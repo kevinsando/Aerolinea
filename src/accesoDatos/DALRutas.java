@@ -1,35 +1,35 @@
 package accesoDatos;
 
 import java.util.ArrayList;
-import logicaNegocios.usuario;
+import logicaNegocios.ruta;
 
-public class DALUsuarios {
+public class DALRutas {
 
-    private static DALUsuarios mInstance;
-    private ArrayList<usuario> al;
+    private static DALRutas mInstance;
+    private ArrayList<ruta> al;
 
-    public static DALUsuarios getInstance() {
+    public static DALRutas getInstance() {
         if (mInstance == null) {
-            mInstance = new DALUsuarios();
+            mInstance = new DALRutas();
         }
 
         return mInstance;
     }
 
-    public DALUsuarios() {
-        al = new ArrayList<usuario>();
+    public DALRutas() {
+        al = new ArrayList<ruta>();
 
     }
 
-    public void insertar(usuario a) {//Listo
+    public void insertar(ruta a) {//Listo
         al.add(a);
     }
 
-    public void eliminar(usuario a) {
+    public void eliminar(ruta a) {
         al.remove(a);
     }
 
-    public void actualizar(int pos, usuario a) {
+    public void actualizar(int pos, ruta a) {
         al.set(pos, a);
     }
 //    public int consultar(int v){
@@ -43,11 +43,11 @@ public class DALUsuarios {
 //      return pos;
 //    }
 
-    public int consultar(usuario a) {
+    public int consultar(ruta a) {
         return al.indexOf(a);
     }
 
-    public usuario consultar(int index) {
+    public ruta consultar(int index) {
         return al.get(index);
 
     }
@@ -65,7 +65,7 @@ public class DALUsuarios {
         return al;
     }
 
-    public void add(usuario a) {
+    public void add(ruta a) {
         al.add(a);
     }
 

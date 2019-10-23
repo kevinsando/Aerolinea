@@ -12,6 +12,8 @@ public class controlador {
     modelo model;
     crearCuenta creaC;
 
+
+
     public controlador(usuario user, publico inicio, modelo model, crearCuenta cc) {
          this.user = user;
         this.inicio = inicio;
