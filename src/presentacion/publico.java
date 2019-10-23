@@ -3,10 +3,10 @@ package presentacion;
 
 import control.controlador;
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import java.util.Observable;
 import logicaNegocios.modelo;
 
-public class publico extends javax.swing.JFrame implements Observable{
+public class publico extends javax.swing.JFrame{
     
     controlador control;
     modelo model;
@@ -31,6 +31,7 @@ public class publico extends javax.swing.JFrame implements Observable{
 
     public publico() {
         initComponents();
+        Tabla.getTableHeader().setReorderingAllowed(false) ;
     }
 
     @SuppressWarnings("unchecked")
@@ -169,13 +170,5 @@ public class publico extends javax.swing.JFrame implements Observable{
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void addListener(InvalidationListener il) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public void removeListener(InvalidationListener il) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
