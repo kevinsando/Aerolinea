@@ -9,6 +9,10 @@ import java.util.Observable;
 
 public class modelo extends Observable {
 
+    public static void crearUsuario(presentacion.usuario u) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     DALAviones aviones;
     DALRutas rutas;
     DALUsuarios usuarios;
@@ -234,5 +238,13 @@ public class modelo extends Observable {
         vuelo v1 = new vuelo();
         vuelos.getInstance().insertar(v1);
         System.out.println(listarVuelo().toString());
+    }
+    
+    public void crearUsuario(usuario u){
+        
+    }
+    
+    public void buscarUsuario(String usuario, String password){
+        
     }
 }

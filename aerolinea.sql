@@ -1,6 +1,7 @@
 Drop Table RUTAS;
 Drop Table VUELOS;
 Drop Table DESCUENTOS;
+
 CREATE TABLE RUTAS(
 identificador varchar2(50),
 duracion varchar2(50),
