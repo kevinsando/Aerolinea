@@ -16,17 +16,17 @@ public class vuelo {
         this.destino = null;
         this.fechaIda = null;
         this.fechaRegreso = null;
-        this.avion = null;
+       // this.avion = null;
     }
 
-    public vuelo(boolean ida, boolean regreso, String origen, String destino, String fechaIda, String fechaRegreso, avion avion) {
+    public vuelo(boolean ida, boolean regreso, String origen, String destino, String fechaIda, String fechaRegreso) {
         this.ida = ida;
         this.regreso = regreso;
         this.origen = origen;
         this.destino = destino;
         this.fechaIda = fechaIda;
         this.fechaRegreso = fechaRegreso;
-        this.avion = avion;
+        //this.avion = avion;
     }
 
     public boolean isIda() {
@@ -53,9 +53,9 @@ public class vuelo {
         return fechaRegreso;
     }
 
-    public avion getAvion() {
+    /*public avion getAvion() {
         return avion;
-    }
+    }*/
 
     public void setIda(boolean ida) {
         this.ida = ida;
@@ -81,9 +81,9 @@ public class vuelo {
         this.fechaRegreso = fechaRegreso;
     }
 
-    public void setAvion(avion avion) {
+  /*  public void setAvion(avion avion) {
         this.avion = avion;
-    }
+    }*/
     
     
     

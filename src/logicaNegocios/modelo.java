@@ -1,37 +1,31 @@
 package logicaNegocios;
 
-import accesoDatos.DALAviones;
-import accesoDatos.DALRutas;
-import accesoDatos.DALUsuarios;
-import accesoDatos.DALVuelos;
+import Excepciones.GlobalException;
+import Excepciones.NoDataException;
 import java.util.ArrayList;
 import java.util.Observable;
+import accesoDatos.ServicioAerolinea;
+import java.sql.SQLException;
 
 public class modelo extends Observable {
-
-    public static void crearUsuario(presentacion.usuario u) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    DALAviones aviones;
-    DALRutas rutas;
-    DALUsuarios usuarios;
-    DALVuelos vuelos;
 
     avion avion;
     ruta ruta;
     usuario usuario;
     vuelo vuelo;
+    ServicioAerolinea sa;
 
     public modelo() {
-        aviones = new DALAviones();
-        rutas = new DALRutas();
-        usuarios = new DALUsuarios();
-        vuelos = new DALVuelos();
+
         avion = new avion();
         ruta = new ruta();
         usuario = new usuario();
         vuelo = new vuelo();
+        sa = new ServicioAerolinea();
+    }
+
+    public static void crearUsuario(presentacion.usuarioA u) {
+
     }
 
     public avion getAvion() {
@@ -61,12 +55,12 @@ public class modelo extends Observable {
 
         this.setChanged();
         this.notifyObservers(null);
-        return aviones.getInstance().listar();
+        return null;
     }
 
     //--------------------------------------------------------------------------
     public void insertarAvion(avion a) {
-        aviones.getInstance().insertar(a);
+
         this.setChanged();
         this.notifyObservers(null);
     }
@@ -74,79 +68,63 @@ public class modelo extends Observable {
     public void modificarAvion(int pos, String id, String nombre, String edad, char sex) {
         //int pos = DAL.getInstance().consultar(e);
         avion aa = new avion();
-        aviones.getInstance().actualizar(pos, aa);
+
         this.setChanged();
         this.notifyObservers(null);
     }
 
     public void eliminarAvion() {
-        aviones.getInstance().eliminar(getAvion());
+
         this.setChanged();
         this.notifyObservers(null);
     }
 
     public void eliminarEspAvion(int pos) {
-        avion aa = (avion) aviones.getInstance().listar().get(pos);
-        aviones.getInstance().eliminar(aa);
+
     }
 
     public int consultarAvion(avion a) {
         this.setChanged();
         this.notifyObservers(null);
-        return aviones.getInstance().consultar(a);
+        return 0;
 
     }
 
     public void agregarAvion(String id, String nombre, String edad, char sexo) {
         avion a1 = new avion();
-        aviones.getInstance().insertar(a1);
-        System.out.println(listarAvion().toString());
+
     }
 
     //--------------------------------------------------------------------------
     public ArrayList listarRuta() {
-
-        this.setChanged();
-        this.notifyObservers(null);
-        return aviones.getInstance().listar();
+        return null;
     }
 
     public void insertarRuta(ruta r) {
-        rutas.getInstance().insertar(r);
-        this.setChanged();
-        this.notifyObservers(null);
+
     }
 
     public void modificarRuta(int pos, String id, String nombre, String edad, char sex) {
-        //int pos = DAL.getInstance().consultar(e);
-        ruta rr = new ruta();
-        rutas.getInstance().actualizar(pos, rr);
-        this.setChanged();
-        this.notifyObservers(null);
+
     }
 
     public void eliminarRuta() {
-        rutas.getInstance().eliminar(getRuta());
-        this.setChanged();
-        this.notifyObservers(null);
+
     }
 
     public void eliminarEspRuta(int pos) {
-        ruta rr = (ruta) rutas.getInstance().listar().get(pos);
-        rutas.getInstance().eliminar(rr);
+
     }
 
     public int consultarRuta(ruta r) {
         this.setChanged();
         this.notifyObservers(null);
-        return rutas.getInstance().consultar(r);
 
+        return 0;
     }
 
     public void agregarRuta(String id, String nombre, String edad, char sexo) {
-        ruta r1 = new ruta();
-        rutas.getInstance().insertar(r1);
-        System.out.println(listarRuta().toString());
+
     }
 
     //--------------------------------------------------------------------------
@@ -154,11 +132,12 @@ public class modelo extends Observable {
 
         this.setChanged();
         this.notifyObservers(null);
-        return usuarios.getInstance().listar();
+        return null;
+
     }
 
     public void insertarUsuario(usuario u) {
-        usuarios.getInstance().insertar(u);
+
         this.setChanged();
         this.notifyObservers(null);
     }
@@ -166,44 +145,47 @@ public class modelo extends Observable {
     public void modificarUsuario(int pos, String id, String nombre, String edad, char sex) {
         //int pos = DAL.getInstance().consultar(e);
         usuario uu = new usuario();
-        usuarios.getInstance().actualizar(pos, uu);
+
         this.setChanged();
         this.notifyObservers(null);
     }
 
     public void eliminarUsuario() {
-        usuarios.getInstance().eliminar(getUsuario());
+
         this.setChanged();
         this.notifyObservers(null);
     }
 
     public void eliminarEspUsuario(int pos) {
-        usuario uu = (usuario) usuarios.getInstance().listar().get(pos);
-        usuarios.getInstance().eliminar(uu);
+
     }
 
-    public int consultarUsuario(usuario u) {
-        this.setChanged();
-        this.notifyObservers(null);
-        return usuarios.getInstance().consultar(u);
+    public void crearUsuario(usuario u) throws GlobalException, NoDataException {
+        sa.insertarUsuario(u);
+    }
 
+    public usuario buscarUsuario(String usuario, String password) throws GlobalException, NoDataException, SQLException {
+        usuario aux = null;
+        aux = sa.MostrarUsuario(usuario, password);
+        System.out.println(aux.toString());
+        return aux;
     }
 
     public void agregarUsuario(String id, String nombre, String edad, char sexo) {
-        usuario u1 = new usuario();
-        usuarios.getInstance().insertar(u1);
-        System.out.println(listarUsuario().toString());
+
     }
+
     //--------------------------------------------------------------------------
-    public ArrayList listarVuelo() {
+    public ArrayList listarVuelo() throws GlobalException, NoDataException {
 
         this.setChanged();
         this.notifyObservers(null);
-        return vuelos.getInstance().listar();
+        return sa.listarVuelo();
+
     }
 
     public void insertarVuelo(vuelo v) {
-        vuelos.getInstance().insertar(v);
+
         this.setChanged();
         this.notifyObservers(null);
     }
@@ -211,40 +193,31 @@ public class modelo extends Observable {
     public void modificarVuelo(int pos, String id, String nombre, String edad, char sex) {
         //int pos = DAL.getInstance().consultar(e);
         vuelo vv = new vuelo();
-        vuelos.getInstance().actualizar(pos,vv);
+
         this.setChanged();
         this.notifyObservers(null);
     }
 
     public void eliminarVuelo() {
-        vuelos.getInstance().eliminar(getVuelo());
+
         this.setChanged();
         this.notifyObservers(null);
     }
 
     public void eliminarEspVuelo(int pos) {
-        vuelo vv = (vuelo) vuelos.getInstance().listar().get(pos);
-        vuelos.getInstance().eliminar(vv);
+
     }
 
     public int consultarVuelo(vuelo v) {
         this.setChanged();
         this.notifyObservers(null);
-        return vuelos.getInstance().consultar(v);
+        return 0;
 
     }
 
     public void agregarVuelo(String id, String nombre, String edad, char sexo) {
         vuelo v1 = new vuelo();
-        vuelos.getInstance().insertar(v1);
-        System.out.println(listarVuelo().toString());
+
     }
-    
-    public void crearUsuario(usuario u){
-        
-    }
-    
-    public void buscarUsuario(String usuario, String password){
-        
-    }
+
 }

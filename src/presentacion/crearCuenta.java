@@ -1,7 +1,14 @@
 package presentacion;
 
+import Excepciones.GlobalException;
+import Excepciones.NoDataException;
 import control.controlador;
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import logicaNegocios.modelo;
+import logicaNegocios.usuario;
 
 public class crearCuenta extends javax.swing.JFrame {
 
@@ -50,8 +57,8 @@ public class crearCuenta extends javax.swing.JFrame {
         direccion = new javax.swing.JTextField();
         trabajo = new javax.swing.JTextField();
         celular = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        robot = new javax.swing.JCheckBox();
+        enviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,12 +80,17 @@ public class crearCuenta extends javax.swing.JFrame {
 
         jLabel9.setText("Celular:");
 
-        jCheckBox1.setText("No soy un robot");
-
-        jButton1.setText("Enviar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        robot.setText("No soy un robot");
+        robot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                robotActionPerformed(evt);
+            }
+        });
+
+        enviar.setText("Enviar");
+        enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarActionPerformed(evt);
             }
         });
 
@@ -117,10 +129,10 @@ public class crearCuenta extends javax.swing.JFrame {
                                     .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(56, 56, 56)
-                                .addComponent(jCheckBox1))))
+                                .addComponent(robot))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addComponent(jButton1)))
+                        .addGap(231, 231, 231)
+                        .addComponent(enviar)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,23 +175,39 @@ public class crearCuenta extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26))
+                .addComponent(robot)
+                .addGap(18, 18, 18)
+                .addComponent(enviar)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
+        if(robot.isSelected()){
         usuario u = new usuario(usuario.getText(), contraseña.getText(), nombre.getText(),
                 apellido.getText(), correo.getText(), nacimiento.getText(), direccion.getText(),
                 Integer.parseInt(trabajo.getText()), Integer.parseInt(celular.getText()));
         
-        control.crearUsuario(u);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            control.crearUsuario(u);
+        } catch (GlobalException | NoDataException ex) {
+            Logger.getLogger(crearCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        control.login();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Es necesario verificar que es humano ",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+            robot.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_enviarActionPerformed
+
+    private void robotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_robotActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_robotActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
@@ -187,8 +215,7 @@ public class crearCuenta extends javax.swing.JFrame {
     private javax.swing.JTextField contraseña;
     private javax.swing.JTextField correo;
     private javax.swing.JTextField direccion;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton enviar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -200,6 +227,7 @@ public class crearCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nacimiento;
     private javax.swing.JTextField nombre;
+    private javax.swing.JCheckBox robot;
     private javax.swing.JTextField trabajo;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables

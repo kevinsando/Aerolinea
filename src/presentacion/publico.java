@@ -1,15 +1,24 @@
 package presentacion;
 
+import Excepciones.GlobalException;
+import Excepciones.NoDataException;
 import control.controlador;
+import java.util.ArrayList;
 import javafx.beans.InvalidationListener;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import logicaNegocios.modelo;
+import logicaNegocios.usuario;
+import logicaNegocios.vuelo;
 
 public class publico extends javax.swing.JFrame {
 
     controlador control;
     modelo model;
+    usuario user;
 
     public void setControl(controlador control) {
         this.control = control;
@@ -42,6 +51,7 @@ public class publico extends javax.swing.JFrame {
         Bselect = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         mvd = new javax.swing.JButton();
+        usuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -77,7 +87,7 @@ public class publico extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¡Bienvenido al Servicio de Aerolínea!");
+        jLabel1.setText("Aerolinea JuanDi");
 
         mvd.setText("Mostrar vuelos disponibles");
         mvd.addActionListener(new java.awt.event.ActionListener() {
@@ -150,13 +160,18 @@ public class publico extends javax.swing.JFrame {
                         .addComponent(mvd))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(349, 349, 349)
-                        .addComponent(Bselect)))
+                        .addComponent(Bselect))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(mvd)
@@ -164,7 +179,7 @@ public class publico extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(Bselect)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -179,13 +194,18 @@ public class publico extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItem4ActionPerformed
 
     private void mvdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mvdActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            this.updateTabla(control.listarVuelos());
+        } catch (GlobalException | NoDataException ex) {
+            Logger.getLogger(publico.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Tabla.setVisible(true);
     }//GEN-LAST:event_mvdActionPerformed
 
     private void BselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BselectActionPerformed
         // TODO add your handling code here:
-        if (model.getUsuario().getUser()==null) {
+        if (model.getUsuario().getUser() == null) {
             JOptionPane.showMessageDialog(rootPane, "Usuario no iniciado",
                     "Error", JOptionPane.WARNING_MESSAGE);
         }
@@ -195,7 +215,12 @@ public class publico extends javax.swing.JFrame {
         // TODO add your handling code here:
         control.cargarAdmin();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    public void setUsuario(usuario u) {
+        user = u;
+        if (user.getUser() != null) {
+            usuario.setText("Bienvenido " + u.getUser());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bselect;
@@ -213,6 +238,28 @@ public class publico extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton mvd;
+    private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
+
+    private void updateTabla(ArrayList vuelos) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        String[] columnNames = {"Cantidad", "Producto", "Precio", "Total"};
+        tableModel.setColumnIdentifiers(columnNames);
+        Object[] Columna = new Object[tableModel.getColumnCount()];
+
+        for (int i = 0; i < vuelos.size(); i++) {
+
+            vuelo aux = (vuelo) vuelos.get(i);
+            Columna[1] = "0";
+            Columna[2] = aux.getOrigen();
+            Columna[3] = aux.getDestino();
+            Columna[4] = aux.getFechaIda();
+            Columna[5] = aux.getFechaRegreso();
+            Columna[6] = "0";
+            tableModel.addRow(Columna);
+        }
+
+        Tabla.setModel(tableModel);
+    }
 
 }

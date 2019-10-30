@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import control.controlador;
-
+import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class administracion extends javax.swing.JFrame {
 
     controlador control;
-    
+
     public administracion() {
         initComponents();
     }
@@ -20,8 +16,8 @@ public class administracion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        LabelU = new javax.swing.JLabel();
+        LabelC = new javax.swing.JLabel();
         usuario = new javax.swing.JTextField();
         contraseña = new javax.swing.JTextField();
         enviar = new javax.swing.JButton();
@@ -30,9 +26,9 @@ public class administracion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Usuario: ");
+        LabelU.setText("Usuario: ");
 
-        jLabel2.setText("Contraseña: ");
+        LabelC.setText("Contraseña: ");
 
         enviar.setText("Enviar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -52,8 +48,8 @@ public class administracion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(LabelU)
+                            .addComponent(LabelC))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(usuario)
@@ -73,11 +69,11 @@ public class administracion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(LabelU)
                     .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(LabelC)
                     .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(enviar)
@@ -92,18 +88,23 @@ public class administracion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        // TODO add your handling code here:
-        if(usuario.getText()=="H"){
-            error.setText("Usuario incorrecto");
+
+        if ((usuario.getText() == "admin")&&(contraseña.getText()=="admin")) {
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+            LabelU.setForeground(Color.red);
+            LabelC.setForeground(Color.red);
         }
     }//GEN-LAST:event_enviarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelC;
+    private javax.swing.JLabel LabelU;
     private javax.swing.JTextField contraseña;
     private javax.swing.JButton enviar;
     private javax.swing.JLabel error;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables

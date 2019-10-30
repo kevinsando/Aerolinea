@@ -108,4 +108,9 @@ public class usuario {
         this.celular = celular;
     }
 
+    @Override
+    public String toString() {
+        return "usuario{" + "user=" + user + ", contrase\u00f1a=" + contraseña + ", nombre=" + nombre + ", apellidos=" + apellidos + ", mail=" + mail + ", feNacimiento=" + feNacimiento + ", direccion=" + direccion + ", trabajoTel=" + trabajoTel + ", celular=" + celular + '}';
+    }
+
 }
