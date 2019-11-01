@@ -10,6 +10,9 @@ public class administracion extends javax.swing.JFrame {
 
     public administracion() {
         initComponents();
+        gRutas.setVisible(false);
+        gVuelos.setVisible(false);
+        gHorarios.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -23,9 +26,9 @@ public class administracion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         error = new javax.swing.JLabel();
         contraseña = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        gRutas = new javax.swing.JButton();
+        gHorarios = new javax.swing.JButton();
+        gVuelos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,11 +51,16 @@ public class administracion extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Gestion Rutas");
+        gRutas.setText("Gestion Rutas");
+        gRutas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gRutasActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Gestion Horarios");
+        gHorarios.setText("Gestion Horarios");
 
-        jButton3.setText("Gestion Vuelos");
+        gVuelos.setText("Gestion Vuelos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +82,7 @@ public class administracion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(gRutas)
                             .addComponent(jLabel3))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -82,9 +90,9 @@ public class administracion extends javax.swing.JFrame {
                                 .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)
+                                .addComponent(gHorarios)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3)))))
+                                .addComponent(gVuelos)))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -99,9 +107,9 @@ public class administracion extends javax.swing.JFrame {
                     .addComponent(enviar))
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(gRutas)
+                    .addComponent(gHorarios)
+                    .addComponent(gVuelos))
                 .addGap(69, 69, 69)
                 .addComponent(error)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -114,20 +122,22 @@ public class administracion extends javax.swing.JFrame {
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         if (usuario.getText().equals("") || contraseña.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Es necesario completar todos los espacios",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+            LabelU.setForeground(Color.red);
+            LabelC.setForeground(Color.red);
+        } else {
             if ((usuario.getText().equals("admin")) && (contraseña.getText().equals("admin"))) {
-                JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña CORRECTO",
-                        "Error", JOptionPane.WARNING_MESSAGE);
+                gRutas.setVisible(true);
+                gVuelos.setVisible(true);
+                gHorarios.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto",
                         "Error", JOptionPane.WARNING_MESSAGE);
                 LabelU.setForeground(Color.red);
                 LabelC.setForeground(Color.red);
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Es necesario completar todos los espacios",
-                    "Error", JOptionPane.WARNING_MESSAGE);
-            LabelU.setForeground(Color.red);
-            LabelC.setForeground(Color.red);
+
         }
     }//GEN-LAST:event_enviarActionPerformed
 
@@ -135,15 +145,20 @@ public class administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaActionPerformed
 
+    private void gRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gRutasActionPerformed
+        // TODO add your handling code here:
+        control.gestionRutas();
+    }//GEN-LAST:event_gRutasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelC;
     private javax.swing.JLabel LabelU;
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JButton enviar;
     private javax.swing.JLabel error;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton gHorarios;
+    private javax.swing.JButton gRutas;
+    private javax.swing.JButton gVuelos;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables

@@ -1,12 +1,13 @@
 package logicaNegocios;
 
 public class ruta {
+
     private String ID;
     private String origen;
     private String destino;
-    private float duracion;
+    private int duracion;
 
-    public ruta(String ID, String origen, String destino, float duracion) {
+    public ruta(String ID, String origen, String destino, int duracion) {
         this.ID = ID;
         this.origen = origen;
         this.destino = destino;
@@ -28,9 +29,13 @@ public class ruta {
         return destino;
     }
 
-    public float getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "ruta{" + "ID=" + ID + ", origen=" + origen + ", destino=" + destino + ", duracion=" + duracion + '}';
+    }
+
 }

@@ -10,8 +10,8 @@ public class Aerolinea {
         administracion admin = new administracion();
         modelo model = new modelo();
         crearCuenta  cc = new crearCuenta();
-        
-        controlador control = new controlador(user,inicio,model,cc,admin);
+        gestionRutas gr = new gestionRutas();
+        controlador control = new controlador(user,inicio,model,cc,admin,gr);
         
         inicio.setVisible(true);
     }

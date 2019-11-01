@@ -119,3 +119,48 @@ BEGIN
 show errors
 
 
+CREATE OR REPLACE PROCEDURE insertarRuta (aidi IN rutas.idruta%TYPE,
+orig IN rutas.origen%TYPE,
+dest IN rutas.destino %TYPE,
+dura IN rutas.duracion %TYPE)
+AS
+BEGIN
+INSERT INTO rutas VALUES(aidi,orig,dest,dura);
+END;
+/
+show errors
+
+CREATE OR REPLACE FUNCTION CONSULTARRUTA(aidi IN rutas.idruta%TYPE)
+RETURN Types.ref_cursor
+AS
+rutas_cur types.ref_cursor;
+BEGIN
+OPEN rutas_cur FOR
+SELECT idRuta,origen, destino, duracion FROM rutas WHERE aidi =idRuta;
+RETURN rutas_cur;
+END;
+/
+--borrar ruta
+--modificar ruta
+
+CREATE OR REPLACE PROCEDURE borrarRutaG
+AS
+BEGIN
+execute immediate 'truncate table rutas';
+END;
+/
+show errors
+
+CREATE OR REPLACE PROCEDURE borrarRuta (aidi IN rutas.idruta%TYPE)
+AS
+BEGIN
+delete from rutas  WHERE aidi = idRuta;
+END;
+/
+show errors
+
+CREATE OR REPLACE PROCEDURE modificarRuta (aidi IN rutas.idruta%TYPE, orig IN rutas.origen%TYPE,dest IN rutas.destino %TYPE,dura IN rutas.duracion %TYPE)
+AS
+BEGIN UPDATE rutas SET  origen=orig, destino=dest, duracion = dura WHERE aidi = idruta;
+END;
+/

@@ -24,110 +24,18 @@ public class modelo extends Observable {
         sa = new ServicioAerolinea();
     }
 
-    public static void crearUsuario(presentacion.usuarioA u) {
-
-    }
-
-    public avion getAvion() {
-        return avion;
-    }
-
-    public ruta getRuta() {
-        return ruta;
-    }
-
-    public usuario getUsuario() {
-        return usuario;
-    }
-
-    public vuelo getVuelo() {
-        return vuelo;
-    }
-
     @Override
     public void addObserver(java.util.Observer o) {
         super.addObserver(o);
         setChanged();
         notifyObservers(null);
     }
+    //--------------------------USUARIO-----------------------------------------
 
-    public ArrayList listarAvion() {
-
-        this.setChanged();
-        this.notifyObservers(null);
-        return null;
+    public usuario getUsuario() {
+        return usuario;
     }
 
-    //--------------------------------------------------------------------------
-    public void insertarAvion(avion a) {
-
-        this.setChanged();
-        this.notifyObservers(null);
-    }
-
-    public void modificarAvion(int pos, String id, String nombre, String edad, char sex) {
-        //int pos = DAL.getInstance().consultar(e);
-        avion aa = new avion();
-
-        this.setChanged();
-        this.notifyObservers(null);
-    }
-
-    public void eliminarAvion() {
-
-        this.setChanged();
-        this.notifyObservers(null);
-    }
-
-    public void eliminarEspAvion(int pos) {
-
-    }
-
-    public int consultarAvion(avion a) {
-        this.setChanged();
-        this.notifyObservers(null);
-        return 0;
-
-    }
-
-    public void agregarAvion(String id, String nombre, String edad, char sexo) {
-        avion a1 = new avion();
-
-    }
-
-    //--------------------------------------------------------------------------
-    public ArrayList listarRuta() {
-        return null;
-    }
-
-    public void insertarRuta(ruta r) {
-
-    }
-
-    public void modificarRuta(int pos, String id, String nombre, String edad, char sex) {
-
-    }
-
-    public void eliminarRuta() {
-
-    }
-
-    public void eliminarEspRuta(int pos) {
-
-    }
-
-    public int consultarRuta(ruta r) {
-        this.setChanged();
-        this.notifyObservers(null);
-
-        return 0;
-    }
-
-    public void agregarRuta(String id, String nombre, String edad, char sexo) {
-
-    }
-
-    //--------------------------------------------------------------------------
     public ArrayList listarUsuario() {
 
         this.setChanged();
@@ -174,14 +82,98 @@ public class modelo extends Observable {
     public void agregarUsuario(String id, String nombre, String edad, char sexo) {
 
     }
+    //---------------------------Avion------------------------------------------
 
-    //--------------------------------------------------------------------------
+    public avion getAvion() {
+        return avion;
+    }
+    public ArrayList listarAvion() {
+
+        this.setChanged();
+        this.notifyObservers(null);
+        return null;
+    }
+    public void insertarAvion(avion a) {
+
+        this.setChanged();
+        this.notifyObservers(null);
+    }
+
+    public void modificarAvion(int pos, String id, String nombre, String edad, char sex) {
+        //int pos = DAL.getInstance().consultar(e);
+        avion aa = new avion();
+
+        this.setChanged();
+        this.notifyObservers(null);
+    }
+
+    public void eliminarAvion() {
+
+        this.setChanged();
+        this.notifyObservers(null);
+    }
+
+    public void eliminarEspAvion(int pos) {
+
+    }
+
+    public int consultarAvion(avion a) {
+        this.setChanged();
+        this.notifyObservers(null);
+        return 0;
+
+    }
+
+    public void agregarAvion(String id, String nombre, String edad, char sexo) {
+        avion a1 = new avion();
+
+    }
+    
+    //----------------------------RUTA------------------------------------------
+    public ruta getRuta() {
+        return ruta;
+    }
+
+    public ArrayList listarRuta() throws GlobalException, NoDataException {
+        return sa.listarRutas();
+    }
+
+    public void insertarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException {
+        ruta r = new ruta(id,ori,des,dura);
+        sa.insertarRuta(r);
+    }
+
+    public void modificarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException, SQLException {
+       ruta r = new ruta(id,ori,des,dura);
+        sa.modificarRuta(r);
+    }
+
+    public void eliminarRutas() throws GlobalException, NoDataException {
+        sa.borrarRutas();
+    }
+
+    public void eliminarEspRuta(String id) throws GlobalException, NoDataException {
+        sa.borrarRuta(id);
+    }
+
+    public ruta consultarRuta(String id) throws GlobalException, NoDataException, SQLException {
+        this.setChanged();
+        this.notifyObservers(null);
+        return sa.consultarRuta(id);
+    }
+
+    //---------------------------VUELO------------------------------------------
+    
     public ArrayList listarVuelo() throws GlobalException, NoDataException {
 
         this.setChanged();
         this.notifyObservers(null);
         return sa.listarVuelo();
 
+    }
+    
+    public vuelo getVuelo() {
+        return vuelo;
     }
 
     public void insertarVuelo(vuelo v) {

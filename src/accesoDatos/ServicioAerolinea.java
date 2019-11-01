@@ -15,15 +15,23 @@ import java.util.ArrayList;
 import oracle.jdbc.internal.OracleTypes;
 
 public class ServicioAerolinea extends Servicio {
+
     private static final String INSERTARUSUARIO = "{call insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
     private static final String INSERTARRUTA = "{call insertarRuta (?, ?, ?, ?)}";
     private static final String CONSULTARUSUARIO = "{? = call CONSULTARUSUARIO(?,?)}";
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
     
+    private static final String LISTARRUTAS = "{?=call listarRutas()}";
+    private static final String CONSULTARRUTA = "{? = call CONSULTARRUTA(?)}";
+    private static final String MODIFICARRUTA = "{call modificarRuta(?,?,?,?)}";
+    private static final String BORRARRUTAS = "{call borrarRutaG()}";
+    private static final String BORRARRUTA = "{call borrarRuta(?)}";
+
     public ServicioAerolinea() {
 
     }
-        public void insertarUsuario(usuario elUsuario) throws GlobalException, NoDataException {
+
+    public void insertarUsuario(usuario elUsuario) throws GlobalException, NoDataException {
         try {
             conectar();
         } catch (ClassNotFoundException e) {
@@ -64,7 +72,8 @@ public class ServicioAerolinea extends Servicio {
             }
         }
     }
-    public usuario MostrarUsuario (String user, String pass) throws GlobalException, NoDataException, SQLException {
+
+    public usuario MostrarUsuario(String user, String pass) throws GlobalException, NoDataException, SQLException {
         try {
             conectar();
         } catch (ClassNotFoundException e) {
@@ -87,7 +96,7 @@ public class ServicioAerolinea extends Servicio {
 
             while (rs.next()) {
                 aux = new usuario(rs.getString("usuario"), rs.getString("contrasena"), rs.getString("nombre"),
-                rs.getString("apellidos"),rs.getString("correo"),rs.getString("fechaNac"),rs.getString("direccion"),rs.getInt("telefonoTrab"),rs.getInt("celular"));
+                        rs.getString("apellidos"), rs.getString("correo"), rs.getString("fechaNac"), rs.getString("direccion"), rs.getInt("telefonoTrab"), rs.getInt("celular"));
             }
             if (aux == null) {
                 throw new GlobalException("No existe un elemento con ese Codigo");
@@ -111,7 +120,8 @@ public class ServicioAerolinea extends Servicio {
             }
         }
         return aux;
-    }   
+    }
+
     public ArrayList listarVuelo() throws GlobalException, NoDataException {
         try {
             conectar();
@@ -165,6 +175,7 @@ public class ServicioAerolinea extends Servicio {
         }
         return coleccion;
     }
+
     public void insertarRuta(ruta laRuta) throws GlobalException, NoDataException {
         try {
             conectar();
@@ -180,7 +191,7 @@ public class ServicioAerolinea extends Servicio {
             pstmt.setString(1, laRuta.getID());
             pstmt.setString(2, laRuta.getOrigen());
             pstmt.setString(3, laRuta.getDestino());
-            pstmt.setFloat(4, laRuta.getDuracion());
+            pstmt.setInt(4, laRuta.getDuracion());
             System.out.println("Insertado con exito");
             boolean resultado = pstmt.execute();
             if (resultado == true) {
@@ -201,5 +212,212 @@ public class ServicioAerolinea extends Servicio {
             }
         }
     }
-    
+
+    public ArrayList listarRutas() throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+
+        ResultSet rs = null;
+        ArrayList<ruta> coleccion = new ArrayList<ruta>();
+        ruta laRuta = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(LISTARRUTAS);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                laRuta = new ruta(rs.getString("idRuta"),
+                        rs.getString("origen"),
+                        rs.getString("destino"),
+                        rs.getInt("duracion")
+                );
+                coleccion.add(laRuta);
+            }
+            for (ruta r : coleccion) {
+                System.out.println(r.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        if (coleccion == null || coleccion.isEmpty()) {
+            throw new NoDataException("No hay datos");
+        }
+        return coleccion;
+    }
+
+    public ruta consultarRuta(String id) throws GlobalException, NoDataException, SQLException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        ResultSet rs = null;
+        CallableStatement pstmt = null;
+        ruta aux = null;
+
+        try {
+            pstmt = conexion.prepareCall(CONSULTARRUTA);
+
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setString(2, id);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+
+            while (rs.next()) {
+                aux = new ruta(rs.getString("idRuta"),
+                        rs.getString("origen"),
+                        rs.getString("destino"),
+                        rs.getInt("duracion")
+                );
+            }
+            if (aux == null) {
+                throw new GlobalException("No existe un elemento con ese Codigo");
+            }
+            System.out.println(aux.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        return aux;
+    }
+
+    public void modificarRuta(ruta laRuta) throws GlobalException, NoDataException, SQLException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(MODIFICARRUTA);
+            pstmt.setString(1,laRuta.getID());
+            pstmt.setString(2,laRuta.getOrigen());
+            pstmt.setString(3,laRuta.getDestino());
+            pstmt.setInt(4, laRuta.getDuracion());
+            
+            boolean resultado = pstmt.execute();
+            System.out.println("Actualizado con exito");
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la actualización");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+
+    public void borrarRutas() throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(BORRARRUTAS);
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la eliminacion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+
+    public void borrarRuta(String id) throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(BORRARRUTA);
+            pstmt.setString(1, id);
+            boolean resultado = pstmt.execute();
+            System.out.println("Ruta borrada");
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la eliminacion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+
 }
