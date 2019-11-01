@@ -16,6 +16,7 @@ import oracle.jdbc.internal.OracleTypes;
 
 public class ServicioAerolinea extends Servicio {
     private static final String INSERTARUSUARIO = "{call insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+    private static final String INSERTARRUTA = "{call insertarRuta (?, ?, ?, ?)}";
     private static final String CONSULTARUSUARIO = "{? = call CONSULTARUSUARIO(?,?)}";
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
     
@@ -163,6 +164,42 @@ public class ServicioAerolinea extends Servicio {
             throw new NoDataException("No hay datos");
         }
         return coleccion;
+    }
+    public void insertarRuta(ruta laRuta) throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(INSERTARRUTA);
+            pstmt.setString(1, laRuta.getID());
+            pstmt.setString(2, laRuta.getOrigen());
+            pstmt.setString(3, laRuta.getDestino());
+            pstmt.setFloat(4, laRuta.getDuracion());
+            System.out.println("Insertado con exito");
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la insercion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
     }
     
 }

@@ -27,10 +27,10 @@ public class usuarioA extends javax.swing.JFrame {
         LabelU = new javax.swing.JLabel();
         LabelC = new javax.swing.JLabel();
         usuario = new javax.swing.JTextField();
-        contraseña = new javax.swing.JTextField();
         enviar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         crear = new javax.swing.JButton();
+        contraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,8 +68,8 @@ public class usuarioA extends javax.swing.JFrame {
                                 .addComponent(LabelC))
                             .addGap(33, 33, 33)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(usuario)
-                                .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                                .addComponent(contraseña)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(51, 51, 51)
                             .addComponent(enviar)))
@@ -82,7 +82,7 @@ public class usuarioA extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
+                .addContainerGap(77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelU)
                     .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -108,22 +108,28 @@ public class usuarioA extends javax.swing.JFrame {
     }//GEN-LAST:event_crearActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        if (usuario.getText().equals("") || contraseña.getText().equals("")) {
+            try {
+                // TODO add your handling code here:
+                usuario aux = control.buscarUsuario(usuario.getText(), contraseña.getText());
+                if (usuario != null) {
+                    control.iniciar();
+                    control.setUsuarioInicio(aux);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                    LabelU.setForeground(Color.red);
+                    LabelC.setForeground(Color.red);
+                }
 
-        try {
-            // TODO add your handling code here:
-            usuario aux = control.buscarUsuario(usuario.getText(), contraseña.getText());
-            if(usuario != null){
-              control.iniciar();
-            control.setUsuarioInicio(aux);  
-            }else{
-            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto",
+            } catch (GlobalException | NoDataException | SQLException ex) {
+                Logger.getLogger(usuarioA.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Es necesario completar todos los espacios",
                     "Error", JOptionPane.WARNING_MESSAGE);
             LabelU.setForeground(Color.red);
-            LabelC.setForeground(Color.red);  
-            }
-            
-        } catch (GlobalException | NoDataException | SQLException ex) {
-            Logger.getLogger(usuarioA.class.getName()).log(Level.SEVERE, null, ex);
+            LabelC.setForeground(Color.red);
         }
 
     }//GEN-LAST:event_enviarActionPerformed
@@ -132,7 +138,7 @@ public class usuarioA extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelC;
     private javax.swing.JLabel LabelU;
-    private javax.swing.JTextField contraseña;
+    private javax.swing.JPasswordField contraseña;
     private javax.swing.JButton crear;
     private javax.swing.JButton enviar;
     private javax.swing.JLabel jLabel3;

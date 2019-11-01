@@ -80,6 +80,12 @@ public class crearCuenta extends javax.swing.JFrame {
 
         jLabel9.setText("Celular:");
 
+        contraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contraseñaActionPerformed(evt);
+            }
+        });
+
         robot.setText("No soy un robot");
         robot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,28 +192,41 @@ public class crearCuenta extends javax.swing.JFrame {
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
-        if(robot.isSelected()){
-        usuario u = new usuario(usuario.getText(), contraseña.getText(), nombre.getText(),
-                apellido.getText(), correo.getText(), nacimiento.getText(), direccion.getText(),
-                Integer.parseInt(trabajo.getText()), Integer.parseInt(celular.getText()));
-        
-        try {
-            control.crearUsuario(u);
-        } catch (GlobalException | NoDataException ex) {
-            Logger.getLogger(crearCuenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        control.login();
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Es necesario verificar que es humano ",
+        if (usuario.getText().equals("") || contraseña.getText().equals("") || nombre.getText().equals("")
+                || apellido.getText().equals("") || correo.getText().equals("") || nacimiento.equals("")
+                || direccion.getText().equals("") || trabajo.equals("") || celular.equals("")) {
+
+            JOptionPane.showMessageDialog(rootPane, "Es necesario completar todos los espacios",
                     "Error", JOptionPane.WARNING_MESSAGE);
-            robot.setForeground(Color.red);
+
+        } else {
+            if (robot.isSelected()) {
+                usuario u = new usuario(usuario.getText(), contraseña.getText(), nombre.getText(),
+                        apellido.getText(), correo.getText(), nacimiento.getText(), direccion.getText(),
+                        Integer.parseInt(trabajo.getText()), Integer.parseInt(celular.getText()));
+
+                try {
+                    control.crearUsuario(u);
+                } catch (GlobalException | NoDataException ex) {
+                    Logger.getLogger(crearCuenta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                control.login();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Es necesario verificar que es humano ",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+                robot.setForeground(Color.red);
+            }
         }
     }//GEN-LAST:event_enviarActionPerformed
 
     private void robotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_robotActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_robotActionPerformed
+
+    private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraseñaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
