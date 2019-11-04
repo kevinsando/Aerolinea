@@ -91,6 +91,11 @@ public class gestionHorarios extends javax.swing.JFrame {
         });
 
         eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         cargar.setText("Cargar");
         cargar.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +259,16 @@ public class gestionHorarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         control.cargarAdmin();
     }//GEN-LAST:event_menuActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        try {
+            // TODO add your handling code here:
+            control.eliminarHorario(id.getText());
+            this.updateTable(control.listarHorario());
+        } catch (GlobalException | NoDataException ex) {
+            Logger.getLogger(gestionHorarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_eliminarActionPerformed
 
     private void updateTable(ArrayList<horario> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
