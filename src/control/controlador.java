@@ -76,6 +76,8 @@ public class controlador {
 
         admin.setVisible(true);
         gr.setVisible(false);
+        gh.setVisible(false);
+        ga.setVisible(false);
     }
 
     public void crearUsuario(usuario u) throws GlobalException, NoDataException {
@@ -89,6 +91,7 @@ public class controlador {
     public void iniciar() {
         inicio.setVisible(true);
         creaC.setVisible(false);
+        admin.setVisible(false);
     }
 
     public void setUsuarioInicio(usuario u) {
@@ -153,6 +156,9 @@ public class controlador {
     }
     public ArrayList<horario> listarHorario() throws GlobalException, NoDataException{
         return model.listarHorario();
+    }
+    public void modificarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws NoDataException, GlobalException{
+        model.modificarHorario(id, dia, hora, minutos, precio, descuento, ruta);
     }
 
 }

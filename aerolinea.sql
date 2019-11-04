@@ -28,8 +28,8 @@ idHorario varchar2(20) not null,
 diaSemana varchar2(20),
 hora numeric(20),
 minutos numeric(20),
-precio float(20),
-descuento float(10),
+precio numeric(20),
+descuento numeric(10),
 IdRuta varchar2(50) not null,
 PRIMARY KEY (idHorario),
 FOREIGN KEY (IdRuta)
@@ -78,6 +78,66 @@ AS
     END;
   /
 
+CREATE OR REPLACE PROCEDURE insertarHorario (idh IN horarios.idhorario%TYPE,
+dia IN horarios.diasemana%TYPE,
+hora IN horarios.hora%TYPE,
+minutos IN horarios.minutos%TYPE,
+precio IN horarios.precio%TYPE,
+descuento IN horarios.descuento%TYPE,
+idr IN horarios.idruta%TYPE)
+AS
+BEGIN
+INSERT INTO horarios VALUES(idh,dia,hora,minutos,precio,descuento,idr);
+END;
+/
+show errors
+CREATE OR REPLACE FUNCTION CONSULTARHORARIO(idh IN horarios.idhorario%TYPE,
+dia IN horarios.diasemana%TYPE,
+hora IN horarios.hora%TYPE,
+minutos IN horarios.minutos%TYPE,
+precio IN horarios.precio%TYPE,
+descuento IN horarios.descuento%TYPE,
+idr IN horarios.idruta%TYPE)
+
+RETURN Types.ref_cursor
+AS
+horarios_cur types.ref_cursor;
+BEGIN
+OPEN horarios_cur FOR
+SELECT idhorario,diasemana,hora,minutos,precio,descuento,idRuta FROM horarios WHERE idh = idhorario;
+RETURN horarios_cur;
+END;
+/
+CREATE OR REPLACE FUNCTION listarHorarios
+RETURN Types.ref_cursor
+AS
+    horarios_cursor types.ref_cursor;
+BEGIN
+    OPEN horarios_cursor FOR
+    SELECT idhorario,diasemana,hora,minutos,precio,descuento,idRuta FROM horarios;
+    Return horarios_cursor;
+END;
+/
+CREATE OR REPLACE PROCEDURE modificarHorario(idh IN horarios.idhorario%TYPE,
+dia IN horarios.diasemana%TYPE,
+hora IN horarios.hora%TYPE,
+minutos IN horarios.minutos%TYPE,
+precio IN horarios.precio%TYPE,
+descuento IN horarios.descuento%TYPE,
+idr IN horarios.idruta%TYPE)
+AS
+BEGIN UPDATE horarios SET idhorario=idh,diasemana=dia,hora=hora,minutos=minutos,precio=precio,descuento=descuento,idruta=idr WHERE idh=idhorario;
+END;
+/
+show errors
+CREATE OR REPLACE PROCEDURE borrarHorario (aidi IN horarios.idhorario%TYPE)
+AS
+BEGIN
+delete from horarios  WHERE aidi = idhorario;
+END;
+/
+show errors
+
 CREATE OR REPLACE PROCEDURE insertarUsuario (usuario IN USUARIOS.usuario%TYPE,
 cont IN USUARIOS.contrasena%TYPE,
 nomb IN USUARIOS.nombre%TYPE,
@@ -109,12 +169,13 @@ CREATE OR REPLACE PROCEDURE insertarTipoAviones(ident IN TIPO_AVIONES.identifica
 anno IN TIPO_AVIONES.ano%TYPE,
 modelOP IN TIPO_AVIONES.modelo%TYPE,
 marc IN TIPO_AVIONES.marca%TYPE,
-pasaj IN TIPO_AVIONES.pasajeros%TYPE,
 fil IN TIPO_AVIONES.filas%TYPE,
-asiFilas IN TIPO_AVIONES.asientosFilas%TYPE)
+asiFilas IN TIPO_AVIONES.asientosFilas%TYPE,
+pasaj IN TIPO_AVIONES.pasajeros%TYPE
+)
 AS
 BEGIN
-INSERT INTO TIPO_AVIONES VALUES(ident,anno,modelOP,marc,pasaj,fil,asiFilas);
+INSERT INTO TIPO_AVIONES VALUES(ident,anno,modelOP,marc,fil,asiFilas,pasaj);
 END;
 /
 show errors
@@ -135,11 +196,11 @@ CREATE OR REPLACE PROCEDURE modificarTipo(ident IN TIPO_AVIONES.identificador%TY
 anno IN TIPO_AVIONES.ano%TYPE,
 modelOP IN TIPO_AVIONES.modelo%TYPE,
 marc IN TIPO_AVIONES.marca%TYPE,
-pasaj IN TIPO_AVIONES.pasajeros%TYPE,
 fil IN TIPO_AVIONES.filas%TYPE,
-asiFilas IN TIPO_AVIONES.asientosFilas%TYPE)
+asiFilas IN TIPO_AVIONES.asientosFilas%TYPE,
+pasaj IN TIPO_AVIONES.pasajeros%TYPE)
 AS
-BEGIN UPDATE TIPO_AVIONES SET ano=anno,modelo=modelOP,marca=marc,pasajeros=pasaj,filas=fil,asientosFilas=asiFilas WHERE identificador=ident;
+BEGIN UPDATE TIPO_AVIONES SET ano=anno,modelo=modelOP,marca=marc,filas=fil,asientosFilas=asiFilas,pasajeros=pasaj WHERE identificador=ident;
 END;
 /
 show errors

@@ -10,9 +10,9 @@ public class administracion extends javax.swing.JFrame {
 
     public administracion() {
         initComponents();
-        gRutas.setVisible(false);
-        gVuelos.setVisible(false);
-        gHorarios.setVisible(false);
+        gRutas.setEnabled(false);
+        gVuelos.setEnabled(false);
+        gHorarios.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +29,7 @@ public class administracion extends javax.swing.JFrame {
         gRutas = new javax.swing.JButton();
         gHorarios = new javax.swing.JButton();
         gVuelos = new javax.swing.JButton();
+        pprincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +73,13 @@ public class administracion extends javax.swing.JFrame {
             }
         });
 
+        pprincipal.setText("Pagina Principal");
+        pprincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pprincipalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,7 +110,10 @@ public class administracion extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(gHorarios)
                                 .addGap(18, 18, 18)
-                                .addComponent(gVuelos)))))
+                                .addComponent(gVuelos))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pprincipal)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,7 +135,9 @@ public class administracion extends javax.swing.JFrame {
                 .addComponent(error)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(pprincipal)
+                .addContainerGap())
         );
 
         pack();
@@ -138,9 +151,9 @@ public class administracion extends javax.swing.JFrame {
             LabelC.setForeground(Color.red);
         } else {
             if ((usuario.getText().equals("admin")) && (contraseña.getText().equals("admin"))) {
-                gRutas.setVisible(true);
-                gVuelos.setVisible(true);
-                gHorarios.setVisible(true);
+                gRutas.setEnabled(true);
+                gVuelos.setEnabled(true);
+                gHorarios.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto",
                         "Error", JOptionPane.WARNING_MESSAGE);
@@ -170,6 +183,11 @@ public class administracion extends javax.swing.JFrame {
         control.gestionHorarios();
     }//GEN-LAST:event_gHorariosActionPerformed
 
+    private void pprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pprincipalActionPerformed
+        // TODO add your handling code here:
+        control.iniciar();
+    }//GEN-LAST:event_pprincipalActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelC;
     private javax.swing.JLabel LabelU;
@@ -180,6 +198,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JButton gRutas;
     private javax.swing.JButton gVuelos;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton pprincipal;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 

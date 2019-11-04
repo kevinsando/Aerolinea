@@ -254,5 +254,9 @@ public class modelo extends Observable {
         
         return hor; 
     }
+    public void modificarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws NoDataException, GlobalException{
+        horario h = new horario(id, dia,hora, minutos,precio,descuento,ruta);
+        sa.modificarHorario(h);
+    }
 
 }
