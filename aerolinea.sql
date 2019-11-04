@@ -105,7 +105,7 @@ RETURN usuarios_cur;
 END;
 /
 
-CREATE OR REPLACE PROCEDURE insertarTipoAvion(ident IN TIPO_AVIONES.identificador%TYPE,
+CREATE OR REPLACE PROCEDURE insertarTipoAviones(ident IN TIPO_AVIONES.identificador%TYPE,
 anno IN TIPO_AVIONES.ano%TYPE,
 modelOP IN TIPO_AVIONES.modelo%TYPE,
 marc IN TIPO_AVIONES.marca%TYPE,
@@ -118,6 +118,7 @@ INSERT INTO TIPO_AVIONES VALUES(ident,anno,modelOP,marc,pasaj,fil,asiFilas);
 END;
 /
 show errors
+
 CREATE OR REPLACE FUNCTION listarTipos
 RETURN Types.ref_cursor
 AS
@@ -128,6 +129,7 @@ BEGIN
     Return tipos_cursor;
 END;
 /
+
 show errors
 CREATE OR REPLACE PROCEDURE modificarTipo(ident IN TIPO_AVIONES.identificador%TYPE,
 anno IN TIPO_AVIONES.ano%TYPE,

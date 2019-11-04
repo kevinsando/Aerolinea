@@ -11,7 +11,9 @@ public class Aerolinea {
         modelo model = new modelo();
         crearCuenta  cc = new crearCuenta();
         gestionRutas gr = new gestionRutas();
-        controlador control = new controlador(user,inicio,model,cc,admin,gr);
+        gestionTipoAviones ga = new gestionTipoAviones();
+        gestionHorarios gh = new gestionHorarios();
+        controlador control = new controlador(user,inicio,model,cc,admin,gr,ga,gh);
         
         inicio.setVisible(true);
     }

@@ -4,12 +4,15 @@ import Excepciones.GlobalException;
 import Excepciones.NoDataException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import logicaNegocios.horario;
 import logicaNegocios.modelo;
 import logicaNegocios.ruta;
 import logicaNegocios.usuario;
 import presentacion.administracion;
 import presentacion.crearCuenta;
+import presentacion.gestionHorarios;
 import presentacion.gestionRutas;
+import presentacion.gestionTipoAviones;
 import presentacion.publico;
 import presentacion.usuarioA;
 
@@ -21,13 +24,17 @@ public class controlador {
     crearCuenta creaC;
     administracion admin;
     gestionRutas gr;
+    gestionTipoAviones ga;
+    gestionHorarios gh;
 
-    public controlador(usuarioA user, publico inicio, modelo model, crearCuenta cc, administracion a, gestionRutas gr) {
+    public controlador(usuarioA user, publico inicio, modelo model, crearCuenta cc, administracion a, gestionRutas gr, gestionTipoAviones ga,gestionHorarios gh) {
         this.user = user;
         this.inicio = inicio;
         this.model = model;
         this.creaC = cc;
         this.admin = a;
+        this.ga = ga;
+        this.gh = gh;
         this.user.setModelo(model);
         this.user.setControl(this);
         this.inicio.setModel(model);
@@ -36,6 +43,8 @@ public class controlador {
         this.creaC.setModelo(model);
         this.creaC.setControl(this);
         this.gr = gr;
+        this.ga.setControl(this);
+        this.gh.setControl(this);
         gr.setControl(this);
     }
 
@@ -51,6 +60,15 @@ public class controlador {
 
     public void gestionRutas() {
         gr.setVisible(true);
+        admin.setVisible(false);
+    }
+
+    public void gestionAviones() {
+        ga.setVisible(true);
+        admin.setVisible(false);
+    }
+    public void gestionHorarios(){
+        gh.setVisible(true);
         admin.setVisible(false);
     }
 
@@ -77,7 +95,8 @@ public class controlador {
         inicio.setUsuario(u);
     }
 
-    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
+    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, 
+            Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
         model.insertarTipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
     }
 
@@ -119,6 +138,21 @@ public class controlador {
 
     public ruta consultarRuta(String id) throws GlobalException, NoDataException, SQLException {
         return model.consultarRuta(id);
+    }
+    
+       public void insertarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws GlobalException, NoDataException{
+        model.insertarHorario(id, dia,hora, minutos,precio,descuento,ruta);
+    }
+    public horario consultarHorario(String id){
+        horario h=null;
+        
+        return h;
+    }
+    public void eliminarHorario(String id) throws GlobalException, NoDataException{
+        model.eliminarHorario(id);
+    }
+    public ArrayList<horario> listarHorario() throws GlobalException, NoDataException{
+        return model.listarHorario();
     }
 
 }

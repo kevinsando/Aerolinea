@@ -59,6 +59,11 @@ public class administracion extends javax.swing.JFrame {
         });
 
         gHorarios.setText("Gestion Horarios");
+        gHorarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gHorariosActionPerformed(evt);
+            }
+        });
 
         gVuelos.setText("Gestion Aviones");
         gVuelos.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +162,13 @@ public class administracion extends javax.swing.JFrame {
 
     private void gVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gVuelosActionPerformed
         // TODO add your handling code here:
+        control.gestionAviones();
     }//GEN-LAST:event_gVuelosActionPerformed
+
+    private void gHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gHorariosActionPerformed
+        // TODO add your handling code here:
+        control.gestionHorarios();
+    }//GEN-LAST:event_gHorariosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelC;

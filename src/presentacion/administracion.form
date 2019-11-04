@@ -132,6 +132,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Gestion Horarios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gHorariosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="gVuelos">
       <Properties>

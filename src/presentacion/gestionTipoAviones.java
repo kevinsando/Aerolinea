@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import logicaNegocios.ruta;
+import logicaNegocios.tipoAvion;
 
 public class gestionTipoAviones extends javax.swing.JFrame {
 
@@ -37,9 +37,9 @@ public class gestionTipoAviones extends javax.swing.JFrame {
         año = new javax.swing.JTextField();
         canPasajeros = new javax.swing.JTextField();
         canFilas = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -75,10 +75,10 @@ public class gestionTipoAviones extends javax.swing.JFrame {
 
         LCanFilas.setText("Cantidad de Filas:");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                agregarActionPerformed(evt);
             }
         });
 
@@ -89,10 +89,10 @@ public class gestionTipoAviones extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                eliminarActionPerformed(evt);
             }
         });
 
@@ -187,8 +187,8 @@ public class gestionTipoAviones extends javax.swing.JFrame {
                                     .addGap(96, 96, 96)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(106, 106, 106)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)))
+                                .addComponent(agregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +200,7 @@ public class gestionTipoAviones extends javax.swing.JFrame {
                                     .addComponent(asientosPorFila)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
-                                .addComponent(jButton3)
+                                .addComponent(eliminar)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -252,9 +252,9 @@ public class gestionTipoAviones extends javax.swing.JFrame {
                                 .addComponent(Lorigen)))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(agregar)
                             .addComponent(jButton2)
-                            .addComponent(jButton3))
+                            .addComponent(eliminar))
                         .addGap(70, 70, 70)
                         .addComponent(volver))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -265,27 +265,31 @@ public class gestionTipoAviones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
 
         try {
-            control.insertarTipoAvion(id.getText(), Integer.parseInt(año.getText()), modelo.getText(), marca.getText(), Integer.parseInt(canPasajeros.getText()), Integer.parseInt(canFilas.getText()), Integer.parseInt(asientosPorFila.getText()));
-                    this.updateTable(control.listarTipoAvion());
+            control.insertarTipoAvion(id.getText(), Integer.parseInt(año.getText()), modelo.getText(), marca.getText(), 
+                    Integer.parseInt(canPasajeros.getText()), Integer.parseInt(canFilas.getText()), 
+                    Integer.parseInt(asientosPorFila.getText()));
+                    //this.updateTable(control.listarTipoAvion());
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(gestionTipoAviones.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_agregarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             // TODO add your handling code here:
-            control.modificarTipoAvion(id.getText(), Integer.parseInt(año.getText()), modelo.getText(), marca.getText(), Integer.parseInt(canPasajeros.getText()), Integer.parseInt(canFilas.getText()), Integer.parseInt(asientosPorFila.getText()));
+            control.modificarTipoAvion(id.getText(), Integer.parseInt(año.getText()), modelo.getText(), marca.getText(), 
+                    Integer.parseInt(canPasajeros.getText()), Integer.parseInt(canFilas.getText()), 
+                    Integer.parseInt(asientosPorFila.getText()));
             this.updateTable(control.listarTipoAvion());
         } catch (GlobalException | NoDataException  ex) {
             Logger.getLogger(gestionTipoAviones.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         try {
             // TODO add your handling code here:
             control.eliminarEspTipo(id.getText());
@@ -293,7 +297,7 @@ public class gestionTipoAviones extends javax.swing.JFrame {
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(gestionTipoAviones.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_eliminarActionPerformed
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         try {
@@ -308,18 +312,21 @@ public class gestionTipoAviones extends javax.swing.JFrame {
         // TODO add your handling code here:
         control.cargarAdmin();
     }//GEN-LAST:event_volverActionPerformed
-private void updateTable(ArrayList<ruta> a1) {
+private void updateTable(ArrayList<tipoAvion> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String[] columnNames = {"ID", "Origen", "Destino", "Duracion"};
+        String[] columnNames = {"ID", "Año", "Modelo", "Marca","Cantidad Pasajeros","Cantidad Filas","Asientos por Filas"};
         tableModel.setColumnIdentifiers(columnNames);
         Object[] Columna = new Object[tableModel.getColumnCount()];
 
         for (int i = 0; i < a1.size(); i++) {
 
-            Columna[0] = a1.get(i).getID();
-            Columna[1] = a1.get(i).getOrigen();
-            Columna[2] = a1.get(i).getDestino();
-            Columna[3] = a1.get(i).getDuracion();
+            Columna[0] = a1.get(i).getId();
+            Columna[1] = a1.get(i).getAnno();
+            Columna[2] = a1.get(i).getModelo();
+            Columna[3] = a1.get(i).getMarca();
+            Columna[4] = a1.get(i).getCanPasajeros();
+            Columna[5] = a1.get(i).getCanFilas();
+            Columna[6] = a1.get(i).getAsientosFila();
             tableModel.addRow(Columna);
         }
 
@@ -334,14 +341,14 @@ private void updateTable(ArrayList<ruta> a1) {
     private javax.swing.JLabel LModelo;
     private javax.swing.JLabel Lid;
     private javax.swing.JLabel Lorigen;
+    private javax.swing.JButton agregar;
     private javax.swing.JTextField asientosPorFila;
     private javax.swing.JTextField año;
     private javax.swing.JTextField canFilas;
     private javax.swing.JTextField canPasajeros;
+    private javax.swing.JButton eliminar;
     private javax.swing.JTextField id;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

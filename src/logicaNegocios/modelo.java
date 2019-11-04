@@ -133,13 +133,16 @@ public class modelo extends Observable {
     }
     //--------------------------TIPO AVION--------------------------------------
 
-    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
+    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, 
+            Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
         tipoAvion t = new tipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
+        
         sa.insertarTipoAvion(t);
     }
 
     public ArrayList listarTipoAvion() throws GlobalException, NoDataException {
-        return sa.listarTipoAviones();
+      return sa.listarTipoAviones();
+
     }
 
     public void modificarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
@@ -232,6 +235,24 @@ public class modelo extends Observable {
     public void agregarVuelo(String id, String nombre, String edad, char sexo) {
         vuelo v1 = new vuelo();
 
+    }
+    //------------------------------HORARIO-------------------------------------
+    public void insertarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws GlobalException, NoDataException{
+        horario h = new horario(id, dia,hora, minutos,precio,descuento,ruta);
+        sa.insertarHorario(h);
+    }
+    public horario consultarHorario(String id){
+        horario h=null;
+        
+        return h;
+    }
+    public void eliminarHorario(String id) throws GlobalException, NoDataException{
+        sa.eliminarHorario(id);
+    }
+    public ArrayList<horario> listarHorario() throws GlobalException, NoDataException{
+        ArrayList<horario> hor = sa.listarHorario();
+        
+        return hor; 
     }
 
 }
