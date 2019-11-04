@@ -4,7 +4,6 @@ import Excepciones.GlobalException;
 import Excepciones.NoDataException;
 import control.controlador;
 import java.util.ArrayList;
-import javafx.beans.InvalidationListener;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;

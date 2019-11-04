@@ -105,7 +105,49 @@ RETURN usuarios_cur;
 END;
 /
 
- 
+CREATE OR REPLACE PROCEDURE insertarTipoAvion(ident IN TIPO_AVIONES.identificador%TYPE,
+anno IN TIPO_AVIONES.ano%TYPE,
+modelOP IN TIPO_AVIONES.modelo%TYPE,
+marc IN TIPO_AVIONES.marca%TYPE,
+pasaj IN TIPO_AVIONES.pasajeros%TYPE,
+fil IN TIPO_AVIONES.filas%TYPE,
+asiFilas IN TIPO_AVIONES.asientosFilas%TYPE)
+AS
+BEGIN
+INSERT INTO TIPO_AVIONES VALUES(ident,anno,modelOP,marc,pasaj,fil,asiFilas);
+END;
+/
+show errors
+CREATE OR REPLACE FUNCTION listarTipos
+RETURN Types.ref_cursor
+AS
+    tipos_cursor types.ref_cursor;
+BEGIN
+    OPEN tipos_cursor FOR
+    SELECT identificador,ano,modelo,marca,filas,asientosFilas,pasajeros FROM TIPO_AVIONES;
+    Return tipos_cursor;
+END;
+/
+show errors
+CREATE OR REPLACE PROCEDURE modificarTipo(ident IN TIPO_AVIONES.identificador%TYPE,
+anno IN TIPO_AVIONES.ano%TYPE,
+modelOP IN TIPO_AVIONES.modelo%TYPE,
+marc IN TIPO_AVIONES.marca%TYPE,
+pasaj IN TIPO_AVIONES.pasajeros%TYPE,
+fil IN TIPO_AVIONES.filas%TYPE,
+asiFilas IN TIPO_AVIONES.asientosFilas%TYPE)
+AS
+BEGIN UPDATE TIPO_AVIONES SET ano=anno,modelo=modelOP,marca=marc,pasajeros=pasaj,filas=fil,asientosFilas=asiFilas WHERE identificador=ident;
+END;
+/
+show errors
+CREATE OR REPLACE PROCEDURE borrarTipo(ident IN TIPO_AVIONES.identificador%TYPE)
+AS
+BEGIN
+delete from TIPO_AVIONES  WHERE ident = identificador;
+END;
+/
+show errors
 CREATE OR REPLACE FUNCTION listarVuelos
 RETURN Types.ref_cursor
 AS
@@ -161,6 +203,6 @@ show errors
 
 CREATE OR REPLACE PROCEDURE modificarRuta (aidi IN rutas.idruta%TYPE, orig IN rutas.origen%TYPE,dest IN rutas.destino %TYPE,dura IN rutas.duracion %TYPE)
 AS
-BEGIN UPDATE rutas SET  origen=orig, destino=dest, duracion = dura WHERE aidi = idruta;
+BEGIN UPDATE rutas SET  origen=orig, destino=dest, duracion = dura WHERE idruta = aidi;
 END;
 /

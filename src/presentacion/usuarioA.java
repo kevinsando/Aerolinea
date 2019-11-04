@@ -108,7 +108,7 @@ public class usuarioA extends javax.swing.JFrame {
     }//GEN-LAST:event_crearActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        if (usuario.getText().equals("") || contraseña.getText().equals("")) {
+        if (!usuario.getText().equals("") && !contraseña.getText().equals("")) {
             try {
                 // TODO add your handling code here:
                 usuario aux = control.buscarUsuario(usuario.getText(), contraseña.getText());
@@ -128,8 +128,13 @@ public class usuarioA extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "Es necesario completar todos los espacios",
                     "Error", JOptionPane.WARNING_MESSAGE);
-            LabelU.setForeground(Color.red);
-            LabelC.setForeground(Color.red);
+            if (usuario.getText().equals("")) {
+                LabelU.setForeground(Color.red);
+                LabelC.setForeground(Color.BLACK);
+            } else {
+                LabelC.setForeground(Color.red);
+                LabelU.setForeground(Color.BLACK);
+            }
         }
 
     }//GEN-LAST:event_enviarActionPerformed

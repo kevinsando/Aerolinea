@@ -60,7 +60,12 @@ public class administracion extends javax.swing.JFrame {
 
         gHorarios.setText("Gestion Horarios");
 
-        gVuelos.setText("Gestion Vuelos");
+        gVuelos.setText("Gestion Aviones");
+        gVuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gVuelosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,6 +154,10 @@ public class administracion extends javax.swing.JFrame {
         // TODO add your handling code here:
         control.gestionRutas();
     }//GEN-LAST:event_gRutasActionPerformed
+
+    private void gVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gVuelosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gVuelosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelC;

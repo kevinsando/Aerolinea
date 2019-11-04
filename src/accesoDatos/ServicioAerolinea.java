@@ -12,20 +12,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import logicaNegocios.tipoAvion;
 import oracle.jdbc.internal.OracleTypes;
 
 public class ServicioAerolinea extends Servicio {
 
     private static final String INSERTARUSUARIO = "{call insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
     private static final String INSERTARRUTA = "{call insertarRuta (?, ?, ?, ?)}";
+    private static final String INSERTARTIPOAVION = "{call insertarTipoAvion (?,?,?,?,?,?,?)}";
     private static final String CONSULTARUSUARIO = "{? = call CONSULTARUSUARIO(?,?)}";
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
-    
+    private static final String LISTARTIPOS = "{?=call listarTipos()}";
     private static final String LISTARRUTAS = "{?=call listarRutas()}";
     private static final String CONSULTARRUTA = "{? = call CONSULTARRUTA(?)}";
     private static final String MODIFICARRUTA = "{call modificarRuta(?,?,?,?)}";
+    private static final String MODIFICARTIPO = "{call modificarTipo(?,?,?,?,?,?,?)}";
     private static final String BORRARRUTAS = "{call borrarRutaG()}";
     private static final String BORRARRUTA = "{call borrarRuta(?)}";
+    private static final String ELIMINARTIPO = "{call borrarTipo(?)}";
 
     public ServicioAerolinea() {
 
@@ -174,6 +178,168 @@ public class ServicioAerolinea extends Servicio {
             throw new NoDataException("No hay datos");
         }
         return coleccion;
+    }
+
+    public void insertarTipoAvion(tipoAvion elTipo) throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(INSERTARTIPOAVION);
+            pstmt.setString(1, elTipo.getId());
+            pstmt.setString(2, elTipo.getAnno().toString());
+            pstmt.setString(3, elTipo.getModelo());
+            pstmt.setString(4, elTipo.getMarca());
+            pstmt.setString(5, elTipo.getCanPasajeros().toString());
+            pstmt.setString(6, elTipo.getCanFilas().toString());
+            pstmt.setString(7, elTipo.getAsientosFila().toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+
+    }
+
+    public ArrayList listarTipoAviones() throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        ResultSet rs = null;
+        ArrayList<tipoAvion> coleccion = new ArrayList<tipoAvion>();
+        tipoAvion elTipo = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(LISTARTIPOS);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                elTipo = new tipoAvion(rs.getString("idTipo"),
+                        Integer.parseInt(rs.getString("año")),
+                        rs.getString("modelo"),
+                        rs.getString("marca"),
+                        Integer.parseInt(rs.getString("canPasajeros")),
+                        Integer.parseInt(rs.getString("canFilas")),
+                        Integer.parseInt(rs.getString("asientosFila"))
+                );
+                coleccion.add(elTipo);
+            }
+            for (tipoAvion t : coleccion) {
+                System.out.println(t.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        if (coleccion == null || coleccion.isEmpty()) {
+            throw new NoDataException("No hay datos");
+        }
+        return coleccion;
+    }
+
+    public void modificarTipo(tipoAvion elTipo) throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(MODIFICARTIPO);
+            pstmt.setString(1, elTipo.getId());
+            pstmt.setString(2, elTipo.getAnno().toString());
+            pstmt.setString(3, elTipo.getModelo());
+            pstmt.setString(4, elTipo.getMarca());
+            pstmt.setString(5, elTipo.getCanPasajeros().toString());
+            pstmt.setString(6, elTipo.getCanFilas().toString());
+            pstmt.setString(7, elTipo.getAsientosFila().toString());
+            boolean resultado = pstmt.execute();
+            if (resultado) {
+                throw new NoDataException("No se realizo la actualización");
+            } else {
+                System.out.println("Actualizado con exito");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+
+    }
+
+    public void eliminarTipo(String id) throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base dde datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+        try {
+            boolean resultado = pstmt.execute();
+            if (resultado) {
+                throw new NoDataException("No se realizo la eliminacion");
+            } else {
+                System.out.println("Tipo de avión borrado");
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
     }
 
     public void insertarRuta(ruta laRuta) throws GlobalException, NoDataException {
@@ -328,11 +494,11 @@ public class ServicioAerolinea extends Servicio {
 
         try {
             pstmt = conexion.prepareCall(MODIFICARRUTA);
-            pstmt.setString(1,laRuta.getID());
-            pstmt.setString(2,laRuta.getOrigen());
-            pstmt.setString(3,laRuta.getDestino());
+            pstmt.setString(1, laRuta.getID());
+            pstmt.setString(2, laRuta.getOrigen());
+            pstmt.setString(3, laRuta.getDestino());
             pstmt.setInt(4, laRuta.getDuracion());
-            
+
             boolean resultado = pstmt.execute();
             System.out.println("Actualizado con exito");
             if (resultado == true) {

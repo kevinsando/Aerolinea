@@ -55,7 +55,7 @@ public class controlador {
     }
 
     public void cargarAdmin() {
-        
+
         admin.setVisible(true);
         gr.setVisible(false);
     }
@@ -75,6 +75,22 @@ public class controlador {
 
     public void setUsuarioInicio(usuario u) {
         inicio.setUsuario(u);
+    }
+
+    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
+        model.insertarTipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
+    }
+
+    public ArrayList listarTipoAvion() throws GlobalException, NoDataException {
+        return model.listarTipoAvion();
+    }
+
+    public void modificarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
+        model.modificarTipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
+    }
+
+    public void eliminarEspTipo(String text) throws GlobalException, NoDataException {
+        model.eliminarEspTipo(text);
     }
 
     public ArrayList listarVuelos() throws GlobalException, NoDataException {

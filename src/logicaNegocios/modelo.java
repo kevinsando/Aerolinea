@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class modelo extends Observable {
 
+    tipoAvion tipoAvion;
     avion avion;
     ruta ruta;
     usuario usuario;
@@ -16,7 +17,7 @@ public class modelo extends Observable {
     ServicioAerolinea sa;
 
     public modelo() {
-
+        tipoAvion = new tipoAvion();
         avion = new avion();
         ruta = new ruta();
         usuario = new usuario();
@@ -87,12 +88,14 @@ public class modelo extends Observable {
     public avion getAvion() {
         return avion;
     }
+
     public ArrayList listarAvion() {
 
         this.setChanged();
         this.notifyObservers(null);
         return null;
     }
+
     public void insertarAvion(avion a) {
 
         this.setChanged();
@@ -128,7 +131,27 @@ public class modelo extends Observable {
         avion a1 = new avion();
 
     }
-    
+    //--------------------------TIPO AVION--------------------------------------
+
+    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
+        tipoAvion t = new tipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
+        sa.insertarTipoAvion(t);
+    }
+
+    public ArrayList listarTipoAvion() throws GlobalException, NoDataException {
+        return sa.listarTipoAviones();
+    }
+
+    public void modificarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
+        tipoAvion t = new tipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
+        sa.modificarTipo(t);
+
+    }
+
+    public void eliminarEspTipo(String text) throws GlobalException, NoDataException {
+        sa.eliminarTipo(text);
+    }
+
     //----------------------------RUTA------------------------------------------
     public ruta getRuta() {
         return ruta;
@@ -139,12 +162,12 @@ public class modelo extends Observable {
     }
 
     public void insertarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException {
-        ruta r = new ruta(id,ori,des,dura);
+        ruta r = new ruta(id, ori, des, dura);
         sa.insertarRuta(r);
     }
 
     public void modificarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException, SQLException {
-       ruta r = new ruta(id,ori,des,dura);
+        ruta r = new ruta(id, ori, des, dura);
         sa.modificarRuta(r);
     }
 
@@ -163,7 +186,6 @@ public class modelo extends Observable {
     }
 
     //---------------------------VUELO------------------------------------------
-    
     public ArrayList listarVuelo() throws GlobalException, NoDataException {
 
         this.setChanged();
@@ -171,7 +193,7 @@ public class modelo extends Observable {
         return sa.listarVuelo();
 
     }
-    
+
     public vuelo getVuelo() {
         return vuelo;
     }
