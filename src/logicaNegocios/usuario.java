@@ -1,5 +1,7 @@
 package logicaNegocios;
 
+import java.util.ArrayList;
+
 public class usuario {
 
     private String user;
@@ -11,6 +13,7 @@ public class usuario {
     private String direccion;
     private int trabajoTel;
     private int celular;
+    ArrayList<tiquete> tiquetes;
 
     public usuario() {
         this.user = null;
@@ -34,6 +37,7 @@ public class usuario {
         this.direccion = direccion;
         this.trabajoTel = trabajoTel;
         this.celular = celular;
+        this.tiquetes = new ArrayList<>();
     }
 
     public String getUser() {
@@ -106,6 +110,22 @@ public class usuario {
 
     public void setCelular(int celular) {
         this.celular = celular;
+    }
+    
+    public void agregarTiquetes(tiquete t){
+        tiquetes.add(t);
+    }
+    
+    public tiquete consultarTiquete(int num){
+        tiquete t = null;
+        boolean bandera = true;
+        for(int i = 0; i < tiquetes.size() && bandera;i++){
+            if(tiquetes.get(i).getNumero() == num){
+                t = tiquetes.get(i);
+                bandera = false;
+            }
+        }
+        return t;
     }
 
     @Override
