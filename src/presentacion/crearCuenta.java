@@ -33,6 +33,7 @@ public class crearCuenta extends javax.swing.JFrame {
 
     public crearCuenta() {
         initComponents();
+       setDefaultCloseOperation(crearCuenta.DISPOSE_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,12 +54,12 @@ public class crearCuenta extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         apellido = new javax.swing.JTextField();
         correo = new javax.swing.JTextField();
-        nacimiento = new javax.swing.JTextField();
         direccion = new javax.swing.JTextField();
         trabajo = new javax.swing.JTextField();
         celular = new javax.swing.JTextField();
         robot = new javax.swing.JCheckBox();
         enviar = new javax.swing.JButton();
+        nacimiento = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +111,9 @@ public class crearCuenta extends javax.swing.JFrame {
                         .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(robot))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
@@ -123,23 +127,21 @@ public class crearCuenta extends javax.swing.JFrame {
                                         .addGap(2, 2, 2)
                                         .addComponent(jLabel8)))
                                 .addGap(53, 53, 53)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usuario)
-                                    .addComponent(contraseña)
-                                    .addComponent(nombre)
-                                    .addComponent(apellido)
-                                    .addComponent(correo)
-                                    .addComponent(nacimiento)
-                                    .addComponent(direccion)
-                                    .addComponent(trabajo)
-                                    .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(robot))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(usuario)
+                                        .addComponent(contraseña)
+                                        .addComponent(nombre)
+                                        .addComponent(apellido)
+                                        .addComponent(correo)
+                                        .addComponent(direccion)
+                                        .addComponent(trabajo)
+                                        .addComponent(celular, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(231, 231, 231)
                         .addComponent(enviar)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +186,7 @@ public class crearCuenta extends javax.swing.JFrame {
                 .addComponent(robot)
                 .addGap(18, 18, 18)
                 .addComponent(enviar)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,7 +195,7 @@ public class crearCuenta extends javax.swing.JFrame {
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
         if (usuario.getText().equals("") || contraseña.getText().equals("") || nombre.getText().equals("")
-                || apellido.getText().equals("") || correo.getText().equals("") || nacimiento.equals("")
+                || apellido.getText().equals("") || correo.getText().equals("") || nacimiento.getDate().toString().equals("")
                 || direccion.getText().equals("") || trabajo.equals("") || celular.equals("")) {
 
             JOptionPane.showMessageDialog(rootPane, "Es necesario completar todos los espacios",
@@ -202,7 +204,7 @@ public class crearCuenta extends javax.swing.JFrame {
         } else {
             if (robot.isSelected()) {
                 usuario u = new usuario(usuario.getText(), contraseña.getText(), nombre.getText(),
-                        apellido.getText(), correo.getText(), nacimiento.getText(), direccion.getText(),
+                        apellido.getText(), correo.getText(), nacimiento.getDate().toString(), direccion.getText(),
                         Integer.parseInt(trabajo.getText()), Integer.parseInt(celular.getText()));
 
                 try {
@@ -244,7 +246,7 @@ public class crearCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField nacimiento;
+    private org.jdesktop.swingx.JXDatePicker nacimiento;
     private javax.swing.JTextField nombre;
     private javax.swing.JCheckBox robot;
     private javax.swing.JTextField trabajo;

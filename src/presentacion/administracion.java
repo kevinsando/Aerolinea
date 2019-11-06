@@ -13,6 +13,8 @@ public class administracion extends javax.swing.JFrame {
         gRutas.setEnabled(false);
         gVuelos.setEnabled(false);
         gHorarios.setEnabled(false);
+        setDefaultCloseOperation(administracion.DISPOSE_ON_CLOSE);
+
     }
 
     @SuppressWarnings("unchecked")

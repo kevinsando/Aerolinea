@@ -18,6 +18,8 @@ public class usuarioA extends javax.swing.JFrame {
 
     public usuarioA() {
         initComponents();
+        setDefaultCloseOperation(usuarioA.DISPOSE_ON_CLOSE);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -115,6 +117,8 @@ public class usuarioA extends javax.swing.JFrame {
                 if (usuario != null) {
                     control.iniciar();
                     control.setUsuarioInicio(aux);
+                    this.dispose();
+                    
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto",
                             "Error", JOptionPane.WARNING_MESSAGE);

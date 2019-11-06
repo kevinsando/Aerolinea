@@ -29,6 +29,10 @@
                       <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="robot" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -44,21 +48,19 @@
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="usuario" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="contraseña" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nombre" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="apellido" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="correo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nacimiento" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="direccion" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="trabajo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="celular" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nacimiento" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="usuario" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="contraseña" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="nombre" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="apellido" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="correo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="direccion" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="trabajo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="celular" alignment="0" pref="85" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                              <Component id="robot" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -67,7 +69,7 @@
                       <Component id="enviar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="164" max="32767" attributes="0"/>
+              <EmptySpace pref="162" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -123,7 +125,7 @@
               <Component id="robot" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="enviar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -187,8 +189,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="correo">
     </Component>
-    <Component class="javax.swing.JTextField" name="nacimiento">
-    </Component>
     <Component class="javax.swing.JTextField" name="direccion">
     </Component>
     <Component class="javax.swing.JTextField" name="trabajo">
@@ -210,6 +210,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enviarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="org.jdesktop.swingx.JXDatePicker" name="nacimiento">
     </Component>
   </SubComponents>
 </Form>

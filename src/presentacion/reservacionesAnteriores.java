@@ -16,6 +16,7 @@ public class reservacionesAnteriores extends javax.swing.JFrame {
      */
     public reservacionesAnteriores() {
         initComponents();
+        setDefaultCloseOperation(usuarioA.DISPOSE_ON_CLOSE);
     }
 
     /**

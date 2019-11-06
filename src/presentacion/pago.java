@@ -16,6 +16,7 @@ public class pago extends javax.swing.JFrame {
      */
     public pago() {
         initComponents();
+        setDefaultCloseOperation(usuarioA.DISPOSE_ON_CLOSE);
     }
 
     /**

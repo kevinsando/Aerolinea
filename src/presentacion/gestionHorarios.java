@@ -16,6 +16,7 @@ public class gestionHorarios extends javax.swing.JFrame {
 
     public gestionHorarios() {
         initComponents();
+        setDefaultCloseOperation(gestionHorarios.DISPOSE_ON_CLOSE);
     }
 
     public void setControl(controlador control) {

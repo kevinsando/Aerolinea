@@ -26,6 +26,7 @@ public class reservaAsientos extends javax.swing.JFrame {
         this.us = us;
         this.vu = vu;
         prepararAsientos();
+        setDefaultCloseOperation(usuarioA.DISPOSE_ON_CLOSE);
     }
     
     private void prepararAsientos(){

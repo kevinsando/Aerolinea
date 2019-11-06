@@ -66,7 +66,7 @@ contrasena varchar2(16),
 nombre varchar2(50),
 apellidos varchar2(50),
 correo varchar2(50),
-fechaNac varchar2(20),
+fechaNac varchar2(30),
 direccion varchar2(50),
 telefonoTrab numeric(20),
 celular numeric(20),
@@ -77,7 +77,7 @@ AS
     TYPE ref_cursor IS REF CURSOR;
     END;
   /
-
+------------------------HORARIO------------------------------
 CREATE OR REPLACE PROCEDURE insertarHorario (idh IN horarios.idhorario%TYPE,
 dia IN horarios.diasemana%TYPE,
 hora IN horarios.hora%TYPE,
@@ -137,7 +137,7 @@ delete from horarios  WHERE aidi = idhorario;
 END;
 /
 show errors
-
+-------------USUARIO-------------------------------
 CREATE OR REPLACE PROCEDURE insertarUsuario (usuario IN USUARIOS.usuario%TYPE,
 cont IN USUARIOS.contrasena%TYPE,
 nomb IN USUARIOS.nombre%TYPE,
@@ -164,7 +164,22 @@ SELECT usuario, contrasena, nombre, apellidos, correo, fechaNac, direccion, tele
 RETURN usuarios_cur;
 END;
 /
-
+CREATE OR REPLACE PROCEDURE modificarUsuario(usu IN USUARIOS.usuario%TYPE,
+cont IN USUARIOS.contrasena%TYPE,
+nomb IN USUARIOS.nombre%TYPE,
+ape IN USUARIOS.apellidos%TYPE,
+corre IN USUARIOS.correo%TYPE,
+fechaNacimiento IN USUARIOS.fechaNac%TYPE,
+direc IN USUARIOS.direccion%TYPE,
+telefonoTrabajo IN USUARIOS.telefonoTrab%TYPE,
+cel IN USUARIOS.celular%TYPE)
+AS
+BEGIN
+UPDATE USUARIOS set contrasena=cont, nombre=nomb, apellidos=ape, correo=corre, fechaNac=fechaNacimiento, direccion=direc, telefonoTrab=telefonoTrabajo,celular=cel WHERE usuario=usu;
+END;
+/
+show errors
+-----------------------TIPO AVIONES-----------------------
 CREATE OR REPLACE PROCEDURE insertarTipoAviones(ident IN TIPO_AVIONES.identificador%TYPE,
 anno IN TIPO_AVIONES.ano%TYPE,
 modelOP IN TIPO_AVIONES.modelo%TYPE,
@@ -211,6 +226,7 @@ delete from TIPO_AVIONES  WHERE ident = identificador;
 END;
 /
 show errors
+------------------------VUELOS-------------------
 CREATE OR REPLACE FUNCTION listarVuelos
 RETURN Types.ref_cursor
 AS
@@ -223,7 +239,7 @@ BEGIN
 /
 show errors
 
-
+---------------------RUTAS---------------------
 CREATE OR REPLACE PROCEDURE insertarRuta (aidi IN rutas.idruta%TYPE,
 orig IN rutas.origen%TYPE,
 dest IN rutas.destino %TYPE,
@@ -234,7 +250,16 @@ INSERT INTO rutas VALUES(aidi,orig,dest,dura);
 END;
 /
 show errors
-
+CREATE OR REPLACE FUNCTION listarRutas
+RETURN Types.ref_cursor
+AS
+    rutas_cursor types.ref_cursor;
+BEGIN
+    OPEN rutas_cursor FOR
+    SELECT IdRuta,origen,destino,duracion FROM RUTAS;
+    return rutas_cursor;
+    END;
+    /
 CREATE OR REPLACE FUNCTION CONSULTARRUTA(aidi IN rutas.idruta%TYPE)
 RETURN Types.ref_cursor
 AS

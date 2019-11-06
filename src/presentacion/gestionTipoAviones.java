@@ -16,7 +16,7 @@ public class gestionTipoAviones extends javax.swing.JFrame {
 
     public gestionTipoAviones() {
         initComponents();
-
+        setDefaultCloseOperation(usuarioA.DISPOSE_ON_CLOSE);
     }
 
     public void setControl(controlador control) {

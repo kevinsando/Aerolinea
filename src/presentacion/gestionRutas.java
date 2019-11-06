@@ -16,7 +16,7 @@ public class gestionRutas extends javax.swing.JFrame {
 
     public gestionRutas() {
         initComponents();
-
+        setDefaultCloseOperation(gestionRutas.DISPOSE_ON_CLOSE);
     }
 
     public void setControl(controlador control) {

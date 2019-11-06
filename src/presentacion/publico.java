@@ -39,6 +39,7 @@ public class publico extends javax.swing.JFrame {
         initComponents();
         Tabla.setVisible(false);
         Tabla.getTableHeader().setReorderingAllowed(false);
+        
     }
 
     @SuppressWarnings("unchecked")
