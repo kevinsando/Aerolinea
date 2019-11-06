@@ -34,6 +34,12 @@ public class ServicioAerolinea extends Servicio {
     private static final String LISTARTIPOS = "{?=call listarTipos()}";
     private static final String ELIMINARTIPO = "{call borrarTipo(?)}";
     
+    private static final String INSERTARAVION = "{call insertarAvion (?,?,?,?)}";
+    private static final String CONSULTARAVION="{?=call consultarAvion(?)}";
+    private static final String MODIFICARAVION = "{call modificarAvion(?,?,?,?)}";
+    private static final String LISTARAVIONES = "{?=call listarAvion()}";
+    private static final String ELIMINARAVION = "{call eliminarAvion(?)}";
+    
     private static final String INSERTARHORARIO = "{call insertarHorario (?,?,?,?,?,?,?)}";
     private static final String MODIFICARHORARIO = "{call modificarHorario(?,?,?,?,?,?,?)}";
     private static final String LISTARHORARIO = "{?=call listarHorarios()}";
@@ -47,7 +53,212 @@ public class ServicioAerolinea extends Servicio {
     public ServicioAerolinea() {
 
     }
+    //--------------------AVION-----------------------------//
+    public void insertarAvion(avion elAvion) throws GlobalException, NoDataException{
+          try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
 
+        try {
+            pstmt = conexion.prepareCall(INSERTARAVION);
+            pstmt.setString(1, elAvion.getID());
+            pstmt.setString(2, elAvion.getIdHorario());
+            pstmt.setString(3, elAvion.getIdRuta());
+            pstmt.setString(4, elAvion.getIdentificadorAv());
+            System.out.println("Insertado con exito");
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la insercion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+    public avion consultarAvion(String id) throws GlobalException, NoDataException{
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        ResultSet rs = null;
+        CallableStatement pstmt = null;
+        avion aux = null;
+
+        try {
+            pstmt = conexion.prepareCall(CONSULTARAVION);
+
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setString(2, id);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+
+            while (rs.next()) {
+                aux = new avion(rs.getString("identificadorAv"),
+                        rs.getString("idHorario"),
+                        rs.getString("IdRuta"),
+                        rs.getString("identificador")
+                );
+            }
+            if (aux == null) {
+                throw new GlobalException("No existe un elemento con ese Codigo");
+            }
+            System.out.println(aux.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        return aux;
+    }
+    public void modificarAvion(avion elAvion) throws GlobalException, NoDataException{
+            try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(MODIFICARAVION);
+            pstmt.setString(1, elAvion.getID());
+            pstmt.setString(2, elAvion.getIdHorario());
+            pstmt.setString(3, elAvion.getIdRuta());
+            pstmt.setString(4, elAvion.getIdentificadorAv());
+            System.out.println("Insertado con exito");
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la insercion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+    public ArrayList listarAviones() throws GlobalException, NoDataException{
+          try {
+            conectar();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        ResultSet rs = null;
+        ArrayList<avion> coleccion = new ArrayList<>();
+        avion elAvion = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(LISTARAVIONES);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                elAvion = new avion(rs.getString("identificadorAv"),
+                        rs.getString("idHorario"),
+                        rs.getString("IdRuta"),
+                        rs.getString("identificador")
+                );
+                coleccion.add(elAvion);
+            }
+            for (avion t : coleccion) {
+                System.out.println(t.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        if (coleccion == null || coleccion.isEmpty()) {
+            throw new NoDataException("No hay datos");
+        }
+        return coleccion;
+    }
+    public void eliminarAvion(String id) throws GlobalException, NoDataException{
+         try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(ELIMINARAVION);
+            pstmt.setString(1, id);
+            boolean resultado = pstmt.execute();
+            System.out.println("Avion borrado");
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la eliminacion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
     public void insertarUsuario(usuario elUsuario) throws GlobalException, NoDataException {
         try {
             conectar();
@@ -332,7 +543,7 @@ public class ServicioAerolinea extends Servicio {
             throw new NoDataException("La base de datos no se encuentra disponible");
         }
         ResultSet rs = null;
-        ArrayList<horario> coleccion = new ArrayList<horario>();
+        ArrayList<horario> coleccion = new ArrayList<>();
         horario elHorario = null;
         CallableStatement pstmt = null;
         try {

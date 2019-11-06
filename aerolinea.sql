@@ -77,6 +77,52 @@ AS
     TYPE ref_cursor IS REF CURSOR;
     END;
   /
+-----------------------AVIONES-------------------------------
+CREATE OR REPLACE PROCEDURE insertarAvion(idA IN AVIONES.identificadorAv%TYPE,
+idHor IN AVIONES.idHorario%TYPE,
+idR IN AVIONES.IdRuta%TYPE,
+idTipo IN AVIONES.identificador%TYPE)
+AS
+BEGIN
+INSERT INTO AVIONES VALUES(idA,idHor,idR,idTipo);
+END;
+/
+show errors
+CREATE OR REPLACE FUNCTION consultarAvion(idA IN AVIONES.identificadorAv%TYPE)
+RETURN Types.ref_cursor
+AS
+aviones_cur types.ref_cursor;
+BEGIN
+OPEN aviones_cur FOR
+SELECT identificadorAv, idHorario,IdRuta,identificador FROM AVIONES WHERE idA = identificadorAv;
+RETURN aviones_cur;
+END;
+/
+CREATE OR REPLACE PROCEDURE modificarAvion(idA IN AVIONES.identificadorAv%TYPE,
+idHor IN AVIONES.idHorario%TYPE,
+idR IN AVIONES.IdRuta%TYPE,
+idTipo IN AVIONES.identificador%TYPE)
+AS
+BEGIN UPDATE AVIONES SET identificadorAv=idA,idHorario=idHor,IdRuta=idR,identificador=idTipo where identificadorAv=idA;
+end;
+/
+CREATE OR REPLACE PROCEDURE eliminarAvion(idA IN AVIONES.identificadorAv%TYPE)
+AS
+BEGIN
+delete from AVIONES  WHERE idA = identificadorAv;
+END;
+/
+show errors
+CREATE OR REPLACE FUNCTION listarAvion
+RETURN Types.ref_cursor
+AS
+    avion_cursor types.ref_cursor;
+BEGIN
+    OPEN avion_cursor FOR
+    SELECT identificadorAv,idHorario,IdRuta,identificador FROM AVIONES;
+    Return avion_cursor;
+END;
+/
 ------------------------HORARIO------------------------------
 CREATE OR REPLACE PROCEDURE insertarHorario (idh IN horarios.idhorario%TYPE,
 dia IN horarios.diasemana%TYPE,

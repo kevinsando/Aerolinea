@@ -2,13 +2,17 @@ package logicaNegocios;
 
 public class avion {
 
-    String ID;
-   tipoAvion tipoAvion;
+    String ID; 
+    String idHorario;
+    String idRuta;
+    String identificadorAv;
    boolean asientos[][];
 
     public avion() {
         this.ID = null;
-       this.tipoAvion=null;
+        this.identificadorAv=null;
+        this.idHorario=null;
+        this.idRuta=null;
        this.asientos = new boolean[6][13];
        for(int i = 0; i < 6; i++){
            for(int j = 0; j < 13; j++){
@@ -17,10 +21,39 @@ public class avion {
        }
     }
 
-    public avion(String ID,tipoAvion tipAv) {
+    public avion(String ID, String idHorario, String idRuta, String identificadorAv) {
         this.ID = ID;
-        this.tipoAvion=tipAv;
+        this.idHorario = idHorario;
+        this.idRuta = idRuta;
+        this.identificadorAv = identificadorAv;
     }
+
+    
+    public String getIdentificadorAv() {
+        return identificadorAv;
+    }
+
+    public void setIdentificadorAv(String identificadorAv) {
+        this.identificadorAv = identificadorAv;
+    }
+
+    public String getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(String idHorario) {
+        this.idHorario = idHorario;
+    }
+
+    public String getIdRuta() {
+        return idRuta;
+    }
+
+    public void setIdRuta(String idRuta) {
+        this.idRuta = idRuta;
+    }
+
+
 
     public String getID() {
         return ID;
@@ -29,13 +62,8 @@ public class avion {
     {
         ID=id;
     }
-    public tipoAvion getTipoAvion() {
-        return tipoAvion;
-    }
 
-    public void setTipoAvion(tipoAvion tipoAvion) {
-        this.tipoAvion = tipoAvion;
-    }
+  
     
     public boolean getAsiento(int i, int j){
         return asientos[i][j];
