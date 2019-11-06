@@ -32,6 +32,7 @@ public class administracion extends javax.swing.JFrame {
         gHorarios = new javax.swing.JButton();
         gVuelos = new javax.swing.JButton();
         pprincipal = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,7 +69,7 @@ public class administracion extends javax.swing.JFrame {
             }
         });
 
-        gVuelos.setText("Gestion Aviones");
+        gVuelos.setText("Gestion Tipo Aviones");
         gVuelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gVuelosActionPerformed(evt);
@@ -79,6 +80,13 @@ public class administracion extends javax.swing.JFrame {
         pprincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pprincipalActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Gestion Aviones");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -100,6 +108,9 @@ public class administracion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(enviar))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pprincipal))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(gRutas)
@@ -112,10 +123,9 @@ public class administracion extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(gHorarios)
                                 .addGap(18, 18, 18)
-                                .addComponent(gVuelos))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pprincipal)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(gVuelos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,7 +143,9 @@ public class administracion extends javax.swing.JFrame {
                     .addComponent(gRutas)
                     .addComponent(gHorarios)
                     .addComponent(gVuelos))
-                .addGap(69, 69, 69)
+                .addGap(32, 32, 32)
+                .addComponent(jButton1)
+                .addGap(14, 14, 14)
                 .addComponent(error)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
@@ -190,6 +202,10 @@ public class administracion extends javax.swing.JFrame {
         control.iniciar();
     }//GEN-LAST:event_pprincipalActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelC;
     private javax.swing.JLabel LabelU;
@@ -199,6 +215,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JButton gHorarios;
     private javax.swing.JButton gRutas;
     private javax.swing.JButton gVuelos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton pprincipal;
     private javax.swing.JTextField usuario;

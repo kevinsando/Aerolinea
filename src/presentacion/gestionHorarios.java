@@ -75,7 +75,7 @@ public class gestionHorarios extends javax.swing.JFrame {
 
         jLabel5.setText("Descuento: ");
 
-        jLabel6.setText("Ruta: ");
+        jLabel6.setText("ID Ruta: ");
 
         agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,14 +131,26 @@ public class gestionHorarios extends javax.swing.JFrame {
                         .addGap(201, 201, 201)
                         .addComponent(cargar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(agregar)
+                                .addGap(57, 57, 57)
+                                .addComponent(editar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(eliminar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(69, 69, 69)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2))
+                                        .addGap(20, 20, 20))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(dia)
                                     .addComponent(id)
@@ -156,13 +168,7 @@ public class gestionHorarios extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(agregar)
-                                .addGap(57, 57, 57)
-                                .addComponent(editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(eliminar)))
+                                        .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9))
                     .addGroup(layout.createSequentialGroup()
@@ -212,7 +218,7 @@ public class gestionHorarios extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(menu)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,17 +278,20 @@ public class gestionHorarios extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void updateTable(ArrayList<horario> a1) {
-        DefaultTableModel tableModel = new DefaultTableModel();
-        String[] columnNames = {"ID", "Hora", "Precio", "Descuento", "Ruta"};
+          DefaultTableModel tableModel = new DefaultTableModel();
+        String[] columnNames = {"ID", "Hora","Minutos", "Precio", "Descuento","Ruta"};
         tableModel.setColumnIdentifiers(columnNames);
         Object[] Columna = new Object[tableModel.getColumnCount()];
 
         for (int i = 0; i < a1.size(); i++) {
-
+            System.out.println(a1.get(i).toString());
+            System.out.println(a1.get(i).getRuta());
             Columna[0] = a1.get(i).getId();
             Columna[1] = a1.get(i).getHora();
-            Columna[2] = a1.get(i).getDescuento();
-            Columna[3] = a1.get(i).getRuta();
+            Columna[2] = a1.get(i).getMinutos();
+            Columna[3] = a1.get(i).getPrecio();
+            Columna[4] = a1.get(i).getDescuento();
+            Columna[5] = a1.get(i).getRuta();
             tableModel.addRow(Columna);
         }
 
