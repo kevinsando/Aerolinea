@@ -3,6 +3,7 @@ package presentacion;
 import Excepciones.GlobalException;
 import Excepciones.NoDataException;
 import control.controlador;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -52,16 +53,17 @@ public class publico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         mvd = new javax.swing.JButton();
         usuario = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        SoloIda = new javax.swing.JRadioButton();
+        idaYRegreso = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        fechaIda = new org.jdesktop.swingx.JXDatePicker();
         jLabel7 = new javax.swing.JLabel();
-        jXDatePicker3 = new org.jdesktop.swingx.JXDatePicker();
+        fechaRegreso = new org.jdesktop.swingx.JXDatePicker();
         jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -78,13 +80,13 @@ public class publico extends javax.swing.JFrame {
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Tipo", "Avion Ida", "Avion Regreso", "Horario Ida", "Horario Regreso"
+                "Codigo Vuelo", "Tipo", "Origen", "Destino", "Fecha ida", "Fecha regreso", "Cpsto"
             }
         ));
         jScrollPane1.setViewportView(Tabla);
@@ -107,9 +109,9 @@ public class publico extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton1.setText("Solo ida");
+        SoloIda.setText("Solo ida");
 
-        jRadioButton2.setText("Ida y regreso");
+        idaYRegreso.setText("Ida y regreso");
 
         jLabel2.setText("Tipo de vuelo:");
 
@@ -122,6 +124,8 @@ public class publico extends javax.swing.JFrame {
         jLabel7.setText("Cantidad de Pasajeros:");
 
         jLabel8.setText("Fecha regreso:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-20", "20-40", "+60" }));
 
         jMenu1.setText("Conozcanos");
 
@@ -195,9 +199,9 @@ public class publico extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(idaYRegreso)
+                                    .addComponent(SoloIda))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(mvd)
@@ -211,15 +215,17 @@ public class publico extends javax.swing.JFrame {
                                                 .addGap(74, 74, 74)
                                                 .addComponent(jLabel5)
                                                 .addGap(31, 31, 31)
-                                                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(fechaIda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(93, 93, 93)
                                                 .addComponent(jLabel8)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(fechaRegreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel7)))))))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,19 +236,20 @@ public class publico extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
+                    .addComponent(SoloIda)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(fechaIda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
+                    .addComponent(idaYRegreso)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jXDatePicker3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(fechaRegreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(mvd)
                 .addGap(18, 18, 18)
@@ -266,7 +273,7 @@ public class publico extends javax.swing.JFrame {
     private void mvdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mvdActionPerformed
         try {
             // TODO add your handling code here:
-            this.updateTabla(control.listarVuelos());
+            this.updateTabla(control.listarVuelos2());
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(publico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -304,12 +311,17 @@ public class publico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bselect;
+    private javax.swing.JRadioButton SoloIda;
     private javax.swing.JTable Tabla;
+    private org.jdesktop.swingx.JXDatePicker fechaIda;
+    private org.jdesktop.swingx.JXDatePicker fechaRegreso;
+    private javax.swing.JRadioButton idaYRegreso;
     private javax.swing.JMenu ingresaAdmin;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -322,22 +334,58 @@ public class publico extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JButton mvd;
     private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 
     private void updateTabla(ArrayList<vuelo> vuelos) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String[] columnNames = {"Codigo", "Tipo", "ID Horario Ida", "ID Horario Regreso", "ID Avion Ida", "ID Avion Regreso"};
+        boolean pintar=false;
+        String[] columnNames = {"Codigo de vuelo", "Tipo","Origen", "Destino","Fecha ida","Fecha Regreso"};
         tableModel.setColumnIdentifiers(columnNames);
         Object[] Columna = new Object[tableModel.getColumnCount()];
-
+        String dia="";
+        switch(fechaIda.getDate().getDay())
+        {
+            case 0:
+            {
+                dia="Domingo";
+                break;
+            }
+            case 1:
+            {
+                dia="Lunes";
+                break;
+            }
+            case 2:
+            {
+                 dia="Martes";
+                break;
+            }
+            case 3:
+            {
+                 dia="Miercoles";
+                break;
+            }
+            case 4:
+            {
+                dia="Jueves";
+                break;
+            }
+            case 5:
+            {
+                 dia="Viernes";
+                break;
+            }
+            case 6:
+            {
+                 dia="Sabado";
+                break;
+            }
+            
+        }
         for (int i = 0; i < vuelos.size(); i++) {
 
             Columna[0] = vuelos.get(i).getCodigo();
@@ -354,13 +402,21 @@ public class publico extends javax.swing.JFrame {
                     break;
                 }
             }            
-            Columna[2] = vuelos.get(i).getHorarioIda();
-            Columna[3] = vuelos.get(i).getHorarioRegreso();
-            Columna[4] = vuelos.get(i).getAvionIda();
-            Columna[5] = vuelos.get(i).getAvionRegreso();
-            tableModel.addRow(Columna);
+            Columna[2] = vuelos.get(i).getOrigen();
+            Columna[3] = vuelos.get(i).getDestino();
+            Columna[4]=vuelos.get(i).getDiaSemana()+" "+vuelos.get(i).getHora()+":"+vuelos.get(i).getMinutos();
+            Columna[5]=vuelos.get(i).getDiaSemana()+" "+vuelos.get(i).getHoraLlegada()+":"+vuelos.get(i).getMinutosLlegada();
+            if(Integer.parseInt(vuelos.get(i).getDescuento())>0)
+            {
+                //VER COMO INDICAR QUE ESTÁ EN DESCUENTO
+                
+            }
+            if(vuelos.get(i).getDiaSemana().equals(dia))
+            {tableModel.addRow(Columna);
+            }
+        
         }
-
+        
         Tabla.setModel(tableModel);
     }
 

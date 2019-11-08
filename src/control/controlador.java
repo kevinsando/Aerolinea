@@ -166,17 +166,20 @@ public class controlador {
         return model.listarVuelo();
 
     }
+    public ArrayList<vuelo> listarVuelos2() throws GlobalException, NoDataException{
+        return model.listarVuelo2();
+    }
 
     public ArrayList listarRuta() throws GlobalException, NoDataException {
         return model.listarRuta();
     }
 
-    public void insertarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException {
-        model.insertarRuta(id, ori, des, dura);
+    public void insertarRuta(String id, String ori, String des, int duraH,int duraM) throws GlobalException, NoDataException {
+        model.insertarRuta(id, ori, des, duraH,duraM);
     }
 
-    public void modificarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException, SQLException {
-        model.modificarRuta(id, ori, des, dura);
+    public void modificarRuta(String id, String ori, String des, int duraH,int duraM) throws GlobalException, NoDataException, SQLException {
+        model.modificarRuta(id, ori, des, duraH,duraM);
     }
 
     public void eliminarRutas() throws GlobalException, NoDataException {
@@ -191,8 +194,8 @@ public class controlador {
         return model.consultarRuta(id);
     }
 
-    public void insertarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws GlobalException, NoDataException {
-        model.insertarHorario(id, dia, hora, minutos, precio, descuento, ruta);
+    public void insertarHorario(String id, String dia, int hora, int minutos,int horaLl,int minutosLl, int precio, int descuento, String ruta) throws GlobalException, NoDataException {
+        model.insertarHorario(id, dia, hora, minutos,horaLl,minutosLl, precio, descuento, ruta);
     }
 
     public horario consultarHorario(String id) {
@@ -210,8 +213,8 @@ public class controlador {
 
     }
 
-    public void modificarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws NoDataException, GlobalException {
-        model.modificarHorario(id, dia, hora, minutos, precio, descuento, ruta);
+    public void modificarHorario(String id, String dia, int hora, int minutos,int horaLl,int minutosLl, int precio, int descuento, String ruta) throws NoDataException, GlobalException {
+        model.modificarHorario(id, dia, hora, minutos,horaLl,minutosLl, precio, descuento, ruta);
     }
 
     public void reservarAsientos() {
@@ -243,8 +246,8 @@ public class controlador {
         return model.listarAvion();
     }
 
-    public void agregarVuelos(String horario, String horarioR, String ida, String regreso, String codigo, int tipo) throws GlobalException, NoDataException, SQLException {
-        model.insertarVuelo(horario, horarioR, ida, regreso, codigo, tipo);
+    public void agregarVuelos(String ida, String regreso, String codigo, int tipo) throws GlobalException, NoDataException, SQLException {
+        model.insertarVuelo(ida, regreso, codigo, tipo);
     }
 
 }

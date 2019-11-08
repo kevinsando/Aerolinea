@@ -157,13 +157,13 @@ public class modelo extends Observable {
         return ServicioAerolinea.getInstance().listarRutas();
     }
 
-    public void insertarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException {
-        ruta r = new ruta(id, ori, des, dura);
+    public void insertarRuta(String id, String ori, String des, int duraH,int duraM) throws GlobalException, NoDataException {
+        ruta r = new ruta(id, ori, des, duraH,duraM);
         ServicioAerolinea.getInstance().insertarRuta(r);
     }
 
-    public void modificarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException, SQLException {
-        ruta r = new ruta(id, ori, des, dura);
+    public void modificarRuta(String id, String ori, String des, int duraH,int duraM) throws GlobalException, NoDataException, SQLException {
+        ruta r = new ruta(id, ori, des, duraH,duraM);
         ServicioAerolinea.getInstance().modificarRuta(r);
     }
 
@@ -195,9 +195,9 @@ public class modelo extends Observable {
         return vuelo;
     }
 
-    public void insertarVuelo(String horario,String horarioR, String ida, String regreso,String codigo,int tipo) throws GlobalException, NoDataException, SQLException {
+    public void insertarVuelo(String ida, String regreso,String codigo,int tipo) throws GlobalException, NoDataException, SQLException {
 
-       vuelo v= new vuelo(codigo,tipo,ida,regreso,horarioR,horario);
+       vuelo v= new vuelo(codigo,tipo,ida,regreso);
         ServicioAerolinea.getInstance().insertarVuelo(v);
         this.setChanged();
         this.notifyObservers(null);
@@ -238,8 +238,8 @@ public class modelo extends Observable {
     }
 
     //------------------------------HORARIO-------------------------------------
-    public void insertarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws GlobalException, NoDataException {
-        horario h = new horario(id, dia, hora, minutos, precio, descuento, ruta);
+    public void insertarHorario(String id, String dia, int hora, int minutos,int horaLl,int minutosLl ,int precio, int descuento, String ruta) throws GlobalException, NoDataException {
+        horario h = new horario(id, dia, hora, minutos,horaLl,minutosLl, precio, descuento, ruta);
         ServicioAerolinea.getInstance().insertarHorario(h);
     }
 
@@ -259,9 +259,14 @@ public class modelo extends Observable {
         return hor;
     }
 
-    public void modificarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws NoDataException, GlobalException {
-        horario h = new horario(id, dia, hora, minutos, precio, descuento, ruta);
+    public void modificarHorario(String id, String dia, int hora, int minutos,int horaLl,int minutosLl,int precio, int descuento, String ruta) throws NoDataException, GlobalException {
+        horario h = new horario(id, dia, hora, minutos,horaLl,minutosLl, precio, descuento, ruta);
         ServicioAerolinea.getInstance().modificarHorario(h);
     }
 
-}
+    public ArrayList<vuelo> listarVuelo2() throws GlobalException, NoDataException {
+         this.setChanged();
+        this.notifyObservers(null);
+        
+        return ServicioAerolinea.getInstance().listarVuelo2();
+}}

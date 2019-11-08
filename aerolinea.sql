@@ -20,7 +20,8 @@ CREATE TABLE RUTAS(
 IdRuta varchar2(50) not null,
 origen varchar2(50),
 destino varchar2(50),
-duracion float(20),
+duracionH numeric(20),
+duracionM numeric(20),
 PRIMARY KEY (IdRuta));
  
 CREATE TABLE HORARIOS(
@@ -28,6 +29,8 @@ idHorario varchar2(20) not null,
 diaSemana varchar2(20),
 hora numeric(20),
 minutos numeric(20),
+horaLlegada numeric(20),
+minutosLlegada numeric(20),
 precio numeric(20),
 descuento numeric(10),
 IdRuta varchar2(50) not null,
@@ -49,15 +52,12 @@ FOREIGN KEY (identificador) REFERENCES tipo_aviones(identificador)
 
  CREATE TABLE VUELOS(
  codigo varchar2(50)not null,
- fIda varchar2(50),
- fRegreso varchar2(50),
- IdRuta varchar2(50) not null,
- idHorario varchar2(20) not null,
- identificadorAv varchar2(20) not null,
+  tipo numeric(2)not null,
+ identificadorAvIda varchar2(20) not null,
+ identificadorAvRegreso varchar(20),
 PRIMARY KEY (codigo),
-FOREIGN KEY (idHorario) REFERENCES horarios(idHorario),
-FOREIGN KEY (IdRuta) REFERENCES rutas(IdRuta),
-FOREIGN KEY (identificadorAv) REFERENCES aviones(identificadorAv)
+FOREIGN KEY (identificadorAvIda) REFERENCES aviones(identificadorAv),
+FOREIGN KEY (identificadorAvRegreso) REFERENCES aviones(identificadorAv)
  );
 
 CREATE TABLE USUARIOS(
@@ -128,29 +128,25 @@ CREATE OR REPLACE PROCEDURE insertarHorario (idh IN horarios.idhorario%TYPE,
 dia IN horarios.diasemana%TYPE,
 hora IN horarios.hora%TYPE,
 minutos IN horarios.minutos%TYPE,
+horaLL IN horarios.horaLlegada%TYPE,
+minutosLL IN horarios.minutosLlegada%TYPE,
 precio IN horarios.precio%TYPE,
 descuento IN horarios.descuento%TYPE,
 idr IN horarios.idruta%TYPE)
 AS
 BEGIN
-INSERT INTO horarios VALUES(idh,dia,hora,minutos,precio,descuento,idr);
+INSERT INTO horarios VALUES(idh,dia,hora,minutos,horaLL,minutosLL,precio,descuento,idr);
 END;
 /
 show errors
-CREATE OR REPLACE FUNCTION CONSULTARHORARIO(idh IN horarios.idhorario%TYPE,
-dia IN horarios.diasemana%TYPE,
-hora IN horarios.hora%TYPE,
-minutos IN horarios.minutos%TYPE,
-precio IN horarios.precio%TYPE,
-descuento IN horarios.descuento%TYPE,
-idr IN horarios.idruta%TYPE)
+CREATE OR REPLACE FUNCTION CONSULTARHORARIO(idh IN horarios.idhorario%TYPE)
 
 RETURN Types.ref_cursor
 AS
 horarios_cur types.ref_cursor;
 BEGIN
 OPEN horarios_cur FOR
-SELECT idhorario,diasemana,hora,minutos,precio,descuento,idRuta FROM horarios WHERE idh = idhorario;
+SELECT idhorario,diasemana,hora,minutos,horaLLegada,minutosLlegada,precio,descuento,idRuta FROM horarios WHERE idh = idhorario;
 RETURN horarios_cur;
 END;
 /
@@ -160,7 +156,7 @@ AS
     horarios_cursor types.ref_cursor;
 BEGIN
     OPEN horarios_cursor FOR
-    SELECT idhorario,diasemana,hora,minutos,precio,descuento,idRuta FROM horarios;
+    SELECT idhorario,diasemana,hora,minutos,horaLlegada,minutosLlegada,precio,descuento,idRuta FROM horarios;
     Return horarios_cursor;
 END;
 /
@@ -168,11 +164,13 @@ CREATE OR REPLACE PROCEDURE modificarHorario(idh IN horarios.idhorario%TYPE,
 dia IN horarios.diasemana%TYPE,
 hora IN horarios.hora%TYPE,
 minutos IN horarios.minutos%TYPE,
+horaLL IN horarios.horaLlegada%TYPE,
+minutosLL IN horarios.minutosLLegada%TYPE,
 precio IN horarios.precio%TYPE,
 descuento IN horarios.descuento%TYPE,
 idr IN horarios.idruta%TYPE)
 AS
-BEGIN UPDATE horarios SET idhorario=idh,diasemana=dia,hora=hora,minutos=minutos,precio=precio,descuento=descuento,idruta=idr WHERE idh=idhorario;
+BEGIN UPDATE horarios SET idhorario=idh,diasemana=dia,hora=hora,minutos=minutos,horaLlegada=horaLL,minutosLlegada=minutosLL,precio=precio,descuento=descuento,idruta=idr WHERE idh=idhorario;
 END;
 /
 show errors
@@ -273,13 +271,35 @@ END;
 /
 show errors
 ------------------------VUELOS-------------------
+CREATE OR REPLACE PROCEDURE insertarVuelo(cod IN VUELOS.codigo%TYPE,
+tip IN VUELOS.tipo%TYPE,
+avionIda IN VUELOS.identificadorAvIda%TYPE,
+avionRegreso IN VUELOS.identificadorAvRegreso%TYPE
+)
+AS
+BEGIN 
+INSERT INTO VUELOS VALUES(cod,tip,avionIda,avionRegreso);
+END;
+/
+show errors
 CREATE OR REPLACE FUNCTION listarVuelos
+RETURN Types.ref_cursor
+AS
+    vuel_cursor types.ref_cursor;
+BEGIN
+    OPEN vuel_cursor FOR
+    SELECT codigo,tipo,identificadorAvIda,identificadorAvRegreso FROM VUELOS;
+    RETURN  vuel_cursor;
+END;
+/
+show errors
+CREATE OR REPLACE FUNCTION listarVuelosPublico
 RETURN Types.ref_cursor
 AS
     vuelos_cursor types.ref_cursor;
 BEGIN
     OPEN vuelos_cursor FOR 
-    SELECT fIda, fRegreso, IdRuta,IdHorario, identificadorAv FROM vuelos;
+    SELECT codigo,tipo,origen,destino,diaSemana,hora,minutos,horaLlegada,minutosLlegada,pasajeros FROM VUELOS,rutas,horarios,Tipo_Aviones;
     RETURN vuelos_cursor;
     END;
 /
@@ -289,10 +309,11 @@ show errors
 CREATE OR REPLACE PROCEDURE insertarRuta (aidi IN rutas.idruta%TYPE,
 orig IN rutas.origen%TYPE,
 dest IN rutas.destino %TYPE,
-dura IN rutas.duracion %TYPE)
+duraH IN rutas.duracionH %TYPE,
+duraM IN rutas.duracionM%TYPE)
 AS
 BEGIN
-INSERT INTO rutas VALUES(aidi,orig,dest,dura);
+INSERT INTO rutas VALUES(aidi,orig,dest,duraH,duraM);
 END;
 /
 show errors
@@ -302,7 +323,7 @@ AS
     rutas_cursor types.ref_cursor;
 BEGIN
     OPEN rutas_cursor FOR
-    SELECT IdRuta,origen,destino,duracion FROM RUTAS;
+    SELECT IdRuta,origen,destino,duracionH,duracionM FROM RUTAS;
     return rutas_cursor;
     END;
     /
@@ -312,7 +333,7 @@ AS
 rutas_cur types.ref_cursor;
 BEGIN
 OPEN rutas_cur FOR
-SELECT idRuta,origen, destino, duracion FROM rutas WHERE aidi =idRuta;
+SELECT idRuta,origen, destino, duracionH,duracionM FROM rutas WHERE aidi =idRuta;
 RETURN rutas_cur;
 END;
 /
@@ -335,8 +356,22 @@ END;
 /
 show errors
 
-CREATE OR REPLACE PROCEDURE modificarRuta (aidi IN rutas.idruta%TYPE, orig IN rutas.origen%TYPE,dest IN rutas.destino %TYPE,dura IN rutas.duracion %TYPE)
+CREATE OR REPLACE PROCEDURE modificarRuta (aidi IN rutas.idruta%TYPE, orig IN rutas.origen%TYPE,dest IN rutas.destino %TYPE,duraH IN rutas.duracionH %TYPE,duraM IN rutas.duracionM%TYPE)
 AS
-BEGIN UPDATE rutas SET  origen=orig, destino=dest, duracion = dura WHERE idruta = aidi;
+BEGIN UPDATE rutas SET  origen=orig, destino=dest, duracionH = duraH,duracionM=duraM WHERE idruta = aidi;
 END;
 /
+---------------------CONSULTAS FILTRO-----------------------------
+CREATE OR REPLACE FUNCTION consultaTipoVuelo(tip IN vuelos.tipo%TYPE)
+RETURN Types.ref_cursor
+AS
+consultex_cur types.ref_cursor;
+BEGIN
+OPEN consultex_cur FOR
+    SELECT codigo,tipo,origen,destino,diaSemana,hora,minutos,horaLlegada,minutosLlegada,pasajeros FROM VUELOS,rutas,horarios,Tipo_Aviones
+ WHERE tip=tipo;
+RETURN consultex_cur;
+END;
+/
+show errors;
+CREATE OR REPLACE FUNCTION consultaOrigenVuelo()

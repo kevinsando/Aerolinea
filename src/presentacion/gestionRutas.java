@@ -45,6 +45,7 @@ public class gestionRutas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         mostrar = new javax.swing.JButton();
         volver = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,33 +128,17 @@ public class gestionRutas extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("HH:MM");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(36, 36, 36)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(Lorigen, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Lid, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGap(47, 47, 47)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(Lduracion, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Ldestino, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGap(34, 34, 34)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(duracion, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(32, 32, 32)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(jButton1)
@@ -172,6 +157,26 @@ public class gestionRutas extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(56, 56, 56))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Lorigen, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lid, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Lduracion, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Ldestino, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(duracion, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +203,8 @@ public class gestionRutas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Lduracion)
-                            .addComponent(duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -214,9 +220,16 @@ public class gestionRutas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        String horas = null, minutos = null;
+        if (duracion.getText().length() < 5) {
+            horas = duracion.getText().substring(0, 1);
+            minutos = duracion.getText().substring(2, 4);
+        } else {
+            horas = duracion.getText().substring(0, 2);
+            minutos = duracion.getText().substring(3, 5);
+        }
         try {
-            control.insertarRuta(id.getText(), origen.getText(), destino.getText(), Integer.parseInt(duracion.getText()));
+            control.insertarRuta(id.getText(), origen.getText(), destino.getText(), Integer.parseInt(horas),Integer.parseInt(minutos));
             this.updateTable(control.listarRuta());
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(gestionRutas.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,9 +237,16 @@ public class gestionRutas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String horas = null, minutos = null;
+        if (duracion.getText().length() < 5) {
+            horas = duracion.getText().substring(0, 1);
+            minutos = duracion.getText().substring(2, 4);
+        } else {
+            horas = duracion.getText().substring(0, 2);
+            minutos = duracion.getText().substring(3, 5);
+        }
         try {
-            // TODO add your handling code here:
-            control.modificarRuta(id.getText(), origen.getText(), destino.getText(), Integer.parseInt(duracion.getText()));
+            control.modificarRuta(id.getText(), origen.getText(), destino.getText(), Integer.parseInt(horas),Integer.parseInt(minutos));
             this.updateTable(control.listarRuta());
         } catch (GlobalException | NoDataException | SQLException ex) {
             Logger.getLogger(gestionRutas.class.getName()).log(Level.SEVERE, null, ex);
@@ -256,7 +276,7 @@ public class gestionRutas extends javax.swing.JFrame {
         // TODO add your handling code here:
         control.cargarAdmin();
     }//GEN-LAST:event_volverActionPerformed
-private void updateTable(ArrayList<ruta> a1) {
+    private void updateTable(ArrayList<ruta> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
         String[] columnNames = {"ID", "Origen", "Destino", "Duracion"};
         tableModel.setColumnIdentifiers(columnNames);
@@ -267,7 +287,7 @@ private void updateTable(ArrayList<ruta> a1) {
             Columna[0] = a1.get(i).getID();
             Columna[1] = a1.get(i).getOrigen();
             Columna[2] = a1.get(i).getDestino();
-            Columna[3] = a1.get(i).getDuracion();
+            Columna[3] = Integer.toString(a1.get(i).getDuracionH())+':'+Integer.toString(a1.get(i).getDuracionM());
             tableModel.addRow(Columna);
         }
 
@@ -286,6 +306,7 @@ private void updateTable(ArrayList<ruta> a1) {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

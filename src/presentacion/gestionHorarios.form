@@ -50,9 +50,9 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="dia" max="32767" attributes="0"/>
                                   <Component id="id" max="32767" attributes="0"/>
-                                  <Component id="ruta" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Component id="ruta" alignment="1" pref="90" max="32767" attributes="0"/>
+                                  <Component id="dia" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -79,8 +79,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel10" min="-2" pref="6" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel10" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -146,10 +146,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="dia" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="precio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dia" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -262,8 +262,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="id">
     </Component>
-    <Component class="javax.swing.JTextField" name="dia">
-    </Component>
     <Component class="javax.swing.JTextField" name="hora">
     </Component>
     <Component class="javax.swing.JTextField" name="precio">
@@ -363,6 +361,24 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rutasActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="dia">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="7">
+            <StringItem index="0" value="Lunes"/>
+            <StringItem index="1" value="Martes"/>
+            <StringItem index="2" value="Miercoles"/>
+            <StringItem index="3" value="Jueves"/>
+            <StringItem index="4" value="Viernes"/>
+            <StringItem index="5" value="Sabado"/>
+            <StringItem index="6" value="Domingo"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

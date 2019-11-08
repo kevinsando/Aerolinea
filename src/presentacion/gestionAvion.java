@@ -396,7 +396,7 @@ public class gestionAvion extends javax.swing.JFrame {
             Columna[0] = a1.get(i).getID();
             Columna[1] = a1.get(i).getOrigen();
             Columna[2] = a1.get(i).getDestino();
-            Columna[3] = a1.get(i).getDuracion();
+            Columna[3] = Integer.toString(a1.get(i).getDuracionH())+':'+Integer.toString(a1.get(i).getDuracionM());
             tableModel.addRow(Columna);
         }
 

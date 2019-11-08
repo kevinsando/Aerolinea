@@ -21,10 +21,10 @@ public class ServicioAerolinea extends Servicio {
     private static final String INSERTARUSUARIO = "{call insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
     private static final String CONSULTARUSUARIO = "{? = call CONSULTARUSUARIO(?,?)}";
 
-    private static final String INSERTARRUTA = "{call insertarRuta (?, ?, ?, ?)}";
+    private static final String INSERTARRUTA = "{call insertarRuta (?, ?, ?, ?,?)}";
     private static final String LISTARRUTAS = "{?=call listarRutas()}";
     private static final String CONSULTARRUTA = "{? = call CONSULTARRUTA(?)}";
-    private static final String MODIFICARRUTA = "{call modificarRuta(?,?,?,?)}";
+    private static final String MODIFICARRUTA = "{call modificarRuta(?,?,?,?,?)}";
     private static final String BORRARRUTAS = "{call borrarRutaG()}";
     private static final String BORRARRUTA = "{call borrarRuta(?)}";
 
@@ -39,14 +39,15 @@ public class ServicioAerolinea extends Servicio {
     private static final String LISTARAVIONES = "{?=call listarAvion()}";
     private static final String ELIMINARAVION = "{call eliminarAvion(?)}";
 
-    private static final String INSERTARHORARIO = "{call insertarHorario (?,?,?,?,?,?,?)}";
-    private static final String MODIFICARHORARIO = "{call modificarHorario(?,?,?,?,?,?,?)}";
+    private static final String INSERTARHORARIO = "{call insertarHorario (?,?,?,?,?,?,?,?,?)}";
+    private static final String MODIFICARHORARIO = "{call modificarHorario(?,?,?,?,?,?,?,?,?)}";
     private static final String LISTARHORARIO = "{?=call listarHorarios()}";
     private static final String ELIMINARHORARIO = "{call borrarHorario(?)}";
     private static final String CONSULTARHORARIO = "{?=call CONSULTARHORARIO(?)}";
 
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
-    private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?,?,?)}";
+    private static final String LISTARVUELOS2 = "{?=call listarVuelosPublico()}";
+    private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?)}";
     //private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
 
     private static ServicioAerolinea mInstance;
@@ -549,9 +550,11 @@ public class ServicioAerolinea extends Servicio {
             pstmt.setString(2, elHorario.getDia());
             pstmt.setInt(3, elHorario.getHora());
             pstmt.setInt(4, elHorario.getMinutos());
-            pstmt.setInt(5, elHorario.getPrecio());
-            pstmt.setInt(6, elHorario.getDescuento());
-            pstmt.setString(7, elHorario.getRuta());
+            pstmt.setInt(5, elHorario.getHoraLlegada());
+            pstmt.setInt(6, elHorario.getMinutosLlegada());
+            pstmt.setInt(7, elHorario.getPrecio());
+            pstmt.setInt(8, elHorario.getDescuento());
+            pstmt.setString(9, elHorario.getRuta());
             System.out.println("horario con exito");
             boolean resultado = pstmt.execute();
             if (resultado == true) {
@@ -594,6 +597,8 @@ public class ServicioAerolinea extends Servicio {
                         rs.getString("diaSemana"),
                         rs.getInt("hora"),
                         rs.getInt("minutos"),
+                        rs.getInt("horaLlegada"),
+                        rs.getInt("minutosLlegada"),
                         rs.getInt("precio"),
                         rs.getInt("descuento"),
                         rs.getString("IdRuta")
@@ -641,9 +646,11 @@ public class ServicioAerolinea extends Servicio {
             pstmt.setString(2, elHorario.getDia());
             pstmt.setInt(3, elHorario.getHora());
             pstmt.setInt(4, elHorario.getMinutos());
-            pstmt.setInt(5, elHorario.getPrecio());
-            pstmt.setInt(6, elHorario.getDescuento());
-            pstmt.setString(7, elHorario.getRuta());
+            pstmt.setInt(5, elHorario.getHoraLlegada());
+            pstmt.setInt(6, elHorario.getMinutosLlegada());
+            pstmt.setInt(7, elHorario.getPrecio());
+            pstmt.setInt(8, elHorario.getDescuento());
+            pstmt.setString(9, elHorario.getRuta());
             boolean resultado = pstmt.execute();
             if (resultado) {
                 throw new NoDataException("No se realizo la actualización");
@@ -726,9 +733,11 @@ public class ServicioAerolinea extends Servicio {
                         rs.getString("diaSemana"),
                         rs.getInt("hora"),
                         rs.getInt("minutos"),
+                        rs.getInt("horaLlegada"),
+                        rs.getInt("minutosLlegada"),
                         rs.getInt("precio"),
                         rs.getInt("descuento"),
-                        rs.getString("idRuta")
+                        rs.getString("IdRuta")
                 );
             }
             if (aux == null) {
@@ -771,7 +780,8 @@ public class ServicioAerolinea extends Servicio {
             pstmt.setString(1, laRuta.getID());
             pstmt.setString(2, laRuta.getOrigen());
             pstmt.setString(3, laRuta.getDestino());
-            pstmt.setInt(4, laRuta.getDuracion());
+            pstmt.setInt(4, laRuta.getDuracionH());
+            pstmt.setInt(5, laRuta.getDuracionM());
             System.out.println("Insertado con exito");
             boolean resultado = pstmt.execute();
             if (resultado == true) {
@@ -815,7 +825,8 @@ public class ServicioAerolinea extends Servicio {
                 laRuta = new ruta(rs.getString("idRuta"),
                         rs.getString("origen"),
                         rs.getString("destino"),
-                        rs.getInt("duracion")
+                        rs.getInt("duracionH"),
+                        rs.getInt("duracionM")
                 );
                 coleccion.add(laRuta);
             }
@@ -869,7 +880,8 @@ public class ServicioAerolinea extends Servicio {
                 aux = new ruta(rs.getString("idRuta"),
                         rs.getString("origen"),
                         rs.getString("destino"),
-                        rs.getInt("duracion")
+                        rs.getInt("duracionH"),
+                        rs.getInt("duracionM")
                 );
             }
             if (aux == null) {
@@ -911,7 +923,8 @@ public class ServicioAerolinea extends Servicio {
             pstmt.setString(1, laRuta.getID());
             pstmt.setString(2, laRuta.getOrigen());
             pstmt.setString(3, laRuta.getDestino());
-            pstmt.setInt(4, laRuta.getDuracion());
+            pstmt.setInt(4, laRuta.getDuracionH());
+            pstmt.setInt(5, laRuta.getDuracionM());
 
             boolean resultado = pstmt.execute();
             System.out.println("Actualizado con exito");
@@ -1024,9 +1037,7 @@ public class ServicioAerolinea extends Servicio {
                 elVuelo = new vuelo(rs.getString("codigo"),
                         rs.getInt("tipo"),
                         rs.getString("identificadorAvIda"),
-                        rs.getString("identificadorAvRegreso"),
-                        rs.getString("idHorarioRegreso"),
-                        rs.getString("idHorarioIda")
+                        rs.getString("identificadorAvRegreso")
                 );
                 coleccion.add(elVuelo);
             }
@@ -1056,6 +1067,66 @@ public class ServicioAerolinea extends Servicio {
         return coleccion;
     }
 
+    public ArrayList listarVuelo2() throws GlobalException, NoDataException {
+         try {
+            conectar();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        //String codigo, int tipo, String origen, String destino, String fechaIda, String fechaRegreso
+        ResultSet rs = null;
+        ArrayList<vuelo> coleccion = new ArrayList<vuelo>();
+        vuelo elVuelo = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(LISTARVUELOS2);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);//El objeto retornado es tipo Cursor
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);//El objeto que recibe es un cursor de todos los estudiantes
+            while (rs.next()) {
+                elVuelo = new vuelo(rs.getString("codigo"),
+                        rs.getInt("tipo"),
+                        rs.getString("origen"),
+                        rs.getString("destino"),
+                        rs.getString("diaSemana"),
+                        rs.getString("hora"),
+                        rs.getString("minutos"),
+                        rs.getString("horaLlegada"),
+                        rs.getString("minutosLlegada"),
+                        rs.getString("pasajeros"),
+                        rs.getString("descuento")
+                );
+                coleccion.add(elVuelo);
+            }
+            for (vuelo v : coleccion) {
+                System.out.println(v.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        if (coleccion == null || coleccion.isEmpty()) {
+            throw new NoDataException("No hay datos");
+        }
+        return coleccion;
+       }
+
+
     public void insertarVuelo(vuelo elVuelo) throws GlobalException, NoDataException {
 
         try {
@@ -1071,10 +1142,8 @@ public class ServicioAerolinea extends Servicio {
             pstmt = conexion.prepareCall(INSERTARVUELOS);
             pstmt.setString(1, elVuelo.getCodigo());
             pstmt.setInt(2, elVuelo.getTipo());
-            pstmt.setString(3, elVuelo.getHorarioIda());
-            pstmt.setString(4, elVuelo.getHorarioRegreso());
-            pstmt.setString(5, elVuelo.getAvionIda());
-            pstmt.setString(6, elVuelo.getAvionRegreso());
+            pstmt.setString(3, elVuelo.getAvionIda());
+            pstmt.setString(4, elVuelo.getAvionRegreso());
             System.out.println("Insertado con exito");
             boolean resultado = pstmt.execute();
             if (resultado == true) {

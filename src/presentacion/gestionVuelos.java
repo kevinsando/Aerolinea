@@ -21,7 +21,6 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
     public gestionVuelos() {
         initComponents();
         opcion = false;
-        horarioR.setEnabled(opcion);
         regreso.setEnabled(opcion);
         setDefaultCloseOperation(administracion.DISPOSE_ON_CLOSE);
 
@@ -37,7 +36,6 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
 
         horarios = new javax.swing.JButton();
         aviones = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaAvion = new javax.swing.JTable();
@@ -46,12 +44,9 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaH = new javax.swing.JTable();
-        horarioI = new javax.swing.JTextField();
         ida = new javax.swing.JTextField();
         regreso = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        horarioR = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         codigo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -72,8 +67,6 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                 avionesActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("ID Horario (Ida): ");
 
         jLabel3.setText("ID Avion (ida):");
 
@@ -116,8 +109,6 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
             }
         });
 
-        jLabel6.setText("ID Horario (Regreso): ");
-
         jLabel7.setText("Codigo: ");
 
         jLabel8.setText("Tipo(1 solo ida, 2 ida/regreso): ");
@@ -144,22 +135,18 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(36, 36, 36)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel3))
+                        .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(horarioR)
-                            .addComponent(horarioI)
+                            .addComponent(ida)
                             .addComponent(codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ida)
                             .addComponent(regreso)
                             .addComponent(tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -176,7 +163,7 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(284, 284, 284)
+                        .addGap(286, 286, 286)
                         .addComponent(jButton3)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -198,24 +185,12 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                             .addComponent(jLabel8)
                             .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(horarioI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(horarioR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(ida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton3)
-                        .addGap(48, 48, 48))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,9 +200,11 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(horarios)
                             .addComponent(aviones))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                         .addComponent(jLabel7)
-                        .addGap(198, 198, 198))))
+                        .addGap(67, 67, 67)))
+                .addComponent(jButton3)
+                .addContainerGap())
         );
 
         pack();
@@ -236,11 +213,10 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             if (!opcion) {
-                horarioR.setText("");
                 regreso.setText("");
             }
             //String horario,String horarioR, String ida, String regreso,String codigo,int tipo
-            control.agregarVuelos(horarioI.getText(), horarioR.getText(), ida.getText(), regreso.getText(), codigo.getText(), Character.getNumericValue(tipo.getItemAt(tipo.getSelectedIndex()).charAt(0)));
+            control.agregarVuelos(ida.getText(), regreso.getText(), codigo.getText(), Character.getNumericValue(tipo.getItemAt(tipo.getSelectedIndex()).charAt(0)));
             this.dispose();
         } catch (GlobalException | NoDataException | SQLException ex) {
             Logger.getLogger(gestionVuelos.class.getName()).log(Level.SEVERE, null, ex);
@@ -269,11 +245,9 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         if (tipo.getSelectedIndex() == 0) {
             opcion = false;
-            horarioR.setEnabled(opcion);
             regreso.setEnabled(opcion);
         } else {
             opcion = true;
-            horarioR.setEnabled(opcion);
             regreso.setEnabled(opcion);
         }
     }//GEN-LAST:event_tipoActionPerformed
@@ -319,17 +293,13 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aviones;
     private javax.swing.JTextField codigo;
-    private javax.swing.JTextField horarioI;
-    private javax.swing.JTextField horarioR;
     private javax.swing.JButton horarios;
     private javax.swing.JTextField ida;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;

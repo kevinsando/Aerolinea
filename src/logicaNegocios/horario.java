@@ -6,6 +6,8 @@ public class horario {
     String dia;
     int hora;
     int minutos;
+    int horaLlegada;
+    int minutosLlegada;
     int precio;
     int descuento;
     String ruta;
@@ -13,11 +15,13 @@ public class horario {
     public horario() {
     }
 
-    public horario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) {
+    public horario(String id, String dia, int hora, int minutos,int horaLlegada,int minutosLlegada, int precio, int descuento, String ruta) {
         this.id = id;
         this.dia = dia;
         this.hora = hora;
         this.minutos = minutos;
+        this.horaLlegada=horaLlegada;
+        this.minutosLlegada=minutosLlegada;
         this.precio = precio;
         this.descuento = descuento;
         this.ruta = ruta;
@@ -45,6 +49,22 @@ public class horario {
 
     public void setDescuento(int descuento) {
         this.descuento = descuento;
+    }
+
+    public int getHoraLlegada() {
+        return horaLlegada;
+    }
+
+    public void setHoraLlegada(int horaLlegada) {
+        this.horaLlegada = horaLlegada;
+    }
+
+    public int getMinutosLlegada() {
+        return minutosLlegada;
+    }
+
+    public void setMinutosLlegada(int minutosLlegada) {
+        this.minutosLlegada = minutosLlegada;
     }
 
     public void setRuta(String ruta) {
