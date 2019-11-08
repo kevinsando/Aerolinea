@@ -383,6 +383,7 @@ public class gestionAvion extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         control.cargarAdmin();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
     private void updateTableRuta(ArrayList<ruta> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();

@@ -253,7 +253,7 @@ public class publico extends javax.swing.JFrame {
 
     private void updateTabla(ArrayList<vuelo> vuelos) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String[] columnNames = {"Codigo", "Tipo", "Avion Ida", "Avion Regreso", "Horario Ida", "Horario Regreso"};
+        String[] columnNames = {"Codigo", "Tipo", "ID Horario Ida", "ID Horario Regreso", "ID Avion Ida", "ID Avion Regreso"};
         tableModel.setColumnIdentifiers(columnNames);
         Object[] Columna = new Object[tableModel.getColumnCount()];
 
@@ -261,10 +261,10 @@ public class publico extends javax.swing.JFrame {
 
             Columna[0] = vuelos.get(i).getCodigo();
             Columna[1] = vuelos.get(i).getTipo();
-            Columna[2] = vuelos.get(i).getAvionIda();
-            Columna[3] = vuelos.get(i).getAvionRegreso();
-            Columna[4] = vuelos.get(i).getHorarioIda();
-            Columna[5] = vuelos.get(i).getHorarioRegreso();
+            Columna[2] = vuelos.get(i).getHorarioIda();
+            Columna[3] = vuelos.get(i).getHorarioRegreso();
+            Columna[4] = vuelos.get(i).getAvionIda();
+            Columna[5] = vuelos.get(i).getAvionRegreso();
             tableModel.addRow(Columna);
         }
 

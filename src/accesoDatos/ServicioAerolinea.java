@@ -47,18 +47,17 @@ public class ServicioAerolinea extends Servicio {
 
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
     private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?,?,?)}";
-    private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
+    //private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
 
     private static ServicioAerolinea mInstance;
-    
-    public static ServicioAerolinea getInstance()
-    {
-        if(mInstance==null)
-        {
-            mInstance=new ServicioAerolinea();
+
+    public static ServicioAerolinea getInstance() {
+        if (mInstance == null) {
+            mInstance = new ServicioAerolinea();
         }
         return mInstance;
     }
+
     public ServicioAerolinea() {
 
     }
@@ -1002,9 +1001,7 @@ public class ServicioAerolinea extends Servicio {
     }
 
     //------------------------------VUELOS------------------------------
-    
     //codigo,tipo,ida,regreso,horarioR,horario
-    
     public ArrayList listarVuelo() throws GlobalException, NoDataException {
         try {
             conectar();
@@ -1013,7 +1010,7 @@ public class ServicioAerolinea extends Servicio {
         } catch (SQLException e) {
             throw new NoDataException("La base de datos no se encuentra disponible");
         }
-       //String codigo, int tipo, String origen, String destino, String fechaIda, String fechaRegreso
+        //String codigo, int tipo, String origen, String destino, String fechaIda, String fechaRegreso
         ResultSet rs = null;
         ArrayList<vuelo> coleccion = new ArrayList<vuelo>();
         vuelo elVuelo = null;
@@ -1026,10 +1023,10 @@ public class ServicioAerolinea extends Servicio {
             while (rs.next()) {
                 elVuelo = new vuelo(rs.getString("codigo"),
                         rs.getInt("tipo"),
-                        rs.getString("IdAvion"),
-                        rs.getString("IdAvionD"),
-                        rs.getString("idHorarioIda"),
-                        rs.getString("idHorarioRegreso")
+                        rs.getString("identificadorAvIda"),
+                        rs.getString("identificadorAvRegreso"),
+                        rs.getString("idHorarioRegreso"),
+                        rs.getString("idHorarioIda")
                 );
                 coleccion.add(elVuelo);
             }
@@ -1074,10 +1071,10 @@ public class ServicioAerolinea extends Servicio {
             pstmt = conexion.prepareCall(INSERTARVUELOS);
             pstmt.setString(1, elVuelo.getCodigo());
             pstmt.setInt(2, elVuelo.getTipo());
-            pstmt.setString(3, elVuelo.getAvionIda());
-            pstmt.setString(4, elVuelo.getAvionRegreso());
-            pstmt.setString(5, elVuelo.getHorarioIda());
-            pstmt.setString(6, elVuelo.getHorarioRegreso());
+            pstmt.setString(3, elVuelo.getHorarioIda());
+            pstmt.setString(4, elVuelo.getHorarioRegreso());
+            pstmt.setString(5, elVuelo.getAvionIda());
+            pstmt.setString(6, elVuelo.getAvionRegreso());
             System.out.println("Insertado con exito");
             boolean resultado = pstmt.execute();
             if (resultado == true) {
