@@ -299,7 +299,7 @@ AS
     vuelos_cursor types.ref_cursor;
 BEGIN
     OPEN vuelos_cursor FOR 
-    SELECT codigo,tipo,origen,destino,diaSemana,hora,minutos,horaLlegada,minutosLlegada,pasajeros FROM VUELOS,rutas,horarios,Tipo_Aviones;
+    SELECT codigo,tipo,origen,destino,diaSemana,hora,minutos,horaLlegada,minutosLlegada,pasajeros,descuento FROM VUELOS,rutas,horarios,Tipo_Aviones;
     RETURN vuelos_cursor;
     END;
 /
