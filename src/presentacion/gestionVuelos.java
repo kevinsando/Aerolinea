@@ -1,4 +1,3 @@
-
 package presentacion;
 
 import Excepciones.GlobalException;
@@ -13,16 +12,18 @@ import logicaNegocios.avion;
 import logicaNegocios.horario;
 
 public class gestionVuelos extends javax.swing.JFrame {
+
     controlador control;
-    
+
     public gestionVuelos() {
         initComponents();
+        setDefaultCloseOperation(administracion.DISPOSE_ON_CLOSE);
+
     }
 
     public void setControl(controlador control) {
         this.control = control;
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -66,9 +67,9 @@ public class gestionVuelos extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Horario (Ida): ");
+        jLabel2.setText("ID Horario (Ida): ");
 
-        jLabel3.setText("Avion (ida):");
+        jLabel3.setText("ID Avion (ida):");
 
         tablaAvion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,7 +84,7 @@ public class gestionVuelos extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tablaAvion);
 
-        jLabel1.setText("Avion (regreso):");
+        jLabel1.setText("ID Avion (regreso):");
 
         jLabel4.setText("Horarios");
 
@@ -109,11 +110,11 @@ public class gestionVuelos extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Horario (Regreso): ");
+        jLabel6.setText("ID Horario (Regreso): ");
 
         jLabel7.setText("Codigo: ");
 
-        jLabel8.setText("Tipo: ");
+        jLabel8.setText("Tipo(1 solo ida, 2 ida/regreso): ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,17 +139,16 @@ public class gestionVuelos extends javax.swing.JFrame {
                             .addComponent(horarioR)
                             .addComponent(horarioI)
                             .addComponent(codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
-                        .addGap(70, 70, 70)
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(113, 113, 113)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ida)
-                                    .addComponent(regreso)
-                                    .addComponent(tipo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)))))
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ida)
+                            .addComponent(regreso)
+                            .addComponent(tipo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(139, 139, 139)
                         .addComponent(horarios)
@@ -201,19 +201,17 @@ public class gestionVuelos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(horarioI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(horarioR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(horarioR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(ida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(51, 51, 51)
                 .addComponent(jButton3)
                 .addGap(48, 48, 48))
@@ -225,7 +223,7 @@ public class gestionVuelos extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             //String horario,String horarioR, String ida, String regreso,String codigo,int tipo
-            control.agregarVuelos(horarioI.getText(),horarioR.getText(),ida.getText(),regreso.getText(),codigo.getText(),Integer.parseInt(tipo.getText()));
+            control.agregarVuelos(horarioI.getText(), horarioR.getText(), ida.getText(), regreso.getText(), codigo.getText(), Integer.parseInt(tipo.getText()));
         } catch (GlobalException | NoDataException | SQLException ex) {
             Logger.getLogger(gestionVuelos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -250,7 +248,7 @@ public class gestionVuelos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_avionesActionPerformed
 
-private void updateTableHorario(ArrayList<horario> a1) {
+    private void updateTableHorario(ArrayList<horario> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
         String[] columnNames = {"ID", "Hora", "Minutos", "Precio", "Descuento", "Ruta"};
         tableModel.setColumnIdentifiers(columnNames);
@@ -270,7 +268,8 @@ private void updateTableHorario(ArrayList<horario> a1) {
 
         tablaH.setModel(tableModel);
     }
-        private void updateTableAvion(ArrayList<avion> a1) {
+
+    private void updateTableAvion(ArrayList<avion> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
         String[] columnNames = {"ID", "Horario", "Ruta", "Avion"};
         tableModel.setColumnIdentifiers(columnNames);

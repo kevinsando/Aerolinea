@@ -20,6 +20,7 @@ public class Aerolinea {
         control.setReservaAsientos(ra);
         control.setGaa(gaa);
         control.setGv(gv);
+        inicio.setLocationRelativeTo(null);
         inicio.setVisible(true);
     }
     

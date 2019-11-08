@@ -35,7 +35,7 @@ public class controlador {
     reservaAsientos ra;
     gestionAvion gaa;
 
-    public controlador(usuarioA user, publico inicio, modelo model, crearCuenta cc, administracion a, gestionRutas gr, gestionTipoAviones ga,gestionHorarios gh) {
+    public controlador(usuarioA user, publico inicio, modelo model, crearCuenta cc, administracion a, gestionRutas gr, gestionTipoAviones ga, gestionHorarios gh) {
         this.user = user;
         this.inicio = inicio;
         this.model = model;
@@ -55,7 +55,8 @@ public class controlador {
         this.gh.setControl(this);
         gr.setControl(this);
     }
-    public void setReservaAsientos(reservaAsientos ra){
+
+    public void setReservaAsientos(reservaAsientos ra) {
         this.ra = ra;
         this.ra.setControl(this);
     }
@@ -63,6 +64,7 @@ public class controlador {
     public void setGaa(gestionAvion gaa) {
         this.gaa = gaa;
         gaa.setControl(this);
+        admin.setLocationRelativeTo(null);
         admin.setVisible(false);
     }
 
@@ -70,42 +72,50 @@ public class controlador {
         this.gv = gv;
         this.gv.setControl(this);
     }
-    
-    
 
     public void login() {
+        user.setLocationRelativeTo(null);
         user.setVisible(true);
         creaC.setVisible(false);
     }
 
     public void newCuenta() {
+        creaC.setLocationRelativeTo(null);
         user.setVisible(false);
         creaC.setVisible(true);
     }
 
     public void gestionRutas() {
+        gr.setLocationRelativeTo(null);
         gr.setVisible(true);
         admin.setVisible(false);
     }
 
     public void gestionTipoAviones() {
+        ga.setLocationRelativeTo(null);
         ga.setVisible(true);
         admin.setVisible(false);
     }
-    public void gestionAvion(){
+
+    public void gestionAvion() {
+        gaa.setLocationRelativeTo(null);
         gaa.setVisible(true);
         admin.setVisible(false);
     }
-    public void gestionHorarios(){
+
+    public void gestionHorarios() {
+        gh.setLocationRelativeTo(null);
         gh.setVisible(true);
         admin.setVisible(false);
     }
-    public void gestionVuelos(){
+
+    public void gestionVuelos() {
+        gv.setLocationRelativeTo(null);
         gv.setVisible(true);
     }
 
     public void cargarAdmin() {
-
+        admin.setLocationRelativeTo(null);
         admin.setVisible(true);
         gr.setVisible(false);
         gh.setVisible(false);
@@ -135,7 +145,7 @@ public class controlador {
         ra.setVu(vv);
     }
 
-    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, 
+    public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros,
             Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
         model.insertarTipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
     }
@@ -154,7 +164,7 @@ public class controlador {
 
     public ArrayList<vuelo> listarVuelos() throws GlobalException, NoDataException {
         return model.listarVuelo();
-        
+
     }
 
     public ArrayList listarRuta() throws GlobalException, NoDataException {
@@ -180,49 +190,60 @@ public class controlador {
     public ruta consultarRuta(String id) throws GlobalException, NoDataException, SQLException {
         return model.consultarRuta(id);
     }
-    
-       public void insertarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws GlobalException, NoDataException{
-        model.insertarHorario(id, dia,hora, minutos,precio,descuento,ruta);
+
+    public void insertarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws GlobalException, NoDataException {
+        model.insertarHorario(id, dia, hora, minutos, precio, descuento, ruta);
     }
-    public horario consultarHorario(String id){
-        horario h=null;
-        
+
+    public horario consultarHorario(String id) {
+        horario h = null;
+
         return h;
     }
-    public void eliminarHorario(String id) throws GlobalException, NoDataException{
+
+    public void eliminarHorario(String id) throws GlobalException, NoDataException {
         model.eliminarHorario(id);
     }
-    public ArrayList<horario> listarHorario() throws GlobalException, NoDataException{
+
+    public ArrayList<horario> listarHorario() throws GlobalException, NoDataException {
         return model.listarHorario();
-        
+
     }
-    public void modificarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws NoDataException, GlobalException{
+
+    public void modificarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws NoDataException, GlobalException {
         model.modificarHorario(id, dia, hora, minutos, precio, descuento, ruta);
     }
-    public void reservarAsientos(){
+
+    public void reservarAsientos() {
         ra.setVisible(true);
         //inicio.setVisible(false);
     }
-    public void llenarReservaAsientos(vuelo v ){
+
+    public void llenarReservaAsientos(vuelo v) {
         vuelo vv = new vuelo();
         ra.setVu(vv);
     }
-    public void ingresarAvion(String id, String horario, String ruta, String avion) throws GlobalException, NoDataException{
+
+    public void ingresarAvion(String id, String horario, String ruta, String avion) throws GlobalException, NoDataException {
         avion aux;
-        aux =model.insertarAvion(id, horario, ruta, avion);
+        aux = model.insertarAvion(id, horario, ruta, avion);
         ra.setAv(aux);
-        
+
     }
-    public void modificarAvion(String id, String horario, String ruta, String avion)throws GlobalException, NoDataException{
+
+    public void modificarAvion(String id, String horario, String ruta, String avion) throws GlobalException, NoDataException {
         model.modificarAvion(id, horario, ruta, avion);
     }
-    public void eliminarAvion(String id) throws GlobalException, NoDataException{
+
+    public void eliminarAvion(String id) throws GlobalException, NoDataException {
         model.eliminarAvion(id);
     }
-    public ArrayList listarAviones() throws GlobalException, NoDataException{
+
+    public ArrayList listarAviones() throws GlobalException, NoDataException {
         return model.listarAvion();
     }
-    public void agregarVuelos(String horario,String horarioR, String ida, String regreso,String codigo,int tipo) throws GlobalException, NoDataException, SQLException{
+
+    public void agregarVuelos(String horario, String horarioR, String ida, String regreso, String codigo, int tipo) throws GlobalException, NoDataException, SQLException {
         model.insertarVuelo(horario, horarioR, ida, regreso, codigo, tipo);
     }
 

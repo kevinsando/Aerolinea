@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaNegocios.tipoAvion;
 
@@ -266,7 +267,11 @@ public class gestionTipoAviones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-
+if(Integer.parseInt(asientosPorFila.getText())<6||Integer.parseInt(asientosPorFila.getText())>9)
+{
+            JOptionPane.showMessageDialog(rootPane, "Cantidad de Asientos por fila incorrecto.\nDebe ser mayor a 6 y menor a 9.", "Error", JOptionPane.WARNING_MESSAGE);
+}
+else{
         try {
             control.insertarTipoAvion(id.getText(), Integer.parseInt(año.getText()), modelo.getText(), marca.getText(), 
                     Integer.parseInt(canPasajeros.getText()), Integer.parseInt(canFilas.getText()), 
@@ -275,6 +280,7 @@ public class gestionTipoAviones extends javax.swing.JFrame {
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(gestionTipoAviones.class.getName()).log(Level.SEVERE, null, ex);
         }
+}
     }//GEN-LAST:event_agregarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

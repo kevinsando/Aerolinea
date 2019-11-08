@@ -18,6 +18,8 @@ public class gestionAvion extends javax.swing.JFrame {
 
     public gestionAvion() {
         initComponents();
+        setDefaultCloseOperation(gestionAvion.DISPOSE_ON_CLOSE);
+
     }
 
     public void setControl(controlador control) {
@@ -441,7 +443,8 @@ public class gestionAvion extends javax.swing.JFrame {
 
         tablaH.setModel(tableModel);
     }
-        private void updateTableAvion(ArrayList<avion> a1) {
+
+    private void updateTableAvion(ArrayList<avion> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
         String[] columnNames = {"ID", "Horario", "Ruta", "Avion"};
         tableModel.setColumnIdentifiers(columnNames);
