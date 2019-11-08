@@ -14,7 +14,6 @@ public class modelo extends Observable {
     ruta ruta;
     usuario usuario;
     vuelo vuelo;
-    ServicioAerolinea sa;
 
     public modelo() {
         tipoAvion = new tipoAvion();
@@ -22,7 +21,6 @@ public class modelo extends Observable {
         ruta = new ruta();
         usuario = new usuario();
         vuelo = new vuelo();
-        sa = new ServicioAerolinea();
     }
 
     @Override
@@ -45,12 +43,6 @@ public class modelo extends Observable {
 
     }
 
-    public void insertarUsuario(usuario u) {
-
-        this.setChanged();
-        this.notifyObservers(null);
-    }
-
     public void modificarUsuario(int pos, String id, String nombre, String edad, char sex) {
         //int pos = DAL.getInstance().consultar(e);
         usuario uu = new usuario();
@@ -70,12 +62,12 @@ public class modelo extends Observable {
     }
 
     public void crearUsuario(usuario u) throws GlobalException, NoDataException {
-        sa.insertarUsuario(u);
+        ServicioAerolinea.getInstance().insertarUsuario(u);
     }
 
     public usuario buscarUsuario(String usuario, String password) throws GlobalException, NoDataException, SQLException {
         usuario aux = null;
-        aux = sa.MostrarUsuario(usuario, password);
+        aux = ServicioAerolinea.getInstance().MostrarUsuario(usuario, password);
         System.out.println(aux.toString());
         return aux;
     }
@@ -93,12 +85,12 @@ public class modelo extends Observable {
 
         this.setChanged();
         this.notifyObservers(null);
-        return sa.listarAviones();
+        return ServicioAerolinea.getInstance().listarAviones();
     }
 
     public avion insertarAvion(String id, String horario, String ruta, String avion) throws GlobalException, NoDataException {
         avion elAvion = new avion(id, horario, ruta, avion);
-        sa.insertarAvion(elAvion);
+        ServicioAerolinea.getInstance().insertarAvion(elAvion);
         this.setChanged();
         this.notifyObservers(null);
         return elAvion;
@@ -107,13 +99,13 @@ public class modelo extends Observable {
     public void modificarAvion(String id, String horario, String ruta, String avion) throws GlobalException, NoDataException {
         //int pos = DAL.getInstance().consultar(e);
         avion aa = new avion(id, horario, ruta, avion);
-        sa.modificarAvion(aa);
+        ServicioAerolinea.getInstance().modificarAvion(aa);
         this.setChanged();
         this.notifyObservers(null);
     }
 
     public void eliminarAvion(String id) throws GlobalException, NoDataException {
-        sa.eliminarAvion(id);
+        ServicioAerolinea.getInstance().eliminarAvion(id);
         this.setChanged();
         this.notifyObservers(null);
     }
@@ -138,22 +130,22 @@ public class modelo extends Observable {
     public void insertarTipoAvion(String id, int año, String modelo, String marca, int canPasajeros, int canFilas, int asientosFila) throws GlobalException, NoDataException {
         tipoAvion t = new tipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
 
-        sa.insertarTipoAvion(t);
+        ServicioAerolinea.getInstance().insertarTipoAvion(t);
     }
 
     public ArrayList listarTipoAvion() throws GlobalException, NoDataException {
-        return sa.listarTipoAviones();
+        return ServicioAerolinea.getInstance().listarTipoAviones();
 
     }
 
     public void modificarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros, Integer canFilas, Integer asientosFila) throws GlobalException, NoDataException {
         tipoAvion t = new tipoAvion(id, año, modelo, marca, canPasajeros, canFilas, asientosFila);
-        sa.modificarTipo(t);
+        ServicioAerolinea.getInstance().modificarTipo(t);
 
     }
 
     public void eliminarEspTipo(String text) throws GlobalException, NoDataException {
-        sa.eliminarTipo(text);
+        ServicioAerolinea.getInstance().eliminarTipo(text);
     }
 
     //----------------------------RUTA------------------------------------------
@@ -162,31 +154,31 @@ public class modelo extends Observable {
     }
 
     public ArrayList listarRuta() throws GlobalException, NoDataException {
-        return sa.listarRutas();
+        return ServicioAerolinea.getInstance().listarRutas();
     }
 
     public void insertarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException {
         ruta r = new ruta(id, ori, des, dura);
-        sa.insertarRuta(r);
+        ServicioAerolinea.getInstance().insertarRuta(r);
     }
 
     public void modificarRuta(String id, String ori, String des, int dura) throws GlobalException, NoDataException, SQLException {
         ruta r = new ruta(id, ori, des, dura);
-        sa.modificarRuta(r);
+        ServicioAerolinea.getInstance().modificarRuta(r);
     }
 
     public void eliminarRutas() throws GlobalException, NoDataException {
-        sa.borrarRutas();
+        ServicioAerolinea.getInstance().borrarRutas();
     }
 
     public void eliminarEspRuta(String id) throws GlobalException, NoDataException {
-        sa.borrarRuta(id);
+        ServicioAerolinea.getInstance().borrarRuta(id);
     }
 
     public ruta consultarRuta(String id) throws GlobalException, NoDataException, SQLException {
         this.setChanged();
         this.notifyObservers(null);
-        return sa.consultarRuta(id);
+        return ServicioAerolinea.getInstance().consultarRuta(id);
     }
 
     //---------------------------VUELO------------------------------------------
@@ -195,7 +187,7 @@ public class modelo extends Observable {
         this.setChanged();
         this.notifyObservers(null);
         
-        return sa.listarVuelo();
+        return ServicioAerolinea.getInstance().listarVuelo();
 
     }
 
@@ -206,7 +198,7 @@ public class modelo extends Observable {
     public void insertarVuelo(String horario,String horarioR, String ida, String regreso,String codigo,int tipo) throws GlobalException, NoDataException, SQLException {
 
        vuelo v= new vuelo(codigo,tipo,ida,regreso,horarioR,horario);
-        sa.insertarVuelo(v);
+        ServicioAerolinea.getInstance().insertarVuelo(v);
         this.setChanged();
         this.notifyObservers(null);
     }
@@ -248,7 +240,7 @@ public class modelo extends Observable {
     //------------------------------HORARIO-------------------------------------
     public void insertarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws GlobalException, NoDataException {
         horario h = new horario(id, dia, hora, minutos, precio, descuento, ruta);
-        sa.insertarHorario(h);
+        ServicioAerolinea.getInstance().insertarHorario(h);
     }
 
     public horario consultarHorario(String id) {
@@ -258,18 +250,18 @@ public class modelo extends Observable {
     }
 
     public void eliminarHorario(String id) throws GlobalException, NoDataException {
-        sa.eliminarHorario(id);
+        ServicioAerolinea.getInstance().eliminarHorario(id);
     }
 
     public ArrayList<horario> listarHorario() throws GlobalException, NoDataException {
-        ArrayList<horario> hor = sa.listarHorario();
+        ArrayList<horario> hor = ServicioAerolinea.getInstance().listarHorario();
 
         return hor;
     }
 
     public void modificarHorario(String id, String dia, int hora, int minutos, int precio, int descuento, String ruta) throws NoDataException, GlobalException {
         horario h = new horario(id, dia, hora, minutos, precio, descuento, ruta);
-        sa.modificarHorario(h);
+        ServicioAerolinea.getInstance().modificarHorario(h);
     }
 
 }

@@ -49,6 +49,16 @@ public class ServicioAerolinea extends Servicio {
     private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?,?,?)}";
     private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
 
+    private static ServicioAerolinea mInstance;
+    
+    public static ServicioAerolinea getInstance()
+    {
+        if(mInstance==null)
+        {
+            mInstance=new ServicioAerolinea();
+        }
+        return mInstance;
+    }
     public ServicioAerolinea() {
 
     }
