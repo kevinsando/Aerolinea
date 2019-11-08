@@ -47,20 +47,20 @@
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="usuario" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="contraseña" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nombre" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="apellido" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="correo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="direccion" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="trabajo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="celular" alignment="0" pref="85" max="32767" attributes="0"/>
-                                  <Component id="fna" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="usuario" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="contraseña" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="nombre" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="apellido" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="correo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="direccion" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="trabajo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="celular" alignment="0" pref="85" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="nacimiento" min="-2" pref="87" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="nacimiento" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -69,7 +69,7 @@
                       <Component id="enviar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <EmptySpace pref="164" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,14 +100,13 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="correo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <Component id="fna" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="direccion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -126,7 +125,7 @@
               <Component id="robot" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="enviar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -213,8 +212,6 @@
       </Events>
     </Component>
     <Component class="org.jdesktop.swingx.JXDatePicker" name="nacimiento">
-    </Component>
-    <Component class="javax.swing.JTextField" name="fna">
     </Component>
   </SubComponents>
 </Form>
