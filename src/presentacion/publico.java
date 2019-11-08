@@ -37,9 +37,9 @@ public class publico extends javax.swing.JFrame {
 
     public publico() {
         initComponents();
-        Tabla.setVisible(false);
+        // Tabla.setVisible(false);
         Tabla.getTableHeader().setReorderingAllowed(false);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -73,7 +73,7 @@ public class publico extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Tipo", "Origen", "Destino", "Fecha Ida", "Fecha Regreso", "Cantidad Pasajeros"
+                "Codigo", "Tipo", "Avion Ida", "Avion Regreso", "Horario Ida", "Horario Regreso"
             }
         ));
         jScrollPane1.setViewportView(Tabla);
@@ -176,8 +176,8 @@ public class publico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(mvd)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(Bselect)
                 .addGap(32, 32, 32))
         );
@@ -200,14 +200,23 @@ public class publico extends javax.swing.JFrame {
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(publico.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Tabla.setVisible(true);
+        // Tabla.setVisible(true);
     }//GEN-LAST:event_mvdActionPerformed
 
     private void BselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BselectActionPerformed
         // TODO add your handling code here:
-        if (model.getUsuario().getUser() == null) {
+        if (user == null) {
             JOptionPane.showMessageDialog(rootPane, "Usuario no iniciado",
                     "Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            ArrayList<vuelo> vuelos;
+            try {
+                control.llenarReservaAsientos(control.listarVuelos().get(Tabla.getSelectedRow()));
+                control.reservarAsientos();
+            } catch (GlobalException | NoDataException ex) {
+                Logger.getLogger(publico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }//GEN-LAST:event_BselectActionPerformed
 
@@ -221,6 +230,7 @@ public class publico extends javax.swing.JFrame {
             usuario.setText("Bienvenido " + u.getUser());
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bselect;
@@ -241,21 +251,20 @@ public class publico extends javax.swing.JFrame {
     private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 
-    private void updateTabla(ArrayList vuelos) {
+    private void updateTabla(ArrayList<vuelo> vuelos) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        String[] columnNames = {"Cantidad", "Producto", "Precio", "Total"};
+        String[] columnNames = {"Codigo", "Tipo", "Avion Ida", "Avion Regreso", "Horario Ida", "Horario Regreso"};
         tableModel.setColumnIdentifiers(columnNames);
         Object[] Columna = new Object[tableModel.getColumnCount()];
 
         for (int i = 0; i < vuelos.size(); i++) {
 
-            vuelo aux = (vuelo) vuelos.get(i);
-            Columna[1] = "0";
-            Columna[2] = aux.getOrigen();
-            Columna[3] = aux.getDestino();
-            Columna[4] = aux.getFechaIda();
-            Columna[5] = aux.getFechaRegreso();
-            Columna[6] = "0";
+            Columna[0] = vuelos.get(i).getCodigo();
+            Columna[1] = vuelos.get(i).getTipo();
+            Columna[2] = vuelos.get(i).getAvionIda();
+            Columna[3] = vuelos.get(i).getAvionRegreso();
+            Columna[4] = vuelos.get(i).getHorarioIda();
+            Columna[5] = vuelos.get(i).getHorarioRegreso();
             tableModel.addRow(Columna);
         }
 

@@ -271,7 +271,7 @@ public class gestionTipoAviones extends javax.swing.JFrame {
             control.insertarTipoAvion(id.getText(), Integer.parseInt(año.getText()), modelo.getText(), marca.getText(), 
                     Integer.parseInt(canPasajeros.getText()), Integer.parseInt(canFilas.getText()), 
                     Integer.parseInt(asientosPorFila.getText()));
-                    //this.updateTable(control.listarTipoAvion());
+                    this.updateTable(control.listarTipoAvion());
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(gestionTipoAviones.class.getName()).log(Level.SEVERE, null, ex);
         }

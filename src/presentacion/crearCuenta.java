@@ -60,6 +60,7 @@ public class crearCuenta extends javax.swing.JFrame {
         robot = new javax.swing.JCheckBox();
         enviar = new javax.swing.JButton();
         nacimiento = new org.jdesktop.swingx.JXDatePicker();
+        fna = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,21 +128,22 @@ public class crearCuenta extends javax.swing.JFrame {
                                         .addGap(2, 2, 2)
                                         .addComponent(jLabel8)))
                                 .addGap(53, 53, 53)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(usuario)
-                                        .addComponent(contraseña)
-                                        .addComponent(nombre)
-                                        .addComponent(apellido)
-                                        .addComponent(correo)
-                                        .addComponent(direccion)
-                                        .addComponent(trabajo)
-                                        .addComponent(celular, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(usuario)
+                                    .addComponent(contraseña)
+                                    .addComponent(nombre)
+                                    .addComponent(apellido)
+                                    .addComponent(correo)
+                                    .addComponent(direccion)
+                                    .addComponent(trabajo)
+                                    .addComponent(celular, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(fna))
+                                .addGap(32, 32, 32)
+                                .addComponent(nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(231, 231, 231)
                         .addComponent(enviar)))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,11 +167,12 @@ public class crearCuenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(fna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -195,7 +198,7 @@ public class crearCuenta extends javax.swing.JFrame {
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
         if (usuario.getText().equals("") || contraseña.getText().equals("") || nombre.getText().equals("")
-                || apellido.getText().equals("") || correo.getText().equals("") || nacimiento.getDate().toString().equals("")
+                || apellido.getText().equals("") || correo.getText().equals("") || fna.getText().equals("")
                 || direccion.getText().equals("") || trabajo.equals("") || celular.equals("")) {
 
             JOptionPane.showMessageDialog(rootPane, "Es necesario completar todos los espacios",
@@ -204,7 +207,7 @@ public class crearCuenta extends javax.swing.JFrame {
         } else {
             if (robot.isSelected()) {
                 usuario u = new usuario(usuario.getText(), contraseña.getText(), nombre.getText(),
-                        apellido.getText(), correo.getText(), nacimiento.getDate().toString(), direccion.getText(),
+                        apellido.getText(), correo.getText(), fna.getText(), direccion.getText(),
                         Integer.parseInt(trabajo.getText()), Integer.parseInt(celular.getText()));
 
                 try {
@@ -237,6 +240,7 @@ public class crearCuenta extends javax.swing.JFrame {
     private javax.swing.JTextField correo;
     private javax.swing.JTextField direccion;
     private javax.swing.JButton enviar;
+    private javax.swing.JTextField fna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

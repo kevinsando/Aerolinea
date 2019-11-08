@@ -128,8 +128,8 @@
               <EmptySpace pref="68" max="32767" attributes="0"/>
               <Component id="mvd" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="86" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Bselect" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
           </Group>
@@ -148,12 +148,12 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
+                <Column editable="true" title="Codigo" type="java.lang.Object"/>
                 <Column editable="true" title="Tipo" type="java.lang.Object"/>
-                <Column editable="true" title="Origen" type="java.lang.Object"/>
-                <Column editable="true" title="Destino" type="java.lang.Object"/>
-                <Column editable="true" title="Fecha Ida" type="java.lang.Object"/>
-                <Column editable="true" title="Fecha Regreso" type="java.lang.Object"/>
-                <Column editable="true" title="Cantidad Pasajeros" type="java.lang.Object"/>
+                <Column editable="true" title="Avion Ida" type="java.lang.Object"/>
+                <Column editable="true" title="Avion Regreso" type="java.lang.Object"/>
+                <Column editable="true" title="Horario Ida" type="java.lang.Object"/>
+                <Column editable="true" title="Horario Regreso" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

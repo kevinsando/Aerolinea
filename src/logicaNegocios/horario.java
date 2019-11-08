@@ -78,6 +78,11 @@ public class horario {
     public String getRuta() {
         return ruta;
     }
+
+    @Override
+    public String toString() {
+        return "horario{" + "id=" + id + ", dia=" + dia + ", hora=" + hora + ", minutos=" + minutos + ", precio=" + precio + ", descuento=" + descuento + ", ruta=" + ruta + '}';
+    }
     
     
 }

@@ -13,8 +13,13 @@ public class Aerolinea {
         gestionRutas gr = new gestionRutas();
         gestionTipoAviones ga = new gestionTipoAviones();
         gestionHorarios gh = new gestionHorarios();
+        gestionAvion gaa = new gestionAvion();
+        gestionVuelos gv = new gestionVuelos();
+        reservaAsientos ra = new reservaAsientos();
         controlador control = new controlador(user,inicio,model,cc,admin,gr,ga,gh);
-        
+        control.setReservaAsientos(ra);
+        control.setGaa(gaa);
+        control.setGv(gv);
         inicio.setVisible(true);
     }
     

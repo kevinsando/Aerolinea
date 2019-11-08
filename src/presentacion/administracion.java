@@ -11,8 +11,10 @@ public class administracion extends javax.swing.JFrame {
     public administracion() {
         initComponents();
         gRutas.setEnabled(false);
-        gVuelos.setEnabled(false);
+        gTipoAviones.setEnabled(false);
         gHorarios.setEnabled(false);
+        gVuelos.setEnabled(false);
+        aviones.setEnabled(false);
         setDefaultCloseOperation(administracion.DISPOSE_ON_CLOSE);
 
     }
@@ -30,9 +32,10 @@ public class administracion extends javax.swing.JFrame {
         contraseña = new javax.swing.JPasswordField();
         gRutas = new javax.swing.JButton();
         gHorarios = new javax.swing.JButton();
-        gVuelos = new javax.swing.JButton();
+        gTipoAviones = new javax.swing.JButton();
         pprincipal = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        aviones = new javax.swing.JButton();
+        gVuelos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,10 +72,10 @@ public class administracion extends javax.swing.JFrame {
             }
         });
 
-        gVuelos.setText("Gestion Tipo Aviones");
-        gVuelos.addActionListener(new java.awt.event.ActionListener() {
+        gTipoAviones.setText("Gestion Tipo Aviones");
+        gTipoAviones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gVuelosActionPerformed(evt);
+                gTipoAvionesActionPerformed(evt);
             }
         });
 
@@ -83,10 +86,17 @@ public class administracion extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Gestion Aviones");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        aviones.setText("Gestion Aviones");
+        aviones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                avionesActionPerformed(evt);
+            }
+        });
+
+        gVuelos.setText("Gestion Vuelos");
+        gVuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gVuelosActionPerformed(evt);
             }
         });
 
@@ -98,35 +108,40 @@ public class administracion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(LabelU)
-                        .addGap(31, 31, 31)
-                        .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(LabelC)
-                        .addGap(18, 18, 18)
-                        .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(enviar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(pprincipal))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(gRutas)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(LabelU)
+                                .addGap(31, 31, 31)
+                                .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(LabelC)
+                                .addGap(18, 18, 18)
+                                .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)))
+                        .addComponent(enviar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(gTipoAviones)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(aviones, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(gRutas)
                                 .addGap(18, 18, 18)
                                 .addComponent(gHorarios)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(gVuelos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                                .addComponent(gVuelos)))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,18 +153,22 @@ public class administracion extends javax.swing.JFrame {
                     .addComponent(LabelC)
                     .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enviar))
-                .addGap(73, 73, 73)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gRutas)
-                    .addComponent(gHorarios)
-                    .addComponent(gVuelos))
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
-                .addGap(14, 14, 14)
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(gRutas)
+                            .addComponent(gHorarios)
+                            .addComponent(gVuelos))
+                        .addGap(64, 64, 64))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(gTipoAviones)
+                        .addComponent(aviones)))
+                .addGap(18, 18, 18)
                 .addComponent(error)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(pprincipal)
                 .addContainerGap())
         );
@@ -166,8 +185,10 @@ public class administracion extends javax.swing.JFrame {
         } else {
             if ((usuario.getText().equals("admin")) && (contraseña.getText().equals("admin"))) {
                 gRutas.setEnabled(true);
-                gVuelos.setEnabled(true);
+                gTipoAviones.setEnabled(true);
                 gHorarios.setEnabled(true);
+                aviones.setEnabled(true);
+                gVuelos.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto",
                         "Error", JOptionPane.WARNING_MESSAGE);
@@ -187,10 +208,10 @@ public class administracion extends javax.swing.JFrame {
         control.gestionRutas();
     }//GEN-LAST:event_gRutasActionPerformed
 
-    private void gVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gVuelosActionPerformed
+    private void gTipoAvionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gTipoAvionesActionPerformed
         // TODO add your handling code here:
-        control.gestionAviones();
-    }//GEN-LAST:event_gVuelosActionPerformed
+        control.gestionTipoAviones();
+    }//GEN-LAST:event_gTipoAvionesActionPerformed
 
     private void gHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gHorariosActionPerformed
         // TODO add your handling code here:
@@ -202,20 +223,27 @@ public class administracion extends javax.swing.JFrame {
         control.iniciar();
     }//GEN-LAST:event_pprincipalActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void avionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avionesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        control.gestionAvion();
+    }//GEN-LAST:event_avionesActionPerformed
+
+    private void gVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gVuelosActionPerformed
+        // TODO add your handling code here:
+        control.gestionVuelos();
+    }//GEN-LAST:event_gVuelosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelC;
     private javax.swing.JLabel LabelU;
+    private javax.swing.JButton aviones;
     private javax.swing.JPasswordField contraseña;
     private javax.swing.JButton enviar;
     private javax.swing.JLabel error;
     private javax.swing.JButton gHorarios;
     private javax.swing.JButton gRutas;
+    private javax.swing.JButton gTipoAviones;
     private javax.swing.JButton gVuelos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton pprincipal;
     private javax.swing.JTextField usuario;

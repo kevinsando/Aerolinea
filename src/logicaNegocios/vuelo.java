@@ -1,90 +1,81 @@
 package logicaNegocios;
 
 public class vuelo {
-    boolean ida;
-    boolean regreso;
-    String origen;
-    String destino;
-    String fechaIda;
-    String fechaRegreso;
-    avion avion;
 
+    String codigo;
+    int tipo;
+    String avionIda;
+    String avionRegreso;
+    String horarioRegreso;
+    String horarioIda;
+
+    public vuelo(String codigo, int tipo, String avionIda, String avionRegreso, String horarioRegreso, String horarioIda) {
+        this.codigo = codigo;
+        this.tipo = tipo;
+        this.avionIda = avionIda;
+        this.avionRegreso = avionRegreso;
+        this.horarioRegreso = horarioRegreso;
+        this.horarioIda = horarioIda;
+    }
     public vuelo() {
-        this.ida = false;
-        this.regreso = false;
-        this.origen = null;
-        this.destino = null;
-        this.fechaIda = null;
-        this.fechaRegreso = null;
-       // this.avion = null;
+        this.codigo = null;
+        this.tipo = 0;
+        this.avionIda = null;
+        this.avionRegreso = null;
+        this.horarioRegreso = null;
+        this.horarioIda = null;
     }
 
-    public vuelo(boolean ida, boolean regreso, String origen, String destino, String fechaIda, String fechaRegreso) {
-        this.ida = ida;
-        this.regreso = regreso;
-        this.origen = origen;
-        this.destino = destino;
-        this.fechaIda = fechaIda;
-        this.fechaRegreso = fechaRegreso;
-        //this.avion = avion;
+   
+
+    public String getCodigo() {
+        return codigo;
     }
 
-    public boolean isIda() {
-        return ida;
+    public int getTipo() {
+        return tipo;
     }
 
-    public boolean isRegreso() {
-        return regreso;
+    public String getAvionIda() {
+        return avionIda;
     }
 
-    public String getOrigen() {
-        return origen;
+    public String getAvionRegreso() {
+        return avionRegreso;
     }
 
-    public String getDestino() {
-        return destino;
+    public String getHorarioRegreso() {
+        return horarioRegreso;
     }
 
-    public String getFechaIda() {
-        return fechaIda;
+    public String getHorarioIda() {
+        return horarioIda;
     }
 
-    public String getFechaRegreso() {
-        return fechaRegreso;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    /*public avion getAvion() {
-        return avion;
-    }*/
-
-    public void setIda(boolean ida) {
-        this.ida = ida;
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 
-    public void setRegreso(boolean regreso) {
-        this.regreso = regreso;
+    public void setAvionIda(String avionIda) {
+        this.avionIda = avionIda;
     }
 
-    public void setOrigen(String origen) {
-        this.origen = origen;
+    public void setAvionRegreso(String avionRegreso) {
+        this.avionRegreso = avionRegreso;
     }
 
-    public void setDestino(String destino) {
-        this.destino = destino;
+    public void setHorarioRegreso(String horarioRegreso) {
+        this.horarioRegreso = horarioRegreso;
     }
 
-    public void setFechaIda(String fechaIda) {
-        this.fechaIda = fechaIda;
+    public void setHorarioIda(String horarioIda) {
+        this.horarioIda = horarioIda;
     }
 
-    public void setFechaRegreso(String fechaRegreso) {
-        this.fechaRegreso = fechaRegreso;
-    }
-
-  /*  public void setAvion(avion avion) {
-        this.avion = avion;
-    }*/
     
-    
-    
+
 }

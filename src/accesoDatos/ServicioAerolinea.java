@@ -20,42 +20,42 @@ public class ServicioAerolinea extends Servicio {
 
     private static final String INSERTARUSUARIO = "{call insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
     private static final String CONSULTARUSUARIO = "{? = call CONSULTARUSUARIO(?,?)}";
-    
+
     private static final String INSERTARRUTA = "{call insertarRuta (?, ?, ?, ?)}";
     private static final String LISTARRUTAS = "{?=call listarRutas()}";
     private static final String CONSULTARRUTA = "{? = call CONSULTARRUTA(?)}";
     private static final String MODIFICARRUTA = "{call modificarRuta(?,?,?,?)}";
     private static final String BORRARRUTAS = "{call borrarRutaG()}";
     private static final String BORRARRUTA = "{call borrarRuta(?)}";
-    
-    
+
     private static final String INSERTARTIPOAVION = "{call insertarTipoAviones (?,?,?,?,?,?,?)}";
     private static final String MODIFICARTIPO = "{call modificarTipo(?,?,?,?,?,?,?)}";
     private static final String LISTARTIPOS = "{?=call listarTipos()}";
     private static final String ELIMINARTIPO = "{call borrarTipo(?)}";
-    
+
     private static final String INSERTARAVION = "{call insertarAvion (?,?,?,?)}";
-    private static final String CONSULTARAVION="{?=call consultarAvion(?)}";
+    private static final String CONSULTARAVION = "{?=call consultarAvion(?)}";
     private static final String MODIFICARAVION = "{call modificarAvion(?,?,?,?)}";
     private static final String LISTARAVIONES = "{?=call listarAvion()}";
     private static final String ELIMINARAVION = "{call eliminarAvion(?)}";
-    
+
     private static final String INSERTARHORARIO = "{call insertarHorario (?,?,?,?,?,?,?)}";
     private static final String MODIFICARHORARIO = "{call modificarHorario(?,?,?,?,?,?,?)}";
     private static final String LISTARHORARIO = "{?=call listarHorarios()}";
     private static final String ELIMINARHORARIO = "{call borrarHorario(?)}";
-    
+    private static final String CONSULTARHORARIO = "{?=call CONSULTARHORARIO(?)}";
+
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
-    
-    
-    
+    private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?,?,?)}";
+    private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
 
     public ServicioAerolinea() {
 
     }
+
     //--------------------AVION-----------------------------//
-    public void insertarAvion(avion elAvion) throws GlobalException, NoDataException{
-          try {
+    public void insertarAvion(avion elAvion) throws GlobalException, NoDataException {
+        try {
             conectar();
         } catch (ClassNotFoundException e) {
             throw new GlobalException("No se ha localizado el driver");
@@ -90,7 +90,8 @@ public class ServicioAerolinea extends Servicio {
             }
         }
     }
-    public avion consultarAvion(String id) throws GlobalException, NoDataException{
+
+    public avion consultarAvion(String id) throws GlobalException, NoDataException {
         try {
             conectar();
         } catch (ClassNotFoundException e) {
@@ -140,8 +141,9 @@ public class ServicioAerolinea extends Servicio {
         }
         return aux;
     }
-    public void modificarAvion(avion elAvion) throws GlobalException, NoDataException{
-            try {
+
+    public void modificarAvion(avion elAvion) throws GlobalException, NoDataException {
+        try {
             conectar();
         } catch (ClassNotFoundException e) {
             throw new GlobalException("No se ha localizado el driver");
@@ -176,8 +178,9 @@ public class ServicioAerolinea extends Servicio {
             }
         }
     }
-    public ArrayList listarAviones() throws GlobalException, NoDataException{
-          try {
+
+    public ArrayList listarAviones() throws GlobalException, NoDataException {
+        try {
             conectar();
         } catch (ClassNotFoundException ex) {
             throw new GlobalException("No se ha localizado el Driver");
@@ -226,8 +229,9 @@ public class ServicioAerolinea extends Servicio {
         }
         return coleccion;
     }
-    public void eliminarAvion(String id) throws GlobalException, NoDataException{
-         try {
+
+    public void eliminarAvion(String id) throws GlobalException, NoDataException {
+        try {
             conectar();
         } catch (ClassNotFoundException e) {
             throw new GlobalException("No se ha localizado el driver");
@@ -259,6 +263,8 @@ public class ServicioAerolinea extends Servicio {
             }
         }
     }
+
+    //--------------------USUARIO-----------------------------//
     public void insertarUsuario(usuario elUsuario) throws GlobalException, NoDataException {
         try {
             conectar();
@@ -299,83 +305,6 @@ public class ServicioAerolinea extends Servicio {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
-    }
-
-    public void insertarTipoAvion(tipoAvion elTipo) throws GlobalException, NoDataException {
-        try {
-            conectar();
-        } catch (ClassNotFoundException e) {
-            throw new GlobalException("No se ha localizado el driver");
-        } catch (SQLException e) {
-            throw new NoDataException("La base de datos no se encuentra disponible");
-        }
-        CallableStatement pstmt = null;
-        try {
-            pstmt = conexion.prepareCall(INSERTARTIPOAVION);
-            pstmt.setString(1, elTipo.getId());
-            pstmt.setString(2, elTipo.getAnno().toString());
-            pstmt.setString(3, elTipo.getModelo());
-            pstmt.setString(4, elTipo.getMarca());
-            pstmt.setInt(5, elTipo.getCanFilas());
-            pstmt.setInt(6, elTipo.getAsientosFila());
-            pstmt.setInt(7, elTipo.getCanPasajeros());
-            System.out.println("Tipo avion insertado con exito");
-            boolean resultado = pstmt.execute();
-            if (resultado == true) {
-                throw new NoDataException("No se realizo la insercion");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new GlobalException("Llave duplicada");
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                desconectar();
-            } catch (SQLException e) {
-                throw new GlobalException("Estatutos invalidos o nulos");
-            }
-        }
-    }
-        public void insertarHorario(horario elHorario) throws GlobalException, NoDataException {
-        try {
-            conectar();
-        } catch (ClassNotFoundException e) {
-            throw new GlobalException("No se ha localizado el driver");
-        } catch (SQLException e) {
-            throw new NoDataException("La base de datos no se encuentra disponible");
-        }
-        CallableStatement pstmt = null;
-        try {
-            pstmt = conexion.prepareCall(INSERTARHORARIO);
-            pstmt.setString(1, elHorario.getId());
-            pstmt.setString(2, elHorario.getDia());
-            pstmt.setInt(3, elHorario.getHora());
-            pstmt.setInt(4, elHorario.getMinutos());
-            pstmt.setInt(5, elHorario.getPrecio());
-            pstmt.setInt(6, elHorario.getDescuento());
-            pstmt.setString(7, elHorario.getRuta());
-            System.out.println("horario con exito");
-            boolean resultado = pstmt.execute();
-            if (resultado == true) {
-                throw new NoDataException("No se realizo la insercion");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new GlobalException("Llave duplicada");
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                desconectar();
-            } catch (SQLException e) {
-                throw new GlobalException("Estatutos invalidos o nulos");
-            }
-        }
-        
-
     }
 
     public usuario MostrarUsuario(String user, String pass) throws GlobalException, NoDataException, SQLException {
@@ -427,46 +356,35 @@ public class ServicioAerolinea extends Servicio {
         return aux;
     }
 
-    public ArrayList listarVuelo() throws GlobalException, NoDataException {
+    //--------------------TIPO AVION-----------------------------//
+    public void insertarTipoAvion(tipoAvion elTipo) throws GlobalException, NoDataException {
         try {
             conectar();
-        } catch (ClassNotFoundException ex) {
-            throw new GlobalException("No se ha localizado el Driver");
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
         } catch (SQLException e) {
             throw new NoDataException("La base de datos no se encuentra disponible");
         }
-
-        ResultSet rs = null;
-        ArrayList<vuelo> coleccion = new ArrayList<vuelo>();
-        vuelo elVuelo = null;
         CallableStatement pstmt = null;
         try {
-            pstmt = conexion.prepareCall(LISTARVUELOS);
-            pstmt.registerOutParameter(1, OracleTypes.CURSOR);//El objeto retornado es tipo Cursor
-            pstmt.execute();
-            rs = (ResultSet) pstmt.getObject(1);//El objeto que recibe es un cursor de todos los estudiantes
-            while (rs.next()) {
-                elVuelo = new vuelo(rs.getBoolean("codigo"),
-                        rs.getBoolean("codigo"),
-                        rs.getString("descripcion"),
-                        rs.getString("descripcion"),
-                        rs.getString("descripcion"),
-                        rs.getString("descripcion")
-                );
-                coleccion.add(elVuelo);
-            }
-            for (vuelo v : coleccion) {
-                System.out.println(v.toString());
+            pstmt = conexion.prepareCall(INSERTARTIPOAVION);
+            pstmt.setString(1, elTipo.getId());
+            pstmt.setString(2, elTipo.getAnno().toString());
+            pstmt.setString(3, elTipo.getModelo());
+            pstmt.setString(4, elTipo.getMarca());
+            pstmt.setInt(5, elTipo.getCanFilas());
+            pstmt.setInt(6, elTipo.getAsientosFila());
+            pstmt.setInt(7, elTipo.getCanPasajeros());
+            System.out.println("Tipo avion insertado con exito");
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la insercion");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
-            throw new GlobalException("Sentencia no valida");
+            throw new GlobalException("Llave duplicada");
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
                 if (pstmt != null) {
                     pstmt.close();
                 }
@@ -475,10 +393,6 @@ public class ServicioAerolinea extends Servicio {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
-        if (coleccion == null || coleccion.isEmpty()) {
-            throw new NoDataException("No hay datos");
-        }
-        return coleccion;
     }
 
     public ArrayList listarTipoAviones() throws GlobalException, NoDataException {
@@ -510,59 +424,6 @@ public class ServicioAerolinea extends Servicio {
                 coleccion.add(elTipo);
             }
             for (tipoAvion t : coleccion) {
-                System.out.println(t.toString());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            throw new GlobalException("Sentencia no valida");
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                desconectar();
-            } catch (SQLException e) {
-                throw new GlobalException("Estatutos invalidos o nulos");
-            }
-        }
-        if (coleccion == null || coleccion.isEmpty()) {
-            throw new NoDataException("No hay datos");
-        }
-        return coleccion;
-    }
-    public ArrayList listarHorario() throws GlobalException, NoDataException {
-        try {
-            conectar();
-        } catch (ClassNotFoundException ex) {
-            throw new GlobalException("No se ha localizado el Driver");
-        } catch (SQLException e) {
-            throw new NoDataException("La base de datos no se encuentra disponible");
-        }
-        ResultSet rs = null;
-        ArrayList<horario> coleccion = new ArrayList<>();
-        horario elHorario = null;
-        CallableStatement pstmt = null;
-        try {
-            pstmt = conexion.prepareCall(LISTARHORARIO);
-            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
-            pstmt.execute();
-            rs = (ResultSet) pstmt.getObject(1);
-            while (rs.next()) {
-                elHorario = new horario(rs.getString("idHorario"),
-                        rs.getString("diaSemana"),
-                        rs.getInt("hora"),
-                        rs.getInt("minutos"),
-                        rs.getInt("precio"),
-                        rs.getInt("descuento"),
-                        rs.getString("IdRuta")
-                );
-                coleccion.add(elHorario);
-            }
-            for (horario t : coleccion) {
                 System.out.println(t.toString());
             }
         } catch (SQLException e) {
@@ -628,46 +489,6 @@ public class ServicioAerolinea extends Servicio {
         }
 
     }
-    public void modificarHorario(horario elHorario) throws GlobalException, NoDataException {
-        try {
-            conectar();
-        } catch (ClassNotFoundException e) {
-            throw new GlobalException("No se ha localizado el driver");
-        } catch (SQLException e) {
-            throw new NoDataException("La base de datos no se encuentra disponible");
-        }
-        CallableStatement pstmt = null;
-        try {
-           pstmt = conexion.prepareCall(MODIFICARHORARIO);
-            pstmt.setString(1, elHorario.getId());
-            pstmt.setString(2, elHorario.getDia());
-            pstmt.setInt(3, elHorario.getHora());
-            pstmt.setInt(4, elHorario.getMinutos());
-            pstmt.setInt(5, elHorario.getPrecio());
-            pstmt.setInt(6, elHorario.getDescuento());
-            pstmt.setString(7, elHorario.getRuta());
-            boolean resultado = pstmt.execute();
-            if (resultado) {
-                throw new NoDataException("No se realizo la actualización");
-            } else {
-                System.out.println("Actualizado con exito");
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new GlobalException("Llave duplicada");
-        } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                desconectar();
-            } catch (SQLException e) {
-                throw new GlobalException("Estatutos invalidos o nulos");
-            }
-        }
-
-    }
 
     public void eliminarTipo(String id) throws GlobalException, NoDataException {
         try {
@@ -702,6 +523,141 @@ public class ServicioAerolinea extends Servicio {
             }
         }
     }
+
+    //--------------------HORARIO-----------------------------//
+    public void insertarHorario(horario elHorario) throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(INSERTARHORARIO);
+            pstmt.setString(1, elHorario.getId());
+            pstmt.setString(2, elHorario.getDia());
+            pstmt.setInt(3, elHorario.getHora());
+            pstmt.setInt(4, elHorario.getMinutos());
+            pstmt.setInt(5, elHorario.getPrecio());
+            pstmt.setInt(6, elHorario.getDescuento());
+            pstmt.setString(7, elHorario.getRuta());
+            System.out.println("horario con exito");
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la insercion");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+
+    public ArrayList listarHorario() throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        ResultSet rs = null;
+        ArrayList<horario> coleccion = new ArrayList<>();
+        horario elHorario = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(LISTARHORARIO);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                elHorario = new horario(rs.getString("idHorario"),
+                        rs.getString("diaSemana"),
+                        rs.getInt("hora"),
+                        rs.getInt("minutos"),
+                        rs.getInt("precio"),
+                        rs.getInt("descuento"),
+                        rs.getString("IdRuta")
+                );
+                coleccion.add(elHorario);
+            }
+            for (horario t : coleccion) {
+                System.out.println(t.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        if (coleccion == null || coleccion.isEmpty()) {
+            throw new NoDataException("No hay datos");
+        }
+        return coleccion;
+    }
+
+    public void modificarHorario(horario elHorario) throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(MODIFICARHORARIO);
+            pstmt.setString(1, elHorario.getId());
+            pstmt.setString(2, elHorario.getDia());
+            pstmt.setInt(3, elHorario.getHora());
+            pstmt.setInt(4, elHorario.getMinutos());
+            pstmt.setInt(5, elHorario.getPrecio());
+            pstmt.setInt(6, elHorario.getDescuento());
+            pstmt.setString(7, elHorario.getRuta());
+            boolean resultado = pstmt.execute();
+            if (resultado) {
+                throw new NoDataException("No se realizo la actualización");
+            } else {
+                System.out.println("Actualizado con exito");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+
+    }
+
     public void eliminarHorario(String id) throws GlobalException, NoDataException {
         try {
             conectar();
@@ -736,6 +692,61 @@ public class ServicioAerolinea extends Servicio {
         }
     }
 
+    public horario consultarHorario(String id) throws GlobalException, NoDataException, SQLException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        ResultSet rs = null;
+        CallableStatement pstmt = null;
+        horario aux = null;
+
+        try {
+            pstmt = conexion.prepareCall(CONSULTARHORARIO);
+
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setString(2, id);
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);
+//String id, String dia, int hora, int minutos, int precio, int descuento, String ruta
+            while (rs.next()) {
+                aux = new horario(rs.getString("idHorario"),
+                        rs.getString("diaSemana"),
+                        rs.getInt("hora"),
+                        rs.getInt("minutos"),
+                        rs.getInt("precio"),
+                        rs.getInt("descuento"),
+                        rs.getString("idRuta")
+                );
+            }
+            if (aux == null) {
+                throw new GlobalException("No existe un elemento con ese Codigo");
+            }
+            System.out.println(aux.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        return aux;
+    }
+
+    //-----------------------------------RUTAS----------------------------------
     public void insertarRuta(ruta laRuta) throws GlobalException, NoDataException {
         try {
             conectar();
@@ -963,6 +974,104 @@ public class ServicioAerolinea extends Servicio {
             System.out.println("Ruta borrada");
             if (resultado == true) {
                 throw new NoDataException("No se realizo la eliminacion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+
+    //------------------------------VUELOS------------------------------
+    
+    //codigo,tipo,ida,regreso,horarioR,horario
+    
+    public ArrayList listarVuelo() throws GlobalException, NoDataException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException ex) {
+            throw new GlobalException("No se ha localizado el Driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+       //String codigo, int tipo, String origen, String destino, String fechaIda, String fechaRegreso
+        ResultSet rs = null;
+        ArrayList<vuelo> coleccion = new ArrayList<vuelo>();
+        vuelo elVuelo = null;
+        CallableStatement pstmt = null;
+        try {
+            pstmt = conexion.prepareCall(LISTARVUELOS);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);//El objeto retornado es tipo Cursor
+            pstmt.execute();
+            rs = (ResultSet) pstmt.getObject(1);//El objeto que recibe es un cursor de todos los estudiantes
+            while (rs.next()) {
+                elVuelo = new vuelo(rs.getString("codigo"),
+                        rs.getInt("tipo"),
+                        rs.getString("IdAvion"),
+                        rs.getString("IdAvionD"),
+                        rs.getString("idHorarioIda"),
+                        rs.getString("idHorarioRegreso")
+                );
+                coleccion.add(elVuelo);
+            }
+            for (vuelo v : coleccion) {
+                System.out.println(v.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            throw new GlobalException("Sentencia no valida");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+        if (coleccion == null || coleccion.isEmpty()) {
+            throw new NoDataException("No hay datos");
+        }
+        return coleccion;
+    }
+
+    public void insertarVuelo(vuelo elVuelo) throws GlobalException, NoDataException {
+
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(INSERTARVUELOS);
+            pstmt.setString(1, elVuelo.getCodigo());
+            pstmt.setInt(2, elVuelo.getTipo());
+            pstmt.setString(3, elVuelo.getAvionIda());
+            pstmt.setString(4, elVuelo.getAvionRegreso());
+            pstmt.setString(5, elVuelo.getHorarioIda());
+            pstmt.setString(6, elVuelo.getHorarioRegreso());
+            System.out.println("Insertado con exito");
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la insercion");
             }
 
         } catch (SQLException e) {
