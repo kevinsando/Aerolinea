@@ -114,10 +114,10 @@ public class modelo extends Observable {
 
     }
 
-    public int consultarAvion(avion a) {
+   public avion consultarAvion(String id) throws GlobalException, NoDataException {
         this.setChanged();
         this.notifyObservers(null);
-        return 0;
+        return ServicioAerolinea.getInstance().consultarAvion(id);
 
     }
 
@@ -195,9 +195,9 @@ public class modelo extends Observable {
         return vuelo;
     }
 
-    public void insertarVuelo(String ida, String regreso, String codigo, int tipo) throws GlobalException, NoDataException, SQLException {
+     public void insertarVuelo(String ida, String regreso,String codigo,int tipo,String idHor) throws GlobalException, NoDataException, SQLException {
 
-        vuelo v = new vuelo(codigo, tipo, ida, regreso);
+       vuelo v= new vuelo(codigo,tipo,ida,regreso,idHor);
         ServicioAerolinea.getInstance().insertarVuelo(v);
         this.setChanged();
         this.notifyObservers(null);

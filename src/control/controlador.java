@@ -256,8 +256,8 @@ public class controlador {
         return model.listarAvion();
     }
 
-    public void agregarVuelos(String ida, String regreso, String codigo, int tipo) throws GlobalException, NoDataException, SQLException {
-        model.insertarVuelo(ida, regreso, codigo, tipo);
+    public void agregarVuelos(String ida, String regreso, String codigo, int tipo,String idHor) throws GlobalException, NoDataException, SQLException {
+        model.insertarVuelo(ida, regreso, codigo, tipo,idHor);
     }
     
     public void mostrarCarrito(tiquete t) {
@@ -272,6 +272,9 @@ public class controlador {
     public void modificarTiquete(int fila,int asiento,int numero,String vuelo,String usuario, int precio) throws GlobalException, NoDataException, SQLException{
         model.insertarTiquete(fila, asiento, numero, vuelo, usuario, precio);
         
+    }
+   public avion cosultarAvion(String id) throws GlobalException, NoDataException {
+    return model.consultarAvion(id);
     }
 
 }

@@ -227,8 +227,7 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                 regreso.setText("");
             }
             //String horario,String horarioR, String ida, String regreso,String codigo,int tipo
-            control.agregarVuelos(ida.getText(), regreso.getText(), codigo.getText(), Character.getNumericValue(tipo.getItemAt(tipo.getSelectedIndex()).charAt(0)));
-            this.dispose();
+control.agregarVuelos(ida.getText(), regreso.getText(), codigo.getText(), Character.getNumericValue(tipo.getItemAt(tipo.getSelectedIndex()).charAt(0)),control.cosultarAvion(ida.getText()).getIdHorario());            this.dispose();
         } catch (GlobalException | NoDataException | SQLException ex) {
             Logger.getLogger(gestionVuelos.class.getName()).log(Level.SEVERE, null, ex);
         }

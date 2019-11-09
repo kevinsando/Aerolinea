@@ -15,12 +15,22 @@ public class vuelo {
     String minutosLlegada;
     String pasajeros;
     String descuento;
+    String idHorario;//NUEVO ATRIBUTO
 
-    public vuelo(String codigo, int tipo, String avionIda, String avionRegreso) {
+    public vuelo(String codigo, int tipo, String avionIda, String avionRegreso, String idHorario) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.avionIda = avionIda;
         this.avionRegreso = avionRegreso;
+        this.idHorario = idHorario;
+    }
+
+    public String getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(String idHorario) {
+        this.idHorario = idHorario;
     }
 
     public vuelo(String codigo, int tipo, String origen, String destino, String diaSemana, String hora, String minutos, String horaLlegada, String minutosLlegada, String pasajeros, String desc) {

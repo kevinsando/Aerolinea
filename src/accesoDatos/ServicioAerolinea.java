@@ -49,8 +49,7 @@ public class ServicioAerolinea extends Servicio {
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
     private static final String LISTARVUELOS2 = "{?=call listarVuelosPublico()}";
     
-    private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?)}";
-    //private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
+    private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?,?)}";    //private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
 
     
     private static final String INSERTARTIQUETE = "{call insertarTiquete (?,?,?,?)}";
@@ -1044,7 +1043,8 @@ public class ServicioAerolinea extends Servicio {
                 elVuelo = new vuelo(rs.getString("codigo"),
                         rs.getInt("tipo"),
                         rs.getString("identificadorAvIda"),
-                        rs.getString("identificadorAvRegreso")
+                        rs.getString("identificadorAvRegreso"),
+                        rs.getString("idHorario")
                 );
                 coleccion.add(elVuelo);
             }
@@ -1151,6 +1151,7 @@ public class ServicioAerolinea extends Servicio {
             pstmt.setInt(2, elVuelo.getTipo());
             pstmt.setString(3, elVuelo.getAvionIda());
             pstmt.setString(4, elVuelo.getAvionRegreso());
+            pstmt.setString(5,elVuelo.getIdHorario());
             System.out.println("Insertado con exito");
             boolean resultado = pstmt.execute();
             if (resultado == true) {

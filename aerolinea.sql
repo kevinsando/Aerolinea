@@ -4,6 +4,7 @@ Drop Table HORARIOS;
 Drop Table USUARIOS;
 Drop Table RUTAS;
 Drop Table TIPO_AVIONES;
+Drop Table TIQUETES;
 
 CREATE TABLE TIPO_AVIONES(
 identificador varchar2(20) not null,
@@ -49,15 +50,25 @@ FOREIGN KEY (idHorario) REFERENCES horarios(idHorario),
 FOREIGN KEY (IdRuta) REFERENCES rutas(IdRuta),
 FOREIGN KEY (identificador) REFERENCES tipo_aviones(identificador)
 );
+CREATE TABLE TIQUETES(
+idTiquete varchar2(20) not null,
+idVuelo varchar2(20) not null,
+nomUsuario varchar2(20) not null,
+asiento varchar2(10) not null,
+PRIMARY KEY (idTiquete),
+FOREIGN KEY(idVuelo) REFERENCES VUELOS(codigo),
+FOREIGN KEY(nomUsuario) REFERENCES USUARIOS(usuario));
 
  CREATE TABLE VUELOS(
  codigo varchar2(50)not null,
   tipo numeric(2)not null,
  identificadorAvIda varchar2(20) not null,
  identificadorAvRegreso varchar(20),
+ idHorario varchar2(20),
 PRIMARY KEY (codigo),
 FOREIGN KEY (identificadorAvIda) REFERENCES aviones(identificadorAv),
-FOREIGN KEY (identificadorAvRegreso) REFERENCES aviones(identificadorAv)
+FOREIGN KEY (identificadorAvRegreso) REFERENCES aviones(identificadorAv),
+FOREIGN KEY (idHorario) REFERENCES horarios(idHorario)
  );
 
 CREATE TABLE USUARIOS(
@@ -77,6 +88,25 @@ AS
     TYPE ref_cursor IS REF CURSOR;
     END;
   /
+  --------------------TIQUETES----------------------
+  CREATE OR REPLACE PROCEDURE insertarTiquete(idT IN TIQUETES.idTiquete%TYPE,
+  idV IN TIQUETES.idVuelo%TYPE,
+  nom IN TIQUETES.nomUsuario%TYPE,
+  asi IN TIQUETES.asiento%TYPE)
+  AS
+  BEGIN
+  INSERT INTO TIQUETES VALUES(idT,idV,nom,asi);
+  END;
+  /
+  CREATE OR REPLACE PROCEDURE modificarTiquete(idT IN TIQUETES.idTiquete%TYPE,
+  idV IN TIQUETES.idVuelo%TYPE,
+  nom IN TIQUETES.nomUsuario%TYPE,
+  asi IN TIQUETES.asiento%TYPE
+  )
+  AS
+  BEGIN UPDATE TIQUETES set idTiquete=idT,idVuelo=idV,nomUsuario=nom,asiento=asi WHERE idTiquete=idT;
+END;
+/
 -----------------------AVIONES-------------------------------
 CREATE OR REPLACE PROCEDURE insertarAvion(idA IN AVIONES.identificadorAv%TYPE,
 idHor IN AVIONES.idHorario%TYPE,
@@ -223,6 +253,19 @@ UPDATE USUARIOS set contrasena=cont, nombre=nomb, apellidos=ape, correo=corre, f
 END;
 /
 show errors
+CREATE OR REPLACE FUNCTION listarUsuario
+RETURN TYPES.ref_cursor
+AS
+    user_cursor types.ref_cursor;
+BEGIN 
+    OPEN user_cursor FOR 
+    SELECT usuario,contrasena,nombre,
+    apellidos,correo,fechaNac,
+    direccion,telefonoTrab,celular 
+    FROM USUARIOS;
+    RETURN user_cursor;
+END;
+/
 -----------------------TIPO AVIONES-----------------------
 CREATE OR REPLACE PROCEDURE insertarTipoAviones(ident IN TIPO_AVIONES.identificador%TYPE,
 anno IN TIPO_AVIONES.ano%TYPE,
@@ -274,11 +317,12 @@ show errors
 CREATE OR REPLACE PROCEDURE insertarVuelo(cod IN VUELOS.codigo%TYPE,
 tip IN VUELOS.tipo%TYPE,
 avionIda IN VUELOS.identificadorAvIda%TYPE,
-avionRegreso IN VUELOS.identificadorAvRegreso%TYPE
+avionRegreso IN VUELOS.identificadorAvRegreso%TYPE,
+idHor IN VUELOS.idHorario%TYPE
 )
 AS
 BEGIN 
-INSERT INTO VUELOS VALUES(cod,tip,avionIda,avionRegreso);
+INSERT INTO VUELOS VALUES(cod,tip,avionIda,avionRegreso,idHor);
 END;
 /
 show errors
@@ -299,7 +343,7 @@ AS
     vuelos_cursor types.ref_cursor;
 BEGIN
     OPEN vuelos_cursor FOR 
-    SELECT codigo,tipo,origen,destino,diaSemana,hora,minutos,horaLlegada,minutosLlegada,pasajeros,descuento FROM VUELOS,rutas,horarios,Tipo_Aviones;
+    SELECT Unique v.codigo,v.tipo,r.origen,r.destino,h.diaSemana,h.hora,h.minutos,h.horaLlegada,h.minutosLlegada,t.pasajeros,h.descuento FROM VUELOS v,rutas r,horarios h,Tipo_Aviones t WHERE r.IdRuta=h.IdRuta AND h.idHorario=v.idHorario;
     RETURN vuelos_cursor;
     END;
 /
