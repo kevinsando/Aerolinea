@@ -14,6 +14,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import logicaNegocios.horario;
 import logicaNegocios.tipoAvion;
+import logicaNegocios.tiquete;
 import oracle.jdbc.internal.OracleTypes;
 
 public class ServicioAerolinea extends Servicio {
@@ -47,9 +48,14 @@ public class ServicioAerolinea extends Servicio {
 
     private static final String LISTARVUELOS = "{?=call listarVuelos()}";
     private static final String LISTARVUELOS2 = "{?=call listarVuelosPublico()}";
+    
     private static final String INSERTARVUELOS = "{call insertarVuelo (?,?,?,?)}";
     //private static final String MODIFICARVUELOS = "{call modificarVuelos(?,?,?,?,?,?)}";
 
+    
+    private static final String INSERTARTIQUETE = "{call insertarTiquete (?,?,?,?)}";
+    private static final String MODIFICARTIQUETE= "{call modificarVuelos(?,?,?,?,?,?)}";
+    
     private static ServicioAerolinea mInstance;
 
     public static ServicioAerolinea getInstance() {
@@ -782,6 +788,7 @@ public class ServicioAerolinea extends Servicio {
             pstmt.setString(3, laRuta.getDestino());
             pstmt.setInt(4, laRuta.getDuracionH());
             pstmt.setInt(5, laRuta.getDuracionM());
+            
             System.out.println("Insertado con exito");
             boolean resultado = pstmt.execute();
             if (resultado == true) {
@@ -1148,6 +1155,81 @@ public class ServicioAerolinea extends Servicio {
             boolean resultado = pstmt.execute();
             if (resultado == true) {
                 throw new NoDataException("No se realizo la insercion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+    
+    public void insertarTiquete(tiquete elTiquete) throws GlobalException, NoDataException {
+
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(INSERTARTIQUETE);
+            pstmt.setString(1,Integer.toString(elTiquete.getNumero()));
+            pstmt.setString(2, elTiquete.getVuel());
+            pstmt.setString(3, elTiquete.getUsuario());
+            pstmt.setString(4, elTiquete.getFila()+"/"+elTiquete.getAsiento());
+            System.out.println("Insertado con exito");
+            boolean resultado = pstmt.execute();
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la insercion");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new GlobalException("Llave duplicada");
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                desconectar();
+            } catch (SQLException e) {
+                throw new GlobalException("Estatutos invalidos o nulos");
+            }
+        }
+    }
+    public void modificarTiquete(tiquete elTiquete) throws GlobalException, NoDataException, SQLException {
+        try {
+            conectar();
+        } catch (ClassNotFoundException e) {
+            throw new GlobalException("No se ha localizado el driver");
+        } catch (SQLException e) {
+            throw new NoDataException("La base de datos no se encuentra disponible");
+        }
+        CallableStatement pstmt = null;
+
+        try {
+            pstmt = conexion.prepareCall(MODIFICARTIQUETE);
+            pstmt.setString(1,Integer.toString(elTiquete.getNumero()));
+            pstmt.setString(2, elTiquete.getVuel());
+            pstmt.setString(3, elTiquete.getUsuario());
+            pstmt.setString(4, elTiquete.getFila()+"/"+elTiquete.getAsiento());
+
+            boolean resultado = pstmt.execute();
+            System.out.println("Actualizado con exito");
+            if (resultado == true) {
+                throw new NoDataException("No se realizo la actualización");
             }
 
         } catch (SQLException e) {

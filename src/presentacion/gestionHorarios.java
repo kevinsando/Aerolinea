@@ -472,4 +472,5 @@ public class gestionHorarios extends javax.swing.JFrame {
     private javax.swing.JTable tabla;
     private javax.swing.JTable tablaR;
     // End of variables declaration//GEN-END:variables
+    private org.jdesktop.swingx.JXDatePicker nacimiento;
 }

@@ -8,9 +8,11 @@ import logicaNegocios.avion;
 import logicaNegocios.horario;
 import logicaNegocios.modelo;
 import logicaNegocios.ruta;
+import logicaNegocios.tiquete;
 import logicaNegocios.usuario;
 import logicaNegocios.vuelo;
 import presentacion.administracion;
+import presentacion.carrito;
 import presentacion.crearCuenta;
 import presentacion.gestionAvion;
 import presentacion.gestionHorarios;
@@ -34,6 +36,7 @@ public class controlador {
     gestionVuelos gv;
     reservaAsientos ra;
     gestionAvion gaa;
+    carrito carrito;
 
     public controlador(usuarioA user, publico inicio, modelo model, crearCuenta cc, administracion a, gestionRutas gr, gestionTipoAviones ga, gestionHorarios gh) {
         this.user = user;
@@ -72,6 +75,11 @@ public class controlador {
         this.gv = gv;
         this.gv.setControl(this);
     }
+
+    public void setCarrito(carrito carrito) {
+        this.carrito = carrito;
+    }
+    
 
     public void login() {
         user.setLocationRelativeTo(null);
@@ -142,7 +150,7 @@ public class controlador {
         avion aa = new avion();
         vuelo vv = new vuelo();
         ra.setAv(aa);
-        ra.setVu(vv);
+        ra.setVu(vv.getCodigo());
     }
 
     public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros,
@@ -223,8 +231,7 @@ public class controlador {
     }
 
     public void llenarReservaAsientos(vuelo v) {
-        vuelo vv = new vuelo();
-        ra.setVu(vv);
+        ra.setVu(v.getCodigo());
     }
 
     public void ingresarAvion(String id, String horario, String ruta, String avion) throws GlobalException, NoDataException {
@@ -248,6 +255,13 @@ public class controlador {
 
     public void agregarVuelos(String ida, String regreso, String codigo, int tipo) throws GlobalException, NoDataException, SQLException {
         model.insertarVuelo(ida, regreso, codigo, tipo);
+    }
+    
+    public void mostrarCarrito(tiquete t) {
+        carrito.setTiquete(t);
+        carrito.cargarDatos();
+        carrito.setVisible(true);
+        
     }
 
 }

@@ -51,6 +51,7 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
         codigo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tipo = new javax.swing.JComboBox<>();
+        admin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +121,13 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
             }
         });
 
+        admin.setText("Menu Admin");
+        admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,14 +164,15 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                         .addComponent(aviones)))
                 .addGap(142, 142, 142))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
+                        .addComponent(admin)
+                        .addGap(203, 203, 203)
                         .addComponent(jButton3)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -203,7 +212,9 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(67, 67, 67)))
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(admin))
                 .addContainerGap())
         );
 
@@ -252,6 +263,11 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
         }
     }//GEN-LAST:event_tipoActionPerformed
 
+    private void adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminActionPerformed
+        // TODO add your handling code here:
+        control.cargarAdmin();
+    }//GEN-LAST:event_adminActionPerformed
+
     private void updateTableHorario(ArrayList<horario> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
         String[] columnNames = {"ID", "Hora", "Minutos", "Precio", "Descuento", "Ruta"};
@@ -291,6 +307,7 @@ public class gestionVuelos extends javax.swing.JFrame implements Observer {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton admin;
     private javax.swing.JButton aviones;
     private javax.swing.JTextField codigo;
     private javax.swing.JButton horarios;

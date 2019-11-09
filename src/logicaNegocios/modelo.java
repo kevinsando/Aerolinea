@@ -157,13 +157,13 @@ public class modelo extends Observable {
         return ServicioAerolinea.getInstance().listarRutas();
     }
 
-    public void insertarRuta(String id, String ori, String des, int duraH,int duraM) throws GlobalException, NoDataException {
-        ruta r = new ruta(id, ori, des, duraH,duraM);
+    public void insertarRuta(String id, String ori, String des, int duraH, int duraM) throws GlobalException, NoDataException {
+        ruta r = new ruta(id, ori, des, duraH, duraM);
         ServicioAerolinea.getInstance().insertarRuta(r);
     }
 
-    public void modificarRuta(String id, String ori, String des, int duraH,int duraM) throws GlobalException, NoDataException, SQLException {
-        ruta r = new ruta(id, ori, des, duraH,duraM);
+    public void modificarRuta(String id, String ori, String des, int duraH, int duraM) throws GlobalException, NoDataException, SQLException {
+        ruta r = new ruta(id, ori, des, duraH, duraM);
         ServicioAerolinea.getInstance().modificarRuta(r);
     }
 
@@ -186,7 +186,7 @@ public class modelo extends Observable {
 
         this.setChanged();
         this.notifyObservers(null);
-        
+
         return ServicioAerolinea.getInstance().listarVuelo();
 
     }
@@ -195,9 +195,9 @@ public class modelo extends Observable {
         return vuelo;
     }
 
-    public void insertarVuelo(String ida, String regreso,String codigo,int tipo) throws GlobalException, NoDataException, SQLException {
+    public void insertarVuelo(String ida, String regreso, String codigo, int tipo) throws GlobalException, NoDataException, SQLException {
 
-       vuelo v= new vuelo(codigo,tipo,ida,regreso);
+        vuelo v = new vuelo(codigo, tipo, ida, regreso);
         ServicioAerolinea.getInstance().insertarVuelo(v);
         this.setChanged();
         this.notifyObservers(null);
@@ -238,8 +238,8 @@ public class modelo extends Observable {
     }
 
     //------------------------------HORARIO-------------------------------------
-    public void insertarHorario(String id, String dia, int hora, int minutos,int horaLl,int minutosLl ,int precio, int descuento, String ruta) throws GlobalException, NoDataException {
-        horario h = new horario(id, dia, hora, minutos,horaLl,minutosLl, precio, descuento, ruta);
+    public void insertarHorario(String id, String dia, int hora, int minutos, int horaLl, int minutosLl, int precio, int descuento, String ruta) throws GlobalException, NoDataException {
+        horario h = new horario(id, dia, hora, minutos, horaLl, minutosLl, precio, descuento, ruta);
         ServicioAerolinea.getInstance().insertarHorario(h);
     }
 
@@ -259,14 +259,31 @@ public class modelo extends Observable {
         return hor;
     }
 
-    public void modificarHorario(String id, String dia, int hora, int minutos,int horaLl,int minutosLl,int precio, int descuento, String ruta) throws NoDataException, GlobalException {
-        horario h = new horario(id, dia, hora, minutos,horaLl,minutosLl, precio, descuento, ruta);
+    public void modificarHorario(String id, String dia, int hora, int minutos, int horaLl, int minutosLl, int precio, int descuento, String ruta) throws NoDataException, GlobalException {
+        horario h = new horario(id, dia, hora, minutos, horaLl, minutosLl, precio, descuento, ruta);
         ServicioAerolinea.getInstance().modificarHorario(h);
     }
 
     public ArrayList<vuelo> listarVuelo2() throws GlobalException, NoDataException {
-         this.setChanged();
+        this.setChanged();
         this.notifyObservers(null);
-        
+        System.out.println(ServicioAerolinea.getInstance().listarVuelo2().toString());
         return ServicioAerolinea.getInstance().listarVuelo2();
-}}
+    }
+    
+    public void insertarTiquete(int fila,int asiento,int numero,String vuelo,String usuario, int precio) throws GlobalException, NoDataException{
+        tiquete t = new tiquete(fila,asiento,vuelo);
+        t.setNumero(numero);
+        t.setUsuario(usuario);
+        t.setPrecio(precio);
+        ServicioAerolinea.getInstance().insertarTiquete(t);
+    }
+    public void modificarTiquete(int fila,int asiento,int numero,String vuelo,String usuario, int precio) throws GlobalException, NoDataException, SQLException{
+        tiquete t = new tiquete(fila,asiento,vuelo);
+        t.setNumero(numero);
+        t.setUsuario(usuario);
+        t.setPrecio(precio);
+        ServicioAerolinea.getInstance().modificarTiquete(t);
+        
+    }
+}

@@ -100,7 +100,7 @@ public class publico extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Aerolinea JuanDi");
+        jLabel1.setText("Compra Tiquete");
 
         mvd.setText("Mostrar vuelos disponibles");
         mvd.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +120,12 @@ public class publico extends javax.swing.JFrame {
         jLabel4.setText("Destino:");
 
         jLabel5.setText("Fecha ida:");
+
+        fechaIda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechaIdaActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Cantidad de Pasajeros:");
 
@@ -202,37 +208,36 @@ public class publico extends javax.swing.JFrame {
                                     .addComponent(idaYRegreso)
                                     .addComponent(SoloIda))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(mvd)
-                                        .addGap(240, 240, 240))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(59, 59, 59)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addGap(74, 74, 74)
-                                                .addComponent(jLabel5)
-                                                .addGap(31, 31, 31)
-                                                .addComponent(fechaIda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(93, 93, 93)
-                                                .addComponent(jLabel8)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(fechaRegreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel7)))))))
+                                .addComponent(jLabel3)
+                                .addGap(59, 59, 59)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(74, 74, 74)
+                                        .addComponent(jLabel5)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(fechaIda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(93, 93, 93)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(fechaRegreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(336, 336, 336)
+                .addComponent(mvd)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -250,9 +255,9 @@ public class publico extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(fechaRegreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(mvd)
                 .addGap(18, 18, 18)
+                .addComponent(mvd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Bselect)
@@ -289,6 +294,7 @@ public class publico extends javax.swing.JFrame {
             ArrayList<vuelo> vuelos;
             try {
                 control.llenarReservaAsientos(control.listarVuelos().get(Tabla.getSelectedRow()));
+                System.out.println("VUELO: "+control.listarVuelos().get(Tabla.getSelectedRow()).toString());
                 control.reservarAsientos();
             } catch (GlobalException | NoDataException ex) {
                 Logger.getLogger(publico.class.getName()).log(Level.SEVERE, null, ex);
@@ -301,6 +307,10 @@ public class publico extends javax.swing.JFrame {
         // TODO add your handling code here:
         control.cargarAdmin();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void fechaIdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaIdaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fechaIdaActionPerformed
     public void setUsuario(usuario u) {
         user = u;
         if (user.getUser() != null) {
@@ -342,81 +352,76 @@ public class publico extends javax.swing.JFrame {
 
     private void updateTabla(ArrayList<vuelo> vuelos) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        boolean pintar=false;
-        String[] columnNames = {"Codigo de vuelo", "Tipo","Origen", "Destino","Fecha ida","Fecha Regreso"};
+        boolean pintar = false;
+        String[] columnNames = {"Codigo de vuelo", "Tipo", "Origen", "Destino", "Fecha ida", "Fecha Regreso"};
         tableModel.setColumnIdentifiers(columnNames);
         Object[] Columna = new Object[tableModel.getColumnCount()];
-        String dia="";
-        switch(fechaIda.getDate().getDay())
-        {
-            case 0:
-            {
-                dia="Domingo";
-                break;
+        String dia = "";
+        if (fechaIda.getDate()!= null) {
+            switch (fechaIda.getDate().getDay()) {
+                case 0: {
+                    dia = "Domingo";
+                    break;
+                }
+                case 1: {
+                    dia = "Lunes";
+                    break;
+                }
+                case 2: {
+                    dia = "Martes";
+                    break;
+                }
+                case 3: {
+                    dia = "Miercoles";
+                    break;
+                }
+                case 4: {
+                    dia = "Jueves";
+                    break;
+                }
+                case 5: {
+                    dia = "Viernes";
+                    break;
+                }
+                case 6: {
+                    dia = "Sabado";
+                    break;
+                }
+                default:
+                    break;
             }
-            case 1:
-            {
-                dia="Lunes";
-                break;
-            }
-            case 2:
-            {
-                 dia="Martes";
-                break;
-            }
-            case 3:
-            {
-                 dia="Miercoles";
-                break;
-            }
-            case 4:
-            {
-                dia="Jueves";
-                break;
-            }
-            case 5:
-            {
-                 dia="Viernes";
-                break;
-            }
-            case 6:
-            {
-                 dia="Sabado";
-                break;
-            }
-            
+        }else{
+            System.out.println("error");
         }
         for (int i = 0; i < vuelos.size(); i++) {
 
             Columna[0] = vuelos.get(i).getCodigo();
-            switch(vuelos.get(i).getTipo())
-            {
-                case 1:
-                {
-                    Columna[1]="Solo Ida";
+            switch (vuelos.get(i).getTipo()) {
+                case 1: {
+                    Columna[1] = "Solo Ida";
                     break;
                 }
-                case 2:
-                {
-                    Columna[1]="Ida y Regreso";
+                case 2: {
+                    Columna[1] = "Ida y Regreso";
                     break;
                 }
-            }            
+            }
             Columna[2] = vuelos.get(i).getOrigen();
             Columna[3] = vuelos.get(i).getDestino();
-            Columna[4]=vuelos.get(i).getDiaSemana()+" "+vuelos.get(i).getHora()+":"+vuelos.get(i).getMinutos();
-            Columna[5]=vuelos.get(i).getDiaSemana()+" "+vuelos.get(i).getHoraLlegada()+":"+vuelos.get(i).getMinutosLlegada();
-            if(Integer.parseInt(vuelos.get(i).getDescuento())>0)
-            {
+            Columna[4] = vuelos.get(i).getDiaSemana() + " " + vuelos.get(i).getHora() + ":" + vuelos.get(i).getMinutos();
+            Columna[5] = vuelos.get(i).getDiaSemana() + " " + vuelos.get(i).getHoraLlegada() + ":" + vuelos.get(i).getMinutosLlegada();
+            if (Integer.parseInt(vuelos.get(i).getDescuento()) > 0) {
                 //VER COMO INDICAR QUE ESTÁ EN DESCUENTO
-                
+
             }
-            if(vuelos.get(i).getDiaSemana().equals(dia))
-            {tableModel.addRow(Columna);
+            if (dia.equals("")) {
+                tableModel.addRow(Columna);
+            } else if (vuelos.get(i).getDiaSemana().equals(dia)) {
+                tableModel.addRow(Columna);
             }
-        
+
         }
-        
+
         Tabla.setModel(tableModel);
     }
 

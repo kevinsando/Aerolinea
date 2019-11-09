@@ -148,4 +148,9 @@ public class vuelo {
         this.avionRegreso = avionRegreso;
     }
 
+    @Override
+    public String toString() {
+        return "vuelo{" + "codigo=" + codigo + ", tipo=" + tipo + ", avionIda=" + avionIda + ", avionRegreso=" + avionRegreso + ", origen=" + origen + ", destino=" + destino + ", diaSemana=" + diaSemana + ", hora=" + hora + ", minutos=" + minutos + ", horaLlegada=" + horaLlegada + ", minutosLlegada=" + minutosLlegada + ", pasajeros=" + pasajeros + ", descuento=" + descuento + '}';
+    }
+
 }

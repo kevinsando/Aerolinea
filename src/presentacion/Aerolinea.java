@@ -19,9 +19,11 @@ public class Aerolinea {
         gestionVuelos gv = new gestionVuelos();
         reservaAsientos ra = new reservaAsientos();
         controlador control = new controlador(user,inicio,model,cc,admin,gr,ga,gh);
+        carrito car = new carrito();
         control.setReservaAsientos(ra);
         control.setGaa(gaa);
         control.setGv(gv);
+        control.setCarrito(car);
         inicio.setLocationRelativeTo(null);
         inicio.setVisible(true);
     }

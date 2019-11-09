@@ -14,10 +14,10 @@ public class reservaAsientos extends javax.swing.JFrame {
     controlador control;
     public avion av;
     public usuario us;
-    public vuelo vu;
+    public String vu;
     ImageIcon iconobtn = new ImageIcon("C:\\Users\\dell\\Documents\\Informatica\\Progra III\\aerolinea\\src\\presentacion\\green.jpg");
-    
-    public reservaAsientos(avion av, usuario us, vuelo vu) {
+    tiquete t=null;
+    public reservaAsientos(avion av, usuario us, String vu) {
         initComponents();
         this.av = av;
         this.us = us;
@@ -46,7 +46,7 @@ public class reservaAsientos extends javax.swing.JFrame {
         this.us = us;
     }
 
-    public void setVu(vuelo vu) {
+    public void setVu(String vu) {
         this.vu = vu;
     }
     
@@ -1344,7 +1344,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton1.setBackground(Color.GREEN);
             jButton1.setIcon(iconobtn);
             av.setAsiento(0, 0);
-            tiquete t = new tiquete(0,0,vu);
+            t = new tiquete(0,0,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1355,7 +1355,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton2.setBackground(Color.GREEN);
             jButton2.setIcon(iconobtn);
             av.setAsiento(0, 1);
-            tiquete t = new tiquete(0,1,vu);
+            t = new tiquete(0,1,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1367,7 +1367,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton3.setIcon
         (iconobtn);
             av.setAsiento(0, 2);
-            tiquete t = new tiquete(0,2,vu);
+            t = new tiquete(0,2,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1379,7 +1379,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton4.setIcon
         (iconobtn);
             av.setAsiento(0, 3);
-            tiquete t = new tiquete(0,3,vu);
+            t = new tiquete(0,3,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -1391,7 +1391,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton5.setIcon
         (iconobtn);
             av.setAsiento(0, 4);
-            tiquete t = new tiquete(0,4,vu);
+            t = new tiquete(0,4,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -1403,7 +1403,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton6.setIcon
         (iconobtn);
             av.setAsiento(0, 5);
-            tiquete t = new tiquete(0,5,vu);
+            t = new tiquete(0,5,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1415,7 +1415,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton7.setIcon
         (iconobtn);
             av.setAsiento(0, 6);
-            tiquete t = new tiquete(0,6,vu);
+            t = new tiquete(0,6,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -1427,7 +1427,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton8.setIcon
         (iconobtn);
             av.setAsiento(0, 7);
-            tiquete t = new tiquete(0,7,vu);
+            t = new tiquete(0,7,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -1439,7 +1439,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton9.setIcon
         (iconobtn);
             av.setAsiento(0, 8);
-            tiquete t = new tiquete(0,8,vu);
+            t = new tiquete(0,8,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1451,7 +1451,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton10.setIcon
         (iconobtn);
             av.setAsiento(0, 9);
-            tiquete t = new tiquete(0,9,vu);
+            t = new tiquete(0,9,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
@@ -1463,7 +1463,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton11.setIcon
         (iconobtn);
             av.setAsiento(0, 10);
-            tiquete t = new tiquete(0,10,vu);
+            t = new tiquete(0,10,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -1475,7 +1475,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton12.setIcon
         (iconobtn);
             av.setAsiento(0, 11);
-            tiquete t = new tiquete(0,11,vu);
+            t = new tiquete(0,11,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -1487,7 +1487,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton13.setIcon
         (iconobtn);
             av.setAsiento(0, 12);
-            tiquete t = new tiquete(0,12,vu);
+            t = new tiquete(0,12,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton13ActionPerformed
@@ -1499,7 +1499,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton17.setIcon
         (iconobtn);
             av.setAsiento(1, 0);
-            tiquete t = new tiquete(1,0,vu);
+            t = new tiquete(1,0,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton17ActionPerformed
@@ -1511,7 +1511,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton19.setIcon
         (iconobtn);
             av.setAsiento(1, 1);
-            tiquete t = new tiquete(1,1,vu);
+            t = new tiquete(1,1,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton19ActionPerformed
@@ -1523,7 +1523,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton21.setIcon
         (iconobtn);
             av.setAsiento(1, 2);
-            tiquete t = new tiquete(1,2,vu);
+            t = new tiquete(1,2,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton21ActionPerformed
@@ -1535,7 +1535,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton23.setIcon
         (iconobtn);
             av.setAsiento(1, 3);
-            tiquete t = new tiquete(1,3,vu);
+            t = new tiquete(1,3,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton23ActionPerformed
@@ -1547,7 +1547,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton24.setIcon
         (iconobtn);
             av.setAsiento(1, 4);
-            tiquete t = new tiquete(1,4,vu);
+            t = new tiquete(1,4,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton24ActionPerformed
@@ -1559,7 +1559,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton25.setIcon
         (iconobtn);
             av.setAsiento(1, 5);
-            tiquete t = new tiquete(1,5,vu);
+            t = new tiquete(1,5,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton25ActionPerformed
@@ -1571,7 +1571,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton26.setIcon
         (iconobtn);
             av.setAsiento(1, 6);
-            tiquete t = new tiquete(1,6,vu);
+            t = new tiquete(1,6,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton26ActionPerformed
@@ -1583,7 +1583,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton14.setIcon
         (iconobtn);
             av.setAsiento(1, 7);
-            tiquete t = new tiquete(1,7,vu);
+            t = new tiquete(1,7,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton14ActionPerformed
@@ -1595,7 +1595,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton15.setIcon
         (iconobtn);
             av.setAsiento(1, 8);
-            tiquete t = new tiquete(1,8,vu);
+            t = new tiquete(1,8,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton15ActionPerformed
@@ -1607,7 +1607,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton16.setIcon
         (iconobtn);
             av.setAsiento(1, 9);
-            tiquete t = new tiquete(1,9,vu);
+            t = new tiquete(1,9,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton16ActionPerformed
@@ -1619,7 +1619,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton18.setIcon
         (iconobtn);
             av.setAsiento(1, 10);
-            tiquete t = new tiquete(1,10,vu);
+            t = new tiquete(1,10,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton18ActionPerformed
@@ -1631,7 +1631,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton20.setIcon
         (iconobtn);
             av.setAsiento(1, 11);
-            tiquete t = new tiquete(1,11,vu);
+            t = new tiquete(1,11,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton20ActionPerformed
@@ -1643,7 +1643,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton22.setIcon
         (iconobtn);
             av.setAsiento(1, 12);
-            tiquete t = new tiquete(1,12,vu);
+            t = new tiquete(1,12,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton22ActionPerformed
@@ -1655,7 +1655,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton30.setIcon
         (iconobtn);
             av.setAsiento(2, 0);
-            tiquete t = new tiquete(2,0,vu);
+            t = new tiquete(2,0,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton30ActionPerformed
@@ -1667,7 +1667,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton32.setIcon
         (iconobtn);
             av.setAsiento(2, 1);
-            tiquete t = new tiquete(2,1,vu);
+            t = new tiquete(2,1,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton32ActionPerformed
@@ -1679,7 +1679,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton34.setIcon
         (iconobtn);
             av.setAsiento(2, 2);
-            tiquete t = new tiquete(2,2,vu);
+            t = new tiquete(2,2,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton34ActionPerformed
@@ -1691,7 +1691,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton36.setIcon
         (iconobtn);
             av.setAsiento(2, 3);
-            tiquete t = new tiquete(2,3,vu);
+            t = new tiquete(2,3,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton36ActionPerformed
@@ -1703,7 +1703,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton37.setIcon
         (iconobtn);
             av.setAsiento(2, 4);
-            tiquete t = new tiquete(2,4,vu);
+            t = new tiquete(2,4,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton37ActionPerformed
@@ -1715,7 +1715,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton38.setIcon
         (iconobtn);
             av.setAsiento(2, 5);
-            tiquete t = new tiquete(2,5,vu);
+            t = new tiquete(2,5,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton38ActionPerformed
@@ -1727,7 +1727,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton39.setIcon
         (iconobtn);
             av.setAsiento(2, 6);
-            tiquete t = new tiquete(2,6,vu);
+            t = new tiquete(2,6,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton39ActionPerformed
@@ -1739,7 +1739,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton27.setIcon
         (iconobtn);
             av.setAsiento(2, 7);
-            tiquete t = new tiquete(2,7,vu);
+            t = new tiquete(2,7,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton27ActionPerformed
@@ -1751,7 +1751,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton28.setIcon
         (iconobtn);
             av.setAsiento(2, 8);
-            tiquete t = new tiquete(2,8,vu);
+            t = new tiquete(2,8,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton28ActionPerformed
@@ -1763,7 +1763,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton29.setIcon
         (iconobtn);
             av.setAsiento(2, 9);
-            tiquete t = new tiquete(2,9,vu);
+            t = new tiquete(2,9,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton29ActionPerformed
@@ -1775,7 +1775,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton31.setIcon
         (iconobtn);
             av.setAsiento(2, 10);
-            tiquete t = new tiquete(2,10,vu);
+            t = new tiquete(2,10,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton31ActionPerformed
@@ -1787,7 +1787,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton33.setIcon
         (iconobtn);
             av.setAsiento(2, 11);
-            tiquete t = new tiquete(2,11,vu);
+            t = new tiquete(2,11,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton33ActionPerformed
@@ -1799,7 +1799,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton35.setIcon
         (iconobtn);
             av.setAsiento(2, 12);
-            tiquete t = new tiquete(2,12,vu);
+            t = new tiquete(2,12,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton35ActionPerformed
@@ -1811,7 +1811,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton64.setIcon
         (iconobtn);
             av.setAsiento(3, 0);
-            tiquete t = new tiquete(3,0,vu);
+            t = new tiquete(3,0,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton64ActionPerformed
@@ -1823,7 +1823,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton65.setIcon
         (iconobtn);
             av.setAsiento(3, 1);
-            tiquete t = new tiquete(3,1,vu);
+            t = new tiquete(3,1,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton65ActionPerformed
@@ -1835,7 +1835,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton68.setIcon
         (iconobtn);
             av.setAsiento(3, 2);
-            tiquete t = new tiquete(3,2,vu);
+            t = new tiquete(3,2,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton68ActionPerformed
@@ -1847,7 +1847,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton70.setIcon
         (iconobtn);
             av.setAsiento(3, 3);
-            tiquete t = new tiquete(3,3,vu);
+            t = new tiquete(3,3,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton70ActionPerformed
@@ -1859,7 +1859,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton72.setIcon
         (iconobtn);
             av.setAsiento(3, 4);
-            tiquete t = new tiquete(3,4,vu);
+            t = new tiquete(3,4,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton72ActionPerformed
@@ -1871,7 +1871,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton75.setIcon
         (iconobtn);
             av.setAsiento(3, 5);
-            tiquete t = new tiquete(3,5,vu);
+            t = new tiquete(3,5,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton75ActionPerformed
@@ -1883,7 +1883,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton77.setIcon
         (iconobtn);
             av.setAsiento(3, 6);
-            tiquete t = new tiquete(3,6,vu);
+            t = new tiquete(3,6,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton77ActionPerformed
@@ -1895,7 +1895,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton40.setIcon
         (iconobtn);
             av.setAsiento(3, 7);
-            tiquete t = new tiquete(3,7,vu);
+            t = new tiquete(3,7,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton40ActionPerformed
@@ -1907,7 +1907,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton42.setIcon
         (iconobtn);
             av.setAsiento(3, 8);
-            tiquete t = new tiquete(3,8,vu);
+            t = new tiquete(3,8,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton42ActionPerformed
@@ -1919,7 +1919,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton44.setIcon
         (iconobtn);
             av.setAsiento(3, 9);
-            tiquete t = new tiquete(3,9,vu);
+            t = new tiquete(3,9,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton44ActionPerformed
@@ -1931,7 +1931,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton45.setIcon
         (iconobtn);
             av.setAsiento(3, 10);
-            tiquete t = new tiquete(3,10,vu);
+            t = new tiquete(3,10,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton45ActionPerformed
@@ -1943,7 +1943,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton48.setIcon
         (iconobtn);
             av.setAsiento(3, 11);
-            tiquete t = new tiquete(3,11,vu);
+            t = new tiquete(3,11,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton48ActionPerformed
@@ -1955,7 +1955,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton50.setIcon
         (iconobtn);
             av.setAsiento(3, 12);
-            tiquete t = new tiquete(3,12,vu);
+            t = new tiquete(3,12,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton50ActionPerformed
@@ -1967,7 +1967,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton58.setIcon
         (iconobtn);
             av.setAsiento(4, 0);
-            tiquete t = new tiquete(4,0,vu);
+            t = new tiquete(4,0,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton58ActionPerformed
@@ -1979,7 +1979,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton61.setIcon
         (iconobtn);
             av.setAsiento(4, 1);
-            tiquete t = new tiquete(4,1,vu);
+            t = new tiquete(4,1,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton61ActionPerformed
@@ -1991,7 +1991,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton63.setIcon
         (iconobtn);
             av.setAsiento(4, 2);
-            tiquete t = new tiquete(4,2,vu);
+            t = new tiquete(4,2,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton63ActionPerformed
@@ -2003,7 +2003,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton67.setIcon
         (iconobtn);
             av.setAsiento(4, 3);
-            tiquete t = new tiquete(4,3,vu);
+            t = new tiquete(4,3,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton67ActionPerformed
@@ -2015,7 +2015,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton69.setIcon
         (iconobtn);
             av.setAsiento(4, 4);
-            tiquete t = new tiquete(4,4,vu);
+            t = new tiquete(4,4,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton69ActionPerformed
@@ -2027,7 +2027,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton71.setIcon
         (iconobtn);
             av.setAsiento(4, 5);
-            tiquete t = new tiquete(4,5,vu);
+            t = new tiquete(4,5,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton71ActionPerformed
@@ -2039,7 +2039,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton73.setIcon
         (iconobtn);
             av.setAsiento(4, 6);
-            tiquete t = new tiquete(4,6,vu);
+            t = new tiquete(4,6,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton73ActionPerformed
@@ -2051,7 +2051,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton52.setIcon
         (iconobtn);
             av.setAsiento(4, 7);
-            tiquete t = new tiquete(4,7,vu);
+            t = new tiquete(4,7,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton52ActionPerformed
@@ -2063,7 +2063,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton54.setIcon
         (iconobtn);
             av.setAsiento(4, 8);
-            tiquete t = new tiquete(4,8,vu);
+            t = new tiquete(4,8,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton54ActionPerformed
@@ -2075,7 +2075,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton56.setIcon
         (iconobtn);
             av.setAsiento(4, 9);
-            tiquete t = new tiquete(4,9,vu);
+            t = new tiquete(4,9,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton56ActionPerformed
@@ -2087,7 +2087,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton60.setIcon
         (iconobtn);
             av.setAsiento(4, 10);
-            tiquete t = new tiquete(4,10,vu);
+            t = new tiquete(4,10,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton60ActionPerformed
@@ -2099,7 +2099,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton62.setIcon
         (iconobtn);
             av.setAsiento(4, 11);
-            tiquete t = new tiquete(4,11,vu);
+            t = new tiquete(4,11,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton62ActionPerformed
@@ -2111,7 +2111,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton66.setIcon
         (iconobtn);
             av.setAsiento(4, 12);
-            tiquete t = new tiquete(4,12,vu);
+            t = new tiquete(4,12,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton66ActionPerformed
@@ -2123,7 +2123,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton41.setIcon
         (iconobtn);
             av.setAsiento(5, 0);
-            tiquete t = new tiquete(5,0,vu);
+            t = new tiquete(5,0,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton41ActionPerformed
@@ -2135,7 +2135,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton46.setIcon
         (iconobtn);
             av.setAsiento(5, 1);
-            tiquete t = new tiquete(5,1,vu);
+            t = new tiquete(5,1,vu);
             us.agregarTiquetes(t);
         }
         
@@ -2148,7 +2148,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton49.setIcon
         (iconobtn);
             av.setAsiento(5, 2);
-            tiquete t = new tiquete(5,2,vu);
+            t = new tiquete(5,2,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton49ActionPerformed
@@ -2160,7 +2160,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton53.setIcon
         (iconobtn);
             av.setAsiento(5, 3);
-            tiquete t = new tiquete(5,3,vu);
+            t = new tiquete(5,3,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton53ActionPerformed
@@ -2172,7 +2172,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton55.setIcon
         (iconobtn);
             av.setAsiento(5, 4);
-            tiquete t = new tiquete(5,4,vu);
+            t = new tiquete(5,4,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton55ActionPerformed
@@ -2184,7 +2184,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton57.setIcon
         (iconobtn);
             av.setAsiento(5, 5);
-            tiquete t = new tiquete(5,5,vu);
+            t = new tiquete(5,5,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton57ActionPerformed
@@ -2196,7 +2196,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton59.setIcon
         (iconobtn);
             av.setAsiento(5, 6);
-            tiquete t = new tiquete(5,6,vu);
+            t = new tiquete(5,6,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton59ActionPerformed
@@ -2208,7 +2208,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton74.setIcon
         (iconobtn);
             av.setAsiento(5, 7);
-            tiquete t = new tiquete(5,7,vu);
+            t = new tiquete(5,7,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton74ActionPerformed
@@ -2220,7 +2220,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton76.setIcon
         (iconobtn);
             av.setAsiento(5, 8);
-            tiquete t = new tiquete(5,8,vu);
+            t = new tiquete(5,8,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton76ActionPerformed
@@ -2232,7 +2232,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton78.setIcon
         (iconobtn);
             av.setAsiento(5, 9);
-            tiquete t = new tiquete(5,9,vu);
+            t = new tiquete(5,9,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton78ActionPerformed
@@ -2244,7 +2244,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton43.setIcon
         (iconobtn);
             av.setAsiento(5, 10);
-            tiquete t = new tiquete(5,10,vu);
+            t = new tiquete(5,10,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton43ActionPerformed
@@ -2256,7 +2256,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton47.setIcon
         (iconobtn);
             av.setAsiento(5, 11);
-            tiquete t = new tiquete(5,11,vu);
+            t = new tiquete(5,11,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton47ActionPerformed
@@ -2268,7 +2268,7 @@ public class reservaAsientos extends javax.swing.JFrame {
             jButton51.setIcon
         (iconobtn);
             av.setAsiento(5, 12);
-            tiquete t = new tiquete(5,12,vu);
+            t = new tiquete(5,12,vu);
             us.agregarTiquetes(t);
         }
     }//GEN-LAST:event_jButton51ActionPerformed
@@ -2276,6 +2276,9 @@ public class reservaAsientos extends javax.swing.JFrame {
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        control.mostrarCarrito(t);
+        System.out.println("Tiquete: "+t.toString());
+        
     }//GEN-LAST:event_confirmarActionPerformed
 
 //    /**
