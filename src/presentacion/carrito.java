@@ -1,13 +1,14 @@
 
 package presentacion;
 
+import control.controlador;
 import logicaNegocios.tiquete;
 import logicaNegocios.usuario;
 
 
 public class carrito extends javax.swing.JFrame {
     tiquete t;
-    
+    controlador control;
     public carrito() {
         initComponents();
     }
@@ -16,6 +17,11 @@ public class carrito extends javax.swing.JFrame {
         this.t = t;
         
     }
+
+    public void setControl(controlador control) {
+        this.control = control;
+    }
+    
     
     public void cargarDatos(String vuel, String hor, String nomb, String fil, String col){
         vuelo.setText(vuel);
@@ -148,6 +154,7 @@ public class carrito extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //verifica usuario
+        //control.insertarTiquete(WIDTH, WIDTH, ERROR, vuelo, usuario, ERROR);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void vueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vueloActionPerformed

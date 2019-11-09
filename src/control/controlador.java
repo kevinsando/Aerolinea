@@ -2,6 +2,7 @@ package control;
 
 import Excepciones.GlobalException;
 import Excepciones.NoDataException;
+import accesoDatos.ServicioAerolinea;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import logicaNegocios.avion;
@@ -78,6 +79,7 @@ public class controlador {
 
     public void setCarrito(carrito carrito) {
         this.carrito = carrito;
+        carrito.setControl(this);
     }
     
 
@@ -146,11 +148,11 @@ public class controlador {
 
     public void setUsuarioInicio(usuario u) {
         inicio.setUsuario(u);
-        ra.setUs(u);
+        ra.setUs(u.getUser());
         avion aa = new avion();
         vuelo vv = new vuelo();
         ra.setAv(aa);
-        ra.setVu(vv.getCodigo());
+        ra.setVu(vv.getCodigo(),u.getUser());
     }
 
     public void insertarTipoAvion(String id, Integer año, String modelo, String marca, Integer canPasajeros,
@@ -230,8 +232,9 @@ public class controlador {
         //inicio.setVisible(false);
     }
 
-    public void llenarReservaAsientos(vuelo v) {
-        ra.setVu(v.getCodigo());
+    public void llenarReservaAsientos(vuelo v,String u) {
+        ra.setVu(v.getCodigo(),u);
+        System.out.println("USUARIO: "+u);
     }
 
     public void ingresarAvion(String id, String horario, String ruta, String avion) throws GlobalException, NoDataException {
@@ -261,6 +264,13 @@ public class controlador {
         carrito.setTiquete(t);
         carrito.cargarDatos();
         carrito.setVisible(true);
+        
+    }
+        public void insertarTiquete(int fila,int asiento,int numero,String vuelo,String usuario, int precio) throws GlobalException, NoDataException{
+        model.insertarTiquete(fila, asiento, numero, vuelo, usuario, precio);
+    }
+    public void modificarTiquete(int fila,int asiento,int numero,String vuelo,String usuario, int precio) throws GlobalException, NoDataException, SQLException{
+        model.insertarTiquete(fila, asiento, numero, vuelo, usuario, precio);
         
     }
 

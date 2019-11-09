@@ -293,7 +293,7 @@ public class publico extends javax.swing.JFrame {
         } else {
             ArrayList<vuelo> vuelos;
             try {
-                control.llenarReservaAsientos(control.listarVuelos().get(Tabla.getSelectedRow()));
+                control.llenarReservaAsientos(control.listarVuelos().get(Tabla.getSelectedRow()),user.getUser());
                 System.out.println("VUELO: "+control.listarVuelos().get(Tabla.getSelectedRow()).toString());
                 control.reservarAsientos();
             } catch (GlobalException | NoDataException ex) {

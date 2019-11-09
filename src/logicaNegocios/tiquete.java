@@ -63,9 +63,7 @@ public class tiquete {
     public String toString() {
         return "tiquete{" + "fila=" + fila + ", asiento=" + asiento + ", numero=" + numero + ", vuelo=" + vuel + ", usuario=" + usuario + ", precio=" + precio + '}';
     }
-    
-    
-    
+
     private int fila;
     private int asiento;
     private int numero;
