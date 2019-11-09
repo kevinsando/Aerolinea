@@ -6,6 +6,7 @@ import control.controlador;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaNegocios.avion;
 import logicaNegocios.horario;
@@ -345,29 +346,44 @@ public class gestionAvion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarActionPerformed
-        try {
-            // TODO add your handling code here:
-            control.ingresarAvion(id.getText(), horario.getText(), ruta.getText(), avion.getText());
-        } catch (GlobalException | NoDataException ex) {
-            Logger.getLogger(gestionAvion.class.getName()).log(Level.SEVERE, null, ex);
+        if(id.getText().equals("") || horario.getText().equals("") || ruta.getText().equals("") || avion.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "No puede haber campos vacios",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        }else{
+            try {
+                // TODO add your handling code here:
+                control.ingresarAvion(id.getText(), horario.getText(), ruta.getText(), avion.getText());
+            } catch (GlobalException | NoDataException ex) {
+                Logger.getLogger(gestionAvion.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_insertarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        try {
-            // TODO add your handling code here:
-            control.eliminarAvion(id.getText());
-        } catch (GlobalException | NoDataException ex) {
-            Logger.getLogger(gestionAvion.class.getName()).log(Level.SEVERE, null, ex);
+        if(id.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Campo ID no especificado",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        }else{
+            try {
+                // TODO add your handling code here:
+                control.eliminarAvion(id.getText());
+            } catch (GlobalException | NoDataException ex) {
+                Logger.getLogger(gestionAvion.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-        try {
-            // TODO add your handling code here:
-            control.modificarAvion(id.getText(), horario.getText(), ruta.getText(), avion.getText());
-        } catch (GlobalException | NoDataException ex) {
-            Logger.getLogger(gestionAvion.class.getName()).log(Level.SEVERE, null, ex);
+        if(id.getText().equals("") || horario.getText().equals("") || ruta.getText().equals("") || avion.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "No puede haber campos vacios",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        }else{
+            try {
+                // TODO add your handling code here:
+                control.modificarAvion(id.getText(), horario.getText(), ruta.getText(), avion.getText());
+            } catch (GlobalException | NoDataException ex) {
+                Logger.getLogger(gestionAvion.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_actualizarActionPerformed
 
