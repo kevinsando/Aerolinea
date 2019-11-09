@@ -1,7 +1,11 @@
 
 package presentacion;
 
+import Excepciones.GlobalException;
+import Excepciones.NoDataException;
 import control.controlador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logicaNegocios.tiquete;
 import logicaNegocios.usuario;
 
@@ -152,9 +156,13 @@ public class carrito extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //verifica usuario
-        //control.insertarTiquete(WIDTH, WIDTH, ERROR, vuelo, usuario, ERROR);
+        try {
+            // TODO add your handling code here:
+            //int fila,int asiento,int numero,String vuelo,String usuario, int precio
+            control.insertarTiquete(t.getFila(),t.getAsiento(), t.getNumero(), t.getVuel(), t.getUsuario(), t.getPrecio());
+        } catch (GlobalException | NoDataException ex) {
+            Logger.getLogger(carrito.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void vueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vueloActionPerformed
