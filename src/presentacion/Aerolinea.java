@@ -1,10 +1,12 @@
 
 package presentacion;
+import Excepciones.GlobalException;
+import Excepciones.NoDataException;
 import control.controlador;
 import logicaNegocios.modelo;
 public class Aerolinea {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws GlobalException, NoDataException {
         publico inicio = new publico();
         usuarioA user = new usuarioA();
         administracion admin = new administracion();
@@ -20,6 +22,7 @@ public class Aerolinea {
         control.setReservaAsientos(ra);
         control.setGaa(gaa);
         control.setGv(gv);
+        inicio.setLocationRelativeTo(null);
         inicio.setVisible(true);
     }
     

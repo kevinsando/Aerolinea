@@ -3,7 +3,13 @@ package presentacion;
 import Excepciones.GlobalException;
 import Excepciones.NoDataException;
 import control.controlador;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -36,7 +42,6 @@ public class gestionHorarios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
-        dia = new javax.swing.JTextField();
         hora = new javax.swing.JTextField();
         precio = new javax.swing.JTextField();
         ruta = new javax.swing.JTextField();
@@ -49,6 +54,11 @@ public class gestionHorarios extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         menu = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaR = new javax.swing.JTable();
+        rutas = new javax.swing.JButton();
+        dia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +128,38 @@ public class gestionHorarios extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("$");
+
+        tablaR.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Origen", "Destino", "Duracion"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaR);
+
+        rutas.setText("Mostrar Rutas");
+        rutas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rutasActionPerformed(evt);
+            }
+        });
+
+        dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,20 +167,12 @@ public class gestionHorarios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(cargar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(69, 69, 69)
                                 .addComponent(agregar)
                                 .addGap(57, 57, 57)
-                                .addComponent(editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(eliminar))
+                                .addComponent(editar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -152,15 +186,11 @@ public class gestionHorarios extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(dia)
                                     .addComponent(id)
-                                    .addComponent(ruta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ruta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                    .addComponent(dia, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(descuento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(39, 39, 39)
@@ -168,9 +198,17 @@ public class gestionHorarios extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(eliminar)
+                                            .addComponent(descuento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -178,16 +216,36 @@ public class gestionHorarios extends javax.swing.JFrame {
                             .addComponent(jLabel8)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(menu)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addComponent(menu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(cargar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(rutas)
+                                .addGap(144, 144, 144)))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cargar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cargar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rutas)))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -198,9 +256,10 @@ public class gestionHorarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -226,6 +285,9 @@ public class gestionHorarios extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         String horas = null, minutos = null;
+        String diaEscogido = dia.getItemAt(dia.getSelectedIndex());
+        int horaFinal = 0;
+        int minutoFinal = 0;
         if (hora.getText().length() < 5) {
             horas = hora.getText().substring(0, 1);
             minutos = hora.getText().substring(2, 4);
@@ -233,9 +295,32 @@ public class gestionHorarios extends javax.swing.JFrame {
             horas = hora.getText().substring(0, 2);
             minutos = hora.getText().substring(3, 5);
         }
+        int horaInicial = Integer.parseInt(horas);
+        int minInicial = Integer.parseInt(minutos);
+        try {
+            int duracionH = control.consultarRuta(ruta.getText()).getDuracionH();
+            int duracionM = control.consultarRuta(ruta.getText()).getDuracionM();
+            horaFinal = duracionH + horaInicial;
+            minutoFinal = duracionM + minInicial;
+            if (minutoFinal > 59) {
+                minutoFinal = minutoFinal - 60;
+                horaFinal++;
+            }
+            if (horaFinal > 23) {
+                horaFinal = horaFinal - 24;
+                if (dia.getSelectedIndex() == 6) {
+                    diaEscogido = dia.getItemAt(0);
+                } else {
+                    diaEscogido = dia.getItemAt(dia.getSelectedIndex() + 1);
+                }
+            }
+        } catch (GlobalException | NoDataException | SQLException ex) {
+            Logger.getLogger(gestionHorarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         try {
             // TODO add your handling code here:
-            control.insertarHorario(id.getText(), dia.getText(), Integer.parseInt(horas), Integer.parseInt(minutos), Integer.parseInt(precio.getText()),
+            control.insertarHorario(id.getText(), diaEscogido, Integer.parseInt(horas), Integer.parseInt(minutos),horaFinal,minutoFinal, Integer.parseInt(precio.getText()),
                     Integer.parseInt(descuento.getText()), ruta.getText());
             this.updateTable(control.listarHorario());
         } catch (GlobalException | NoDataException ex) {
@@ -244,11 +329,46 @@ public class gestionHorarios extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+       String horas = null, minutos = null;
+        String diaEscogido = dia.getItemAt(dia.getSelectedIndex());
+        int horaFinal = 0;
+        int minutoFinal = 0;
+        if (hora.getText().length() < 5) {
+            horas = hora.getText().substring(0, 1);
+            minutos = hora.getText().substring(2, 4);
+        } else {
+            horas = hora.getText().substring(0, 2);
+            minutos = hora.getText().substring(3, 5);
+        }
+        int horaInicial = Integer.parseInt(horas);
+        int minInicial = Integer.parseInt(minutos);
+        try {
+            int duracionH = control.consultarRuta(ruta.getText()).getDuracionH();
+            int duracionM = control.consultarRuta(ruta.getText()).getDuracionM();
+            horaFinal = duracionH + horaInicial;
+            minutoFinal = duracionM + minInicial;
+            if (minutoFinal > 59) {
+                minutoFinal = minutoFinal - 60;
+                horaFinal++;
+            }
+            if (horaFinal > 23) {
+                horaFinal = horaFinal - 24;
+                if (dia.getSelectedIndex() == 6) {
+                    diaEscogido = dia.getItemAt(0);
+                } else {
+                    diaEscogido = dia.getItemAt(dia.getSelectedIndex() + 1);
+                }
+            }
+        } catch (GlobalException | NoDataException | SQLException ex) {
+            Logger.getLogger(gestionHorarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         try {
             // TODO add your handling code here:
-            control.modificarHorario(id.getText(), dia.getText(), ABORT, WIDTH, ERROR, Integer.parseInt(descuento.getText()), ruta.getText());
+            control.modificarHorario(id.getText(), diaEscogido, Integer.parseInt(horas), Integer.parseInt(minutos),horaFinal,minutoFinal, Integer.parseInt(precio.getText()),
+                    Integer.parseInt(descuento.getText()), ruta.getText());
             this.updateTable(control.listarHorario());
-        } catch (NoDataException | GlobalException ex) {
+        } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(gestionHorarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_editarActionPerformed
@@ -277,9 +397,18 @@ public class gestionHorarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_eliminarActionPerformed
 
+    private void rutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rutasActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.updateTableRuta(control.listarRuta());
+        } catch (GlobalException | NoDataException ex) {
+            Logger.getLogger(gestionAvion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_rutasActionPerformed
+
     private void updateTable(ArrayList<horario> a1) {
-          DefaultTableModel tableModel = new DefaultTableModel();
-        String[] columnNames = {"ID", "Hora","Minutos", "Precio", "Descuento","Ruta"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        String[] columnNames = {"ID", "Hora", "Minutos", "Precio", "Descuento", "Ruta"};
         tableModel.setColumnIdentifiers(columnNames);
         Object[] Columna = new Object[tableModel.getColumnCount()];
 
@@ -297,16 +426,35 @@ public class gestionHorarios extends javax.swing.JFrame {
 
         tabla.setModel(tableModel);
     }
+
+    private void updateTableRuta(ArrayList<ruta> a1) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        String[] columnNames = {"ID", "Origen", "Destino", "Duracion"};
+        tableModel.setColumnIdentifiers(columnNames);
+        Object[] Columna = new Object[tableModel.getColumnCount()];
+
+        for (int i = 0; i < a1.size(); i++) {
+
+            Columna[0] = a1.get(i).getID();
+            Columna[1] = a1.get(i).getOrigen();
+            Columna[2] = a1.get(i).getDestino();
+            Columna[3] = a1.get(i).getDuracionH() + ":" + a1.get(i).getDuracionM();
+            tableModel.addRow(Columna);
+        }
+
+        tablaR.setModel(tableModel);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
     private javax.swing.JButton cargar;
     private javax.swing.JTextField descuento;
-    private javax.swing.JTextField dia;
+    private javax.swing.JComboBox<String> dia;
     private javax.swing.JButton editar;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField hora;
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -316,9 +464,12 @@ public class gestionHorarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton menu;
     private javax.swing.JTextField precio;
     private javax.swing.JTextField ruta;
+    private javax.swing.JButton rutas;
     private javax.swing.JTable tabla;
+    private javax.swing.JTable tablaR;
     // End of variables declaration//GEN-END:variables
 }

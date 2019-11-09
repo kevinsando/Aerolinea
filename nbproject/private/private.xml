@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dell/Documents/Informatica/Progra%20III/aerolinea/src/logicaNegocios/modelo.java</file>
-            <file>file:/C:/Users/dell/Documents/Informatica/Progra%20III/aerolinea/src/control/controlador.java</file>
-            <file>file:/C:/Users/dell/Documents/Informatica/Progra%20III/aerolinea/src/presentacion/Aerolinea.java</file>
-            <file>file:/C:/Users/dell/Documents/Informatica/Progra%20III/aerolinea/src/presentacion/administracion.java</file>
-            <file>file:/C:/Users/dell/Documents/Informatica/Progra%20III/aerolinea/src/logicaNegocios/tipoAvion.java</file>
-            <file>file:/C:/Users/dell/Documents/Informatica/Progra%20III/aerolinea/src/presentacion/publico.java</file>
-            <file>file:/C:/Users/dell/Documents/Informatica/Progra%20III/aerolinea/src/logicaNegocios/gestionVuelos.java</file>
+            <file>file:/C:/Users/Kike/Documents/NetBeansProjects/cronicaDeUnaMuerteAnunciada/src/accesoDatos/ServicioAerolinea.java</file>
+            <file>file:/C:/Users/Kike/Documents/NetBeansProjects/cronicaDeUnaMuerteAnunciada/src/logicaNegocios/modelo.java</file>
+            <file>file:/C:/Users/Kike/Documents/NetBeansProjects/cronicaDeUnaMuerteAnunciada/src/control/controlador.java</file>
+            <file>file:/C:/Users/Kike/Documents/NetBeansProjects/cronicaDeUnaMuerteAnunciada/src/accesoDatos/Servicio.java</file>
         </group>
     </open-files>
 </project-private>

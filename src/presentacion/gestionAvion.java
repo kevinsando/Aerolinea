@@ -18,6 +18,8 @@ public class gestionAvion extends javax.swing.JFrame {
 
     public gestionAvion() {
         initComponents();
+        setDefaultCloseOperation(gestionAvion.DISPOSE_ON_CLOSE);
+
     }
 
     public void setControl(controlador control) {
@@ -381,6 +383,7 @@ public class gestionAvion extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         control.cargarAdmin();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
     private void updateTableRuta(ArrayList<ruta> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
@@ -393,7 +396,7 @@ public class gestionAvion extends javax.swing.JFrame {
             Columna[0] = a1.get(i).getID();
             Columna[1] = a1.get(i).getOrigen();
             Columna[2] = a1.get(i).getDestino();
-            Columna[3] = a1.get(i).getDuracion();
+            Columna[3] = Integer.toString(a1.get(i).getDuracionH())+':'+Integer.toString(a1.get(i).getDuracionM());
             tableModel.addRow(Columna);
         }
 
@@ -441,7 +444,8 @@ public class gestionAvion extends javax.swing.JFrame {
 
         tablaH.setModel(tableModel);
     }
-        private void updateTableAvion(ArrayList<avion> a1) {
+
+    private void updateTableAvion(ArrayList<avion> a1) {
         DefaultTableModel tableModel = new DefaultTableModel();
         String[] columnNames = {"ID", "Horario", "Ruta", "Avion"};
         tableModel.setColumnIdentifiers(columnNames);
